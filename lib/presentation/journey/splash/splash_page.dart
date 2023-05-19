@@ -13,7 +13,8 @@ class SplashScreen extends GetView<SplashController> {
       color: AppColors.background,
       child: Center(
         child: Text(
-          'LMS',
+          'Library Management System',
+          textAlign: TextAlign.center,
           style: ThemeText.headline4
               .copyWith(color: Colors.blue[900], fontWeight: FontWeight.bold),
         ),
