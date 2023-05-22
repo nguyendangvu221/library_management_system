@@ -13,26 +13,7 @@ class LoginScreen extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        leading: AppTouchable(
-          height: 36.sp,
-          onPressed: Get.back,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Back',
-                style: ThemeText.bodyText2,
-              )
-            ],
-          ),
-        ),
-        title: Text(
-          'Login',
-          style: ThemeText.subtitle1,
-        ),
-      ),
+      
     );
   }
 }
