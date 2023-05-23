@@ -13,6 +13,21 @@ class LoginScreen extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
+      body: SafeArea(
+        child:Padding(
+          padding: EdgeInsets.all(90),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('Hi, Welcome Back!',
+              style: TextStyle(
+                fontSize: 24.sp,
+                fontWeight: FontWeight.w700
+
+              ),),
+            ]),
+        ),),
+      
       
     );
   }
