@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "575477101878",
+    "project_id": "library-system-ca215",
+    "storage_bucket": "library-system-ca215.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:575477101878:android:34285e4cd8bfa5ed2daf97",
+        "android_client_info": {
+          "package_name": "com.example.library_management_system"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "575477101878-n6ccset39pmh4vmtek0i907trj3miep7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjaqFX1xOrIwdoDZ4GYnpt0Kr8_lrkY90"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "575477101878-n6ccset39pmh4vmtek0i907trj3miep7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
