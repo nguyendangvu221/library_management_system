@@ -13,26 +13,51 @@ class LoginScreen extends GetView<LoginController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.white,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        leading: AppTouchable(
-          height: 36.sp,
-          onPressed: Get.back,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
+      body: SafeArea(
+        child:Padding(
+          padding: EdgeInsets.all(42),
+          child: Column(
+
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Back',
-                style: ThemeText.bodyText2,
-              )
-            ],
-          ),
-        ),
-        title: Text(
-          'Login',
-          style: ThemeText.subtitle1,
-        ),
-      ),
+              Container(
+                alignment: Alignment.bottomCenter,
+                child: Text('Hi, Welcome Back!',
+                textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  
+                ),),
+              ),
+              SizedBox(height: 18.h,),
+              Text('Email',textAlign: TextAlign.left,),
+              SizedBox(height: 10,),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius:BorderRadius.circular(11.r),
+                    borderSide: BorderSide(
+                      color: Color(0x00000000,),
+                      width: 0,
+                    ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                    borderRadius:BorderRadius.circular(10.r),
+                    borderSide: BorderSide(
+                      color: Color(0x00000000,),
+                      width: 0,
+                    ),
+                    ),
+                    filled: true,
+                    fillColor: Color(0xFFFFFFFF),
+                    hintText: 'example@gmail.com',
+                ),
+              ),
+            ]),
+        ),),
+      
+      
     );
   }
 }
