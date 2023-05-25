@@ -13,7 +13,7 @@ class LoginScreen extends GetView<LoginController> {
       backgroundColor: AppColors.white,
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.all(42),
+          padding: const EdgeInsets.all(42),
           child:
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
             Container(
@@ -40,27 +40,60 @@ class LoginScreen extends GetView<LoginController> {
             TextField(
               decoration: InputDecoration(
                 border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(11.r),
-                  borderSide: BorderSide(
-                    color: Color(
-                      0x00000000,
-                    ),
-                    width: 0,
-                  ),
+                  borderRadius: BorderRadius.circular(10.r),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10.r),
-                  borderSide: BorderSide(
-                    color: Color(
-                      0x00000000,
-                    ),
-                    width: 0,
-                  ),
                 ),
                 filled: true,
-                fillColor: Color(0xFFFFFFFF),
+                fillColor: AppColors.white1,
                 hintText: 'example@gmail.com',
               ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              'Password',
+              textAlign: TextAlign.left,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Obx(
+              () => TextField(
+                obscureText: controller.isPasswordHidden.value,
+                decoration: InputDecoration(
+                  suffix: InkWell(
+                    child: Icon(
+                      controller.isPasswordHidden.value
+                          ? Icons.visibility
+                          : Icons.visibility_off,
+                    ),
+                    onTap: () {
+                      controller.isPasswordHidden.value =
+                          !controller.isPasswordHidden.value;
+                    },
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.r),
+                  ),
+                  filled: true,
+                  fillColor: AppColors.white1,
+                  hintText: 'Enter Your Password',
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                //Checkbox(value: value, onChanged: onChanged)
+              ],
             ),
           ]),
         ),
