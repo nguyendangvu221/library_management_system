@@ -3,6 +3,8 @@ import 'package:library_management_system/common/constants/app_routes.dart';
 import 'package:library_management_system/common/injector/bindings/app_binding.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_screen.dart';
 import 'package:library_management_system/presentation/journey/book_shelf/book_shelf_screen.dart';
+import 'package:library_management_system/presentation/journey/home/home_screen.dart';
+import 'package:library_management_system/presentation/journey/main/main_screen.dart';
 import 'package:library_management_system/presentation/journey/register/register_screen.dart';
 import 'package:library_management_system/presentation/journey/splash/splash_page.dart';
 import 'package:library_management_system/presentation/journey/user/user_screen.dart';
@@ -17,6 +19,18 @@ List<GetPage> myPages = [
     binding: SplashBinding(),
   ),
   GetPage(
+    name: AppRoutes.main,
+    page: () => const MainScreen(),
+    bindings: [
+      MainBinding(),
+      HomeBinding(),
+      SearchBinding(),
+      BookShelfBinding(),
+      AddBookBinding(),
+      UserBinding(),
+    ],
+  ),
+  GetPage(
     name: AppRoutes.login,
     page: () => const LoginScreen(),
     binding: LoginBinding(),
@@ -25,6 +39,11 @@ List<GetPage> myPages = [
     name: AppRoutes.register,
     page: () => const RegisterScreen(),
     binding: RegisterBinding(),
+  ),
+  GetPage(
+    name: AppRoutes.home,
+    page: () => const HomeScreen(),
+    binding: HomeBinding(),
   ),
   GetPage(
     name: AppRoutes.search,

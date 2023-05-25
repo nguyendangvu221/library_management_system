@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:library_management_system/presentation/controllers/app_controller.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_controller.dart';
 import 'package:library_management_system/presentation/journey/book_shelf/book_shelf_controller.dart';
+import 'package:library_management_system/presentation/journey/home/home_controller.dart';
 import 'package:library_management_system/presentation/journey/login/login_controller.dart';
+import 'package:library_management_system/presentation/journey/main/main_controller.dart';
 import 'package:library_management_system/presentation/journey/register/register_controller.dart';
 import 'package:library_management_system/presentation/journey/search/search_controller.dart';
 import 'package:library_management_system/presentation/journey/splash/splash_controller.dart';
@@ -24,6 +26,13 @@ class SplashBinding extends Bindings {
   }
 }
 
+class MainBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(MainController());
+  }
+}
+
 class LoginBinding extends Bindings {
   @override
   void dependencies() {
@@ -35,6 +44,13 @@ class RegisterBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(RegisterController());
+  }
+}
+
+class HomeBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(HomeController());
   }
 }
 
