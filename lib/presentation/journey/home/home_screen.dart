@@ -22,7 +22,7 @@ class HomeScreen extends GetView<HomeController> {
           children: [
             Text(
               "Trang Chủ",
-              style: ThemeText.headline5,
+              style: ThemeText.heading2.blue800,
             )
           ],
         ),

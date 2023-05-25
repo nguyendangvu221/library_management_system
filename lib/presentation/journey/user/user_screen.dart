@@ -23,14 +23,12 @@ class UserScreen extends GetView<UserController> {
             children: [
               Text(
                 'Back',
-                style: ThemeText.bodyText2,
               )
             ],
           ),
         ),
         title: Text(
           'User',
-          style: ThemeText.subtitle1,
         ),
       ),
     );

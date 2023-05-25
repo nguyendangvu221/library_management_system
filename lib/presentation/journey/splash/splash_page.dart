@@ -14,9 +14,8 @@ class SplashScreen extends GetView<SplashController> {
       child: Center(
         child: Text(
           'Library Management System',
+          style: ThemeText.heading1.blue900.copyWith(color: AppColors.blue700),
           textAlign: TextAlign.center,
-          style: ThemeText.headline4
-              .copyWith(color: Colors.blue[900], fontWeight: FontWeight.bold),
         ),
       ),
     );

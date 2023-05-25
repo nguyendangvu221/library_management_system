@@ -23,14 +23,12 @@ class BookShelfScreen extends GetView<BookShelfController> {
             children: [
               Text(
                 'Back',
-                style: ThemeText.bodyText2,
               )
             ],
           ),
         ),
         title: Text(
           'BookShelfs',
-          style: ThemeText.subtitle1,
         ),
       ),
     );
