@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  static Color? primary = Colors.blue[900];
-  static const Color secondary = Color(0xFF271801);
-  static Color text = black;
-  static Color hintText = grey;
-  static const Color background = Color(0xFFEBFEFF);
+  // TODO(dieptt): define common color
+  static const Color primary = Color(0xFF012A4A);
+  static const Color text = black;
+  static Color? background = grey50;
+  static const backgroundColor = Color(0xffFCFAF3);
+  static const bianca = Color(0xffFCFAF3);
 
-  static Color? blue = Colors.blue;
-  static Color? blue800 = Colors.blue[800];
+  static const Color charade = Color(0xff012A4A);
+  static const Color white = Colors.white;
+
+  static const Color errorColor = Colors.red;
+  static const Color errorColor2 = Colors.redAccent;
+
+  //green
   static Color? green50 = Colors.green[50];
   static const Color green = Colors.green;
-  static const Color greenAccent = Color(0xFF00BA50);
-  static const Color greenAccent900 = Color(0xFF00872E);
+
+  //orange
   static Color? orange50 = Colors.orange[50];
   static const Color orange = Colors.orange;
-  static const Color deepOrange = Colors.deepOrange;
-  static Color? deepOrange600 = Colors.deepOrange[600];
-  static Color? deepOrange900 = Colors.deepOrange[900];
-  static const Color deepOrangeAccent = Colors.deepOrangeAccent;
-  static Color? red50 = Colors.red[50];
-  static const Color pink100 = Color(0xFFFCA9B4);
-  static const Color pink = Color(0xFFF76F80);
-  static const Color red = Colors.red;
-  static const Color brown = Colors.brown;
-  static Color? brown800 = Colors.brown[800];
-  static const Color white = Colors.white;
+
+  //grey
   static Color? grey50 = Colors.grey[50];
   static Color? grey100 = Colors.grey[100];
   static Color? grey200 = Colors.grey[200];
@@ -35,8 +32,29 @@ class AppColors {
   static Color? grey600 = Colors.grey[600];
   static Color? grey700 = Colors.grey[700];
   static Color? grey800 = Colors.grey[800];
-  static Color black = Colors.black;
-  static Color? black45 = Colors.black45;
+
   static Color transparent = Colors.transparent;
+
+  //blue
+
+  static const Color blue100 = Color(0xFFBBDEFB);
+  static const Color blue200 = Color(0xFF90CAF9);
+  static const Color blue300 = Color(0xFF64B5F6);
+  static const Color blue400 = Color(0xFF42A5F5);
+  static const Color blue500 = Color(0xFF2196F3);
+  static const Color blue600 = Color(0xFF1E88E5);
+  static const Color blue700 = Color(0xFF1976D2);
+  static const Color blue800 = Color(0xFF1565C0);
+  static const Color blue900 = Color(0xFF0D47A1);
+
+  static const Color borderColor = blue400;
+  static const Color red = Colors.red;
+  static const Color redAccent = Colors.redAccent;
+  static const Color red50 = Color(0xffFFEBEE);
+  static const Color red100 = Color(0xffFFCDD2);
+
+  static const Color black = Colors.black;
+  static const Color black45 = Colors.black45;
+  static Color black54 = Colors.black54;
   static const Color white1 = Color(0xFFFFFFFF);
 }
