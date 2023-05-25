@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:library_management_system/presentation/journey/home/home_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
-import 'package:library_management_system/presentation/widget/app_touchable.dart';
 
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
@@ -12,25 +11,20 @@ class HomeScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        leading: AppTouchable(
-          height: 36.sp,
-          onPressed: Get.back,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Back',
-                style: ThemeText.bodyText2,
-              )
-            ],
-          ),
+      backgroundColor: AppColors.backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: 16.sp,
+          right: 16.sp,
+          top: Get.mediaQuery.padding.top,
         ),
-        title: Text(
-          'Home',
-          style: ThemeText.subtitle1,
+        child: Stack(
+          children: [
+            Text(
+              "Trang Chủ",
+              style: ThemeText.headline5,
+            )
+          ],
         ),
       ),
     );
