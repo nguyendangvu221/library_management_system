@@ -23,14 +23,12 @@ class RegisterScreen extends GetView<RegisterController> {
             children: [
               Text(
                 'Back',
-                style: ThemeText.bodyText2,
               )
             ],
           ),
         ),
         title: Text(
           'Register',
-          style: ThemeText.subtitle1,
         ),
       ),
     );

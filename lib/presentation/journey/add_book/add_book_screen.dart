@@ -23,14 +23,12 @@ class AddBookScreen extends GetView<AddBookController> {
             children: [
               Text(
                 'Back',
-                style: ThemeText.bodyText2,
               )
             ],
           ),
         ),
         title: Text(
           'Add Book',
-          style: ThemeText.subtitle1,
         ),
       ),
     );

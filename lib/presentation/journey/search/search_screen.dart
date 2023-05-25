@@ -22,14 +22,12 @@ class SearchScreen extends GetView<SearchController> {
             children: [
               Text(
                 'Back',
-                style: ThemeText.bodyText2,
               )
             ],
           ),
         ),
         title: Text(
           'Search',
-          style: ThemeText.subtitle1,
         ),
       ),
     );
