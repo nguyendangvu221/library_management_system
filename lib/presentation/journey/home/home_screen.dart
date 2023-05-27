@@ -18,11 +18,24 @@ class HomeScreen extends GetView<HomeController> {
           right: 16.sp,
           top: Get.mediaQuery.padding.top,
         ),
-        child: Stack(
+        child: Column(
           children: [
             Text(
-              "Trang Chủ",
+              "Trang chủ",
               style: ThemeText.heading2.blue800,
+            ),
+            Expanded(
+              child: DefaultTabController(
+                length: 3,
+                child: Scaffold(
+                  appBar: AppBar(
+                    bottom: TabBar(tabs: controller.tabs),
+                  ),
+                  body: const TabBarView(
+                    children: [Text("a"), Text("b"), Text("c")],
+                  ),
+                ),
+              ),
             )
           ],
         ),
