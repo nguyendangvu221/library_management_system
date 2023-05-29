@@ -18,7 +18,7 @@ class MainScreen extends GetView<MainController> {
   Widget _buildBottomNavigationBar(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.bianca,
+        color: AppColors.backgroundColor,
         boxShadow: [
           BoxShadow(
             blurRadius: 20,
@@ -81,6 +81,7 @@ class MainScreen extends GetView<MainController> {
       const UserScreen(),
     ];
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor,
       body: Obx(() => IndexedStack(
             index: controller.rxCurrentNavIndex.value,
             children: listScreenTab,

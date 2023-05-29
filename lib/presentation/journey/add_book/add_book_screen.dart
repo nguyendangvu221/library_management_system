@@ -12,23 +12,20 @@ class AddBookScreen extends GetView<AddBookController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
-      appBar: AppBar(
-        backgroundColor: AppColors.white,
-        leading: AppTouchable(
-          height: 36.sp,
-          onPressed: Get.back,
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Back',
-              )
-            ],
-          ),
+      backgroundColor: AppColors.backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: 16.sp,
+          right: 16.sp,
+          top: Get.mediaQuery.padding.top,
         ),
-        title: Text(
-          'Add Book',
+        child: Stack(
+          children: [
+            Text(
+              "Thêm sách",
+              style: ThemeText.heading2.blue800,
+            )
+          ],
         ),
       ),
     );
