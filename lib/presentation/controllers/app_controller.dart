@@ -5,6 +5,7 @@ import 'package:library_management_system/common/ultils/status_bar_style/style_o
 import 'package:library_management_system/common/ultils/translations/app_utils.dart';
 
 class AppController extends SuperController {
+  
   @override
   void onDetached() {
     logger('---------App State onDetached');

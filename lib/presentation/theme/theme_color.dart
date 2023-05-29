@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // TODO(dieptt): define common color
   static const Color primary = Color(0xFF012A4A);
   static const Color text = black;
   static Color? background = grey50;
@@ -56,4 +55,7 @@ class AppColors {
   static const Color black = Colors.black;
   static const Color black45 = Colors.black45;
   static Color black54 = Colors.black54;
+  static const Color white1 = Color(0xFFFFFFFF);
+  static const Color bluef = Color(0xff0E64D2);
+  static const Color bluel = Color(0xff1877F2);
 }
