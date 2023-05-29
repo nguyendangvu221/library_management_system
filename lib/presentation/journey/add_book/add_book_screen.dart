@@ -12,7 +12,7 @@ class AddBookScreen extends GetView<AddBookController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.white,
+      backgroundColor: AppColors.backgroundColor,
       body: Padding(
         padding: EdgeInsets.only(
           left: 16.sp,
