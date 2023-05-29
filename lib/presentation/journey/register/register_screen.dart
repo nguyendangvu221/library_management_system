@@ -162,8 +162,8 @@ class RegisterScreen extends GetView<RegisterController> {
                           height: 20,
                         ),
                         Container(
-                          width: 312,
-                          height: 48,
+                          width: 312.w,
+                          height: 48.r,
                           color: AppColors.bluef,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
@@ -193,8 +193,8 @@ class RegisterScreen extends GetView<RegisterController> {
                           height: 20,
                         ),
                         Container(
-                          width: 312,
-                          height: 48,
+                          width: 312.w,
+                          height: 48.r,
                           child: SignInButtonBuilder(
                             text: 'Login with facebook',
                             icon: Icons.facebook,
@@ -209,8 +209,8 @@ class RegisterScreen extends GetView<RegisterController> {
                           height: 20,
                         ),
                         Container(
-                          width: 312,
-                          height: 48,
+                          width: 312.w,
+                          height: 48.r,
                           child: SignInButton(
                             Buttons.google,
                             text: "Login with Google",

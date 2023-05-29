@@ -154,8 +154,8 @@ class LoginScreen extends GetView<LoginController> {
                   height: 10,
                 ),
                 Container(
-                  width: 312,
-                  height: 48,
+                  width: 312.w,
+                  height: 48.h,
                   child: ElevatedButton(
                     onPressed: controller.login,
                     style: ElevatedButton.styleFrom(
@@ -184,8 +184,8 @@ class LoginScreen extends GetView<LoginController> {
                   height: 20,
                 ),
                 Container(
-                  width: 312,
-                  height: 48,
+                  width: 312.w,
+                  height: 48.h,
                   child: SignInButtonBuilder(
                     text: 'Login with facebook',
                     icon: Icons.facebook,
@@ -200,8 +200,8 @@ class LoginScreen extends GetView<LoginController> {
                   height: 20,
                 ),
                 Container(
-                  width: 312,
-                  height: 48,
+                  width: 312.w,
+                  height: 48.h,
                   child: SignInButton(
                     Buttons.google,
                     text: "Login with Google",
