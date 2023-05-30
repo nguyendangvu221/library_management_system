@@ -1,5 +1,5 @@
 class HiveTypeConstants {
-  static const int document = 2;
+  static const int document = 0;
 }
 
 class HiveKey {

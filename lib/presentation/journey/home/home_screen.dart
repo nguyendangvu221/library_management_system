@@ -86,7 +86,7 @@ class HomeScreen extends GetView<HomeController> {
                     child: const Image(
                         fit: BoxFit.fill,
                         image: NetworkImage(
-                            "https://gamek.mediacdn.vn/133514250583805952/2020/6/30/photo-1-15935006303501558549714-1593500662710349227570.jpg")),
+                            "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg")),
                   ),
                 ),
                 Expanded(
