@@ -27,6 +27,7 @@ class RegisterScreen extends GetView<RegisterController> {
                   child: Text(
                     'Create an account',
                     style: TextStyle(
+                      color: AppColors.blue700,
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
                     ),
@@ -37,6 +38,7 @@ class RegisterScreen extends GetView<RegisterController> {
                   child: Text(
                     'Connect with your friends today!',
                     style: TextStyle(
+                      color: AppColors.blue700,
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
                     ),
@@ -58,11 +60,18 @@ class RegisterScreen extends GetView<RegisterController> {
                               borderRadius: BorderRadius.circular(10.r),
                             ),
                             enabledBorder: OutlineInputBorder(
+                              borderSide: new BorderSide(
+                                color: AppColors.blue700,
+                              ),
                               borderRadius: BorderRadius.circular(10.r),
                             ),
                             filled: true,
                             fillColor: AppColors.white1,
                             hintText: 'Enter Your Username',
+                            hintStyle: TextStyle(
+                              color: AppColors.blue700,
+                              fontSize: 16,
+                            ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -81,11 +90,18 @@ class RegisterScreen extends GetView<RegisterController> {
                               borderRadius: BorderRadius.circular(10.r),
                             ),
                             enabledBorder: OutlineInputBorder(
+                              borderSide: new BorderSide(
+                                color: AppColors.blue700,
+                              ),
                               borderRadius: BorderRadius.circular(10.r),
                             ),
                             filled: true,
                             fillColor: AppColors.white1,
                             hintText: 'Enter Your Email',
+                            hintStyle: TextStyle(
+                              color: AppColors.blue700,
+                              fontSize: 16,
+                            ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -104,11 +120,18 @@ class RegisterScreen extends GetView<RegisterController> {
                               borderRadius: BorderRadius.circular(10.r),
                             ),
                             enabledBorder: OutlineInputBorder(
+                              borderSide: new BorderSide(
+                                color: AppColors.blue700,
+                              ),
                               borderRadius: BorderRadius.circular(10.r),
                             ),
                             filled: true,
                             fillColor: AppColors.white1,
                             hintText: 'Enter Your Phone Number',
+                            hintStyle: TextStyle(
+                              color: AppColors.blue700,
+                              fontSize: 16,
+                            ),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -136,6 +159,8 @@ class RegisterScreen extends GetView<RegisterController> {
                             obscureText: controller.isPasswordHidden1.value,
                             decoration: InputDecoration(
                               hintText: 'Enter Your Password',
+                              hintStyle: TextStyle(
+                                  color: AppColors.blue700, fontSize: 16),
                               suffixIcon: IconButton(
                                 padding:
                                     const EdgeInsetsDirectional.only(end: 12),
@@ -151,6 +176,9 @@ class RegisterScreen extends GetView<RegisterController> {
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
                               enabledBorder: OutlineInputBorder(
+                                borderSide: new BorderSide(
+                                  color: AppColors.blue700,
+                                ),
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
                               filled: true,
@@ -162,62 +190,63 @@ class RegisterScreen extends GetView<RegisterController> {
                           height: 20,
                         ),
                         Container(
-                          width: 312.w,
-                          height: 48.r,
-                          color: AppColors.bluef,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                               backgroundColor:AppColors.bluef ,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5.0),
+                  width: 312.w,
+                  height: 48.h,
+                  child: ElevatedButton(
+                    onPressed: controller.login1,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.bluef,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
+                    child: Text('Sign Up',style: TextStyle(fontSize: 16),),
+                  ),
+                ),
+                        const SizedBox(
+                          height: 40,
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Divider(
+                                  color: AppColors.blue700, thickness: 1),
+                            ),
+                            SizedBox(
+                                width: 70.h,
+                                child: Text(
+                                  'Or With',
+                                  style: TextStyle(
+                                      color: AppColors.blue700, fontSize: 18),
+                                  textAlign: TextAlign.center,
+                                )),
+                            Expanded(
+                              child: Divider(
+                                color: AppColors.blue700,
+                                thickness: 1,
                               ),
                             ),
-                            onPressed: controller.login1,
-                            child: Text('Sign up'),
-                          ),
+                          ],
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 40,
                         ),
                         Container(
-                            alignment: Alignment.center,
+                          width: 312.w,
+                          height: 48.h,
+                          child: OutlinedButton(
+                            onPressed: () {},
+                            style: OutlinedButton.styleFrom(
+                              backgroundColor: AppColors.white,
+
+                              side: BorderSide(
+                                  color: AppColors.blue700), //<-- SEE HERE
+                            ),
                             child: Text(
-                              'Or With',
-                              textAlign: TextAlign.center,
-                            )),
-                        Divider(
-                          color: AppColors.black,
-                          height: 30,
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: 312.w,
-                          height: 48.r,
-                          child: SignInButtonBuilder(
-                            text: 'Login with facebook',
-                            icon: Icons.facebook,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5.0),
+                              'Login with Barcode',
+                              style: TextStyle(
+                                  color: AppColors.blue700, fontSize: 16),
                             ),
-                            onPressed: () {},
-                            backgroundColor: AppColors.bluel,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          width: 312.w,
-                          height: 48.r,
-                          child: SignInButton(
-                            Buttons.google,
-                            text: "Login with Google",
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5.0),
-                            ),
-                            onPressed: () {},
                           ),
                         ),
                         SizedBox(
@@ -226,14 +255,18 @@ class RegisterScreen extends GetView<RegisterController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Already have an account? ",
-                                textAlign: TextAlign.center),
+                            Text(
+                              "Already have an account? ",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16),
+                            ),
                             TextButton(
                                 onPressed: () =>
                                     Get.put(const RegisterScreen()),
                                 child: Text(
                                   'Login up',
                                   textAlign: TextAlign.center,
+                                  style: TextStyle(fontSize: 16),
                                 )),
                           ],
                         ),
