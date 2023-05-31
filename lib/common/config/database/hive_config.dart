@@ -11,7 +11,7 @@ class HiveConfig {
     final appDocumentDirectory =
         await path_provider.getApplicationDocumentsDirectory();
     Hive.init(appDocumentDirectory.path);
-    Hive.registerAdapter(HiveDocumentAdapter());
+    // Hive.registerAdapter(HiveDocumentAdapter());
     documentBox = await Hive.openBox(HiveKey.document);
   }
 }

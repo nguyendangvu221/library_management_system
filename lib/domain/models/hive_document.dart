@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:library_management_system/common/config/database/hive_type_constants.dart';
-part 'hive_document.g.dart';
+// part 'hive_document.g.dart';
 
 @HiveType(typeId: HiveTypeConstants.document)
 class HiveDocument {
@@ -30,7 +31,8 @@ class HiveDocument {
   DateTime? releaseDate;
   @HiveField(12)
   DateTime? updateDate;
-
+  @HiveField(13)
+  Image? image;
   HiveDocument({
     this.name,
     this.code,
@@ -45,5 +47,6 @@ class HiveDocument {
     this.numberOfEditions,
     this.releaseDate,
     this.updateDate,
+    this.image,
   });
 }

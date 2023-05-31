@@ -18,7 +18,7 @@ class HomeController extends GetxController {
         releaseDate: DateTime.now(),
         reprint: "Lần 3",
         updateDate: DateTime.now(),
-        yearPublication: "2020"),
+        language: "English"),
     Document(
         name: "Mục thần ký",
         author: "Trạch Trư",
@@ -32,7 +32,7 @@ class HomeController extends GetxController {
         releaseDate: DateTime.now(),
         reprint: "Lần 3",
         updateDate: DateTime.now(),
-        yearPublication: "2020"),
+        language: "English"),
     Document(
         name: "Mục thần ký",
         author: "Trạch Trư",
@@ -46,7 +46,7 @@ class HomeController extends GetxController {
         releaseDate: DateTime.now(),
         reprint: "Lần 3",
         updateDate: DateTime.now(),
-        yearPublication: "2020"),
+        language: "English"),
     Document(
         name: "Mục thần ký",
         author: "Trạch Trư",
@@ -60,7 +60,7 @@ class HomeController extends GetxController {
         releaseDate: DateTime.now(),
         reprint: "Lần 3",
         updateDate: DateTime.now(),
-        yearPublication: "2020")
+        language: "English")
   ];
   final tabs = <Widget>[
     Text(

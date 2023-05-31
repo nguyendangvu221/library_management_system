@@ -39,8 +39,6 @@ class SearchScreen extends GetView<SearchController> {
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(left: 10.sp, bottom: 8.sp),
-                    // child: Column(
-                    //   children: [
                     child: TextField(
                       decoration: InputDecoration(
                           enabledBorder: const UnderlineInputBorder(
@@ -49,8 +47,6 @@ class SearchScreen extends GetView<SearchController> {
                           ),
                           hintText: "Nhập tên tài liệu",
                           hintStyle: ThemeText.bodyMedium.blue800),
-                      //   ),
-                      // ],
                     ),
                   ),
                 ),
