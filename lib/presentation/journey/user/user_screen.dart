@@ -154,6 +154,7 @@ class UserScreen extends GetView<UserController> {
                     style: ButtonStyle(alignment: Alignment.bottomLeft),
                     icon: const Icon(Icons.logout_outlined),
                     label: const Text(
+                      ///fffff
                       'Đăng xuất',
                       style: TextStyle(color: AppColors.blue700, fontSize: 18),
                       textAlign: TextAlign.left,
