@@ -38,7 +38,7 @@ class HomeScreen extends GetView<HomeController> {
                   appBar: AppBar(
                     backgroundColor: AppColors.backgroundColor,
                     elevation: 0,
-                    toolbarHeight: 0,
+                    toolbarHeight: 25.sp,
                     flexibleSpace: TabBar(
                       tabs: controller.tabs,
                       labelColor: AppColors.blue800,
@@ -70,8 +70,9 @@ class HomeScreen extends GetView<HomeController> {
     return ListView.builder(
       itemBuilder: (context, index) {
         return Container(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-          height: 160.h,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+          ),
           child: Card(
             color: AppColors.grey200,
             child: Row(
@@ -79,7 +80,8 @@ class HomeScreen extends GetView<HomeController> {
                 Expanded(
                   flex: 1,
                   child: Container(
-                    margin: EdgeInsets.all(5.sp),
+                    height: 160.h,
+                    margin: EdgeInsets.all(7.sp),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20.sp),
                     ),
@@ -93,7 +95,9 @@ class HomeScreen extends GetView<HomeController> {
                   flex: 2,
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    margin: EdgeInsets.only(left: 10.sp, top: 10.sp),
+                    margin: EdgeInsets.only(
+                      left: 10.sp,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
