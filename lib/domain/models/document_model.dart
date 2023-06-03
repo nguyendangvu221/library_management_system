@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class Document {
   String? code;
   String? name;
@@ -14,7 +12,7 @@ class Document {
   String? language;
   DateTime? releaseDate;
   DateTime? updateDate;
-  Image? image;
+  String? image;
 
   Document({
     this.code,

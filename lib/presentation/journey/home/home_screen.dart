@@ -80,16 +80,17 @@ class HomeScreen extends GetView<HomeController> {
                 Expanded(
                   flex: 1,
                   child: Container(
-                    height: 160.h,
-                    margin: EdgeInsets.all(7.sp),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.sp),
-                    ),
-                    child: const Image(
+                      height: 160.h,
+                      margin: EdgeInsets.all(7.sp),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.sp),
+                      ),
+                      child: Image(
                         fit: BoxFit.fill,
                         image: NetworkImage(
-                            "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg")),
-                  ),
+                          document[index].image ?? "",
+                        ),
+                      )),
                 ),
                 Expanded(
                   flex: 2,
@@ -102,15 +103,15 @@ class HomeScreen extends GetView<HomeController> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          document[index].name!,
+                          document[index].name ?? "",
                           style: ThemeText.heading2.s18.blue900,
                         ),
                         Text(
-                          "Tác giả: ${document[index].author!}",
+                          "Tác giả: ${document[index].author ?? ""}",
                           style: ThemeText.heading4.blue900,
                         ),
                         Text(
-                          "Thể loại: ${document[index].category!}",
+                          "Thể loại: ${document[index].category ?? ""}",
                           style: ThemeText.bodyMedium.blue900,
                         ),
                         Text(
@@ -118,7 +119,7 @@ class HomeScreen extends GetView<HomeController> {
                           style: ThemeText.bodyMedium.blue900,
                         ),
                         Text(
-                          "Ngày đăng: ${document[index].releaseDate!.day.toString()}",
+                          "Ngày đăng: ${document[index].releaseDate?.day.toString() ?? DateTime.now()}",
                           style: ThemeText.bodyMedium.blue900,
                         ),
                       ],

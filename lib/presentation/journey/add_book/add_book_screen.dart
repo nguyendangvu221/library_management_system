@@ -14,10 +14,12 @@ class AddBookScreen extends GetView<AddBookController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
+      resizeToAvoidBottomInset: true,
       body: Padding(
         padding: EdgeInsets.only(
           left: 16.sp,
           right: 16.sp,
+          // bottom: Get.mediaQuery.padding.bottom,
           top: Get.mediaQuery.padding.top,
         ),
         child: Column(
@@ -32,6 +34,7 @@ class AddBookScreen extends GetView<AddBookController> {
             ),
             Expanded(
               child: SingleChildScrollView(
+                reverse: true,
                 child: Column(
                   children: [
                     textField(
@@ -229,7 +232,7 @@ class AddBookScreen extends GetView<AddBookController> {
           ],
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: AppTouchable(
         onPressed: () {},
         outlinedBorder: RoundedRectangleBorder(
