@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:library_management_system/presentation/journey/register/register_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
-import 'package:library_management_system/presentation/widget/app_touchable.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 class RegisterScreen extends GetView<RegisterController> {
