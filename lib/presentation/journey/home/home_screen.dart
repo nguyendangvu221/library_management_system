@@ -73,59 +73,62 @@ class HomeScreen extends GetView<HomeController> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Card(
-            color: AppColors.grey200,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                    height: 160.h,
-                    margin: EdgeInsets.all(7.sp),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20.sp),
-                    ),
-                    child: const Image(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(
-                            "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg")),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    margin: EdgeInsets.only(
-                      left: 10.sp,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          document[index].name!,
-                          style: ThemeText.heading2.s18.blue900,
-                        ),
-                        Text(
-                          "Tác giả: ${document[index].author!}",
-                          style: ThemeText.heading4.blue900,
-                        ),
-                        Text(
-                          "Thể loại: ${document[index].category!}",
-                          style: ThemeText.bodyMedium.blue900,
-                        ),
-                        Text(
-                          "Số trang: ${document[index].numberOfPage.toString()}",
-                          style: ThemeText.bodyMedium.blue900,
-                        ),
-                        Text(
-                          "Ngày đăng: ${document[index].releaseDate!.day.toString()}",
-                          style: ThemeText.bodyMedium.blue900,
-                        ),
-                      ],
+          child: TextButton(
+            onPressed: () {  },
+            child: Card(
+              color: AppColors.grey200,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                      height: 160.h,
+                      margin: EdgeInsets.all(7.sp),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20.sp),
+                      ),
+                      child: const Image(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(
+                              "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg")),
                     ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(
+                        left: 10.sp,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            document[index].name!,
+                            style: ThemeText.heading2.s18.blue900,
+                          ),
+                          Text(
+                            "Tác giả: ${document[index].author!}",
+                            style: ThemeText.heading4.blue900,
+                          ),
+                          Text(
+                            "Thể loại: ${document[index].category!}",
+                            style: ThemeText.bodyMedium.blue900,
+                          ),
+                          Text(
+                            "Số trang: ${document[index].numberOfPage.toString()}",
+                            style: ThemeText.bodyMedium.blue900,
+                          ),
+                          Text(
+                            "Ngày đăng: ${document[index].releaseDate!.day.toString()}",
+                            style: ThemeText.bodyMedium.blue900,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );

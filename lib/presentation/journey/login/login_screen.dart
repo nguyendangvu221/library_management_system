@@ -5,6 +5,7 @@ import 'package:library_management_system/presentation/journey/login/login_contr
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
+import '../../../common/constants/app_routes.dart';
 import '../register/register_screen.dart';
 
 //import 'package:get/get.dart';
@@ -51,77 +52,18 @@ class LoginScreen extends GetView<LoginController> {
                   height: 10,
                 ),
                 Container(
+                  
                   child: Form(
                     key: controller.loginFormKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextFormField(
-                          controller: controller.emailController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: new BorderSide(
-                                color: AppColors.blue700,
-                              ),
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            filled: true,
-                            fillColor: AppColors.white1,
-                            hintText: 'example@gmail.com',
-                            hintStyle: TextStyle(color: AppColors.blue700,
-                            fontSize: 16,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Emai không hợp lệ';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Text(
-                          'Password',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: AppColors.blue700,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Obx(
-                          () => TextFormField(
-                            validator: (value) {
-                              if (value == null ||
-                                  value.isEmpty ||
-                                  value.length < 6) {
-                                return 'Mật khẩu > 6 kí tự';
-                              }
-                              return null;
-                            },
-                            controller: controller.passwordController,
-                            obscureText: controller.isPasswordHidden.value,
+                        Container(
+                          width: 312.h,
+                          height: 80.w,
+                          child: TextFormField(
+                            controller: controller.emailController,
                             decoration: InputDecoration(
-                              hintText: 'Enter Your Password',
-                              hintStyle: TextStyle(color: AppColors.blue700,
-                              fontSize: 16,),
-                              suffixIcon: IconButton(
-                                padding:
-                                    const EdgeInsetsDirectional.only(end: 12),
-                                icon: controller.isPasswordHidden.value
-                                    ? Icon(Icons.visibility)
-                                    : Icon(Icons.visibility_off),
-                                onPressed: () {
-                                  controller.isPasswordHidden.value =
-                                      !controller.isPasswordHidden.value;
-                                },
-                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
@@ -133,6 +75,72 @@ class LoginScreen extends GetView<LoginController> {
                               ),
                               filled: true,
                               fillColor: AppColors.white1,
+                              hintText: 'example@gmail.com',
+                              hintStyle: TextStyle(color: AppColors.blue700,
+                              fontSize: 16,
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Emai không hợp lệ';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        
+                        Text(
+                          'Password',
+                          textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: AppColors.blue700,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Obx(
+                          () => Container(
+                            width: 312.h,
+                          height: 80.w,
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value == null ||
+                                    value.isEmpty ||
+                                    value.length < 6) {
+                                  return 'Mật khẩu > 6 kí tự';
+                                }
+                                return null;
+                              },
+                              controller: controller.passwordController,
+                              obscureText: controller.isPasswordHidden.value,
+                              decoration: InputDecoration(
+                                hintText: 'Enter Your Password',
+                                hintStyle: TextStyle(color: AppColors.blue700,
+                                fontSize: 16,),
+                                suffixIcon: IconButton(
+                                  padding:
+                                      const EdgeInsetsDirectional.only(end: 12),
+                                  icon: controller.isPasswordHidden.value
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
+                                  onPressed: () {
+                                    controller.isPasswordHidden.value =
+                                        !controller.isPasswordHidden.value;
+                                  },
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: new BorderSide(
+                                    color: AppColors.blue700,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                filled: true,
+                                fillColor: AppColors.white1,
+                              ),
                             ),
                           ),
                         ),
@@ -140,9 +148,7 @@ class LoginScreen extends GetView<LoginController> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+               
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -173,7 +179,7 @@ class LoginScreen extends GetView<LoginController> {
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Container(
                   width: 312.w,
@@ -236,16 +242,14 @@ class LoginScreen extends GetView<LoginController> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: 60,
-                ),
+                const SizedBox(height: 30,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Don't have an account", textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 16,),),
                     TextButton(
-                        onPressed: () => Get.put(const RegisterScreen()),
+                        onPressed: () =>  Get.offAllNamed(AppRoutes.register),
                         child: Text(
                           'Sign up',
                           textAlign: TextAlign.center,

@@ -19,11 +19,14 @@ class UserScreen extends GetView<UserController> {
           right: 16.sp,
           top: Get.mediaQuery.padding.top,
         ),
-        child: Stack(
+        child: Column(
           children: [
             Text(
               "Cài đặt",
               style: ThemeText.heading2.blue800,
+            ),
+            Container(
+              
             ),
             
           ],

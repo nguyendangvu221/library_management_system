@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:library_management_system/common/constants/app_routes.dart';
 import 'package:library_management_system/presentation/journey/register/register_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
@@ -52,125 +53,12 @@ class RegisterScreen extends GetView<RegisterController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextFormField(
-                          controller: controller.usernameController1,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: new BorderSide(
-                                color: AppColors.blue700,
-                              ),
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            filled: true,
-                            fillColor: AppColors.white1,
-                            hintText: 'Enter Your Username',
-                            hintStyle: TextStyle(
-                              color: AppColors.blue700,
-                              fontSize: 16,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Tên không hợp lệ';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: controller.emailController1,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: new BorderSide(
-                                color: AppColors.blue700,
-                              ),
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            filled: true,
-                            fillColor: AppColors.white1,
-                            hintText: 'Enter Your Email',
-                            hintStyle: TextStyle(
-                              color: AppColors.blue700,
-                              fontSize: 16,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Emai không hợp lệ';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        TextFormField(
-                          controller: controller.phonenumberController1,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: new BorderSide(
-                                color: AppColors.blue700,
-                              ),
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            filled: true,
-                            fillColor: AppColors.white1,
-                            hintText: 'Enter Your Phone Number',
-                            hintStyle: TextStyle(
-                              color: AppColors.blue700,
-                              fontSize: 16,
-                            ),
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Số điện thoại không hợp lệ';
-                            }
-                            return null;
-                          },
-                        ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Obx(
-                          () => TextFormField(
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (value) {
-                              if (value == null ||
-                                  value.isEmpty ||
-                                  value.length < 6) {
-                                return 'Mật khẩu > 6 kí tự';
-                              }
-                              return null;
-                            },
-                            controller: controller.passwordController1,
-                            obscureText: controller.isPasswordHidden1.value,
+                        Container(
+                          width: 312.h,
+                          height: 80.w,
+                          child: TextFormField(
+                            controller: controller.usernameController1,
                             decoration: InputDecoration(
-                              hintText: 'Enter Your Password',
-                              hintStyle: TextStyle(
-                                  color: AppColors.blue700, fontSize: 16),
-                              suffixIcon: IconButton(
-                                padding:
-                                    const EdgeInsetsDirectional.only(end: 12),
-                                icon: controller.isPasswordHidden1.value
-                                    ? Icon(Icons.visibility)
-                                    : Icon(Icons.visibility_off),
-                                onPressed: () {
-                                  controller.isPasswordHidden1.value =
-                                      !controller.isPasswordHidden1.value;
-                                },
-                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
@@ -182,12 +70,133 @@ class RegisterScreen extends GetView<RegisterController> {
                               ),
                               filled: true,
                               fillColor: AppColors.white1,
+                              hintText: 'Enter Your Username',
+                              hintStyle: TextStyle(
+                                color: AppColors.blue700,
+                                fontSize: 16,
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Tên không hợp lệ';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        
+                        Container(
+                          width: 312.h,
+                          height: 80.w,
+                          child: TextFormField(
+                            controller: controller.emailController1,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: new BorderSide(
+                                  color: AppColors.blue700,
+                                ),
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              filled: true,
+                              fillColor: AppColors.white1,
+                              hintText: 'Enter Your Email',
+                              hintStyle: TextStyle(
+                                color: AppColors.blue700,
+                                fontSize: 16,
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Emai không hợp lệ';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        
+                        Container(
+                          width: 312.h,
+                          height: 80.w,
+                          child: TextFormField(
+                            controller: controller.phonenumberController1,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: new BorderSide(
+                                  color: AppColors.blue700,
+                                ),
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              filled: true,
+                              fillColor: AppColors.white1,
+                              hintText: 'Enter Your Phone Number',
+                              hintStyle: TextStyle(
+                                color: AppColors.blue700,
+                                fontSize: 16,
+                              ),
+                            ),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Số điện thoại không hợp lệ';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        
+                        Obx(
+                          () => Container(
+                            width: 312.h,
+                          height: 80.w,
+                            child: TextFormField(
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (value) {
+                                if (value == null ||
+                                    value.isEmpty ||
+                                    value.length < 6) {
+                                  return 'Mật khẩu > 6 kí tự';
+                                }
+                                return null;
+                              },
+                              controller: controller.passwordController1,
+                              obscureText: controller.isPasswordHidden1.value,
+                              decoration: InputDecoration(
+                                hintText: 'Enter Your Password',
+                                hintStyle: TextStyle(
+                                    color: AppColors.blue700, fontSize: 16),
+                                suffixIcon: IconButton(
+                                  padding:
+                                      const EdgeInsetsDirectional.only(end: 12),
+                                  icon: controller.isPasswordHidden1.value
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
+                                  onPressed: () {
+                                    controller.isPasswordHidden1.value =
+                                        !controller.isPasswordHidden1.value;
+                                  },
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: new BorderSide(
+                                    color: AppColors.blue700,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                filled: true,
+                                fillColor: AppColors.white1,
+                              ),
                             ),
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                       
                         Container(
                   width: 312.w,
                   height: 48.h,
@@ -203,7 +212,7 @@ class RegisterScreen extends GetView<RegisterController> {
                   ),
                 ),
                         const SizedBox(
-                          height: 40,
+                          height: 30,
                         ),
                         Row(
                           children: [
@@ -228,7 +237,7 @@ class RegisterScreen extends GetView<RegisterController> {
                           ],
                         ),
                         const SizedBox(
-                          height: 40,
+                          height: 30,
                         ),
                         Container(
                           width: 312.w,
@@ -249,7 +258,7 @@ class RegisterScreen extends GetView<RegisterController> {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 30,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -261,7 +270,7 @@ class RegisterScreen extends GetView<RegisterController> {
                             ),
                             TextButton(
                                 onPressed: () =>
-                                    Get.put(const RegisterScreen()),
+                                    Get.offAllNamed(AppRoutes.login),
                                 child: Text(
                                   'Login up',
                                   textAlign: TextAlign.center,
