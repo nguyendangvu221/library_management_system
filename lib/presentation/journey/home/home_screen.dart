@@ -1,9 +1,6 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:library_management_system/domain/models/document_model.dart';
 import 'package:library_management_system/presentation/journey/home/home_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
@@ -38,7 +35,7 @@ class HomeScreen extends GetView<HomeController> {
                   appBar: AppBar(
                     backgroundColor: AppColors.backgroundColor,
                     elevation: 0,
-                    toolbarHeight: 25.sp,
+                    toolbarHeight: 0,
                     flexibleSpace: TabBar(
                       tabs: controller.tabs,
                       labelColor: AppColors.blue800,
@@ -51,9 +48,9 @@ class HomeScreen extends GetView<HomeController> {
                     ),
                     child: TabBarView(
                       children: [
-                        listBuilderTabBarView(controller.listDocument),
-                        listBuilderTabBarView(controller.listDocument),
-                        listBuilderTabBarView(controller.listDocument),
+                        listBuilderTabBarView(),
+                        listBuilderTabBarView(),
+                        listBuilderTabBarView(),
                       ],
                     ),
                   ),
@@ -66,6 +63,7 @@ class HomeScreen extends GetView<HomeController> {
     );
   }
 
+<<<<<<< HEAD
   Widget listBuilderTabBarView(List<Document> document) {
     return ListView.builder(
       itemBuilder: (context, index) {
@@ -129,11 +127,52 @@ class HomeScreen extends GetView<HomeController> {
                   ),
                 ],
               ),
+=======
+  Widget listBuilderTabBarView() {
+    return
+        // child: ListView.builder(
+        //   itemBuilder: (context, index) {
+        SizedBox(
+      child: Card(
+        color: AppColors.blue100,
+        child: Row(
+          children: [
+            const Expanded(
+              child: Image(
+                  fit: BoxFit.cover,
+                  image: NetworkImage(
+                      "https://gamek.mediacdn.vn/133514250583805952/2020/6/30/photo-1-15935006303501558549714-1593500662710349227570.jpg")),
+>>>>>>> parent of 64ac643 (Merge branch 'main' into trongtanbranch)
             ),
-          ),
-        );
-      },
-      itemCount: document.length,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Mục thần ký",
+                    style: ThemeText.heading2.blue900,
+                  ),
+                  Text(
+                    "Tác giả: Trạch Trư",
+                    style: ThemeText.heading3.blue900,
+                  ),
+                  Text(
+                    "Thể loại: Truyện Tu Tiên",
+                    style: ThemeText.heading3.blue900,
+                  ),
+                  Text(
+                    "Số trang: 1001 Trang",
+                    style: ThemeText.heading3.blue900,
+                  )
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
+    //   },
+    //   itemCount: 1,
+    // ),
   }
 }

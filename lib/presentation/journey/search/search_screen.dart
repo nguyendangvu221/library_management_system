@@ -11,46 +11,18 @@ class SearchScreen extends GetView<SearchController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColors.white,
       body: Padding(
         padding: EdgeInsets.only(
           left: 16.sp,
           right: 16.sp,
           top: Get.mediaQuery.padding.top,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Stack(
           children: [
             Text(
               "Tìm kiếm",
               style: ThemeText.heading2.blue800,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                GestureDetector(
-                  child: Icon(
-                    Icons.search,
-                    color: AppColors.blue800,
-                    size: 30.sp,
-                  ),
-                  onTap: () {},
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10.sp, bottom: 8.sp),
-                    child: TextField(
-                      decoration: InputDecoration(
-                          enabledBorder: const UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 1, color: AppColors.blue800),
-                          ),
-                          hintText: "Nhập tên tài liệu",
-                          hintStyle: ThemeText.bodyMedium.blue800),
-                    ),
-                  ),
-                ),
-              ],
             )
           ],
         ),

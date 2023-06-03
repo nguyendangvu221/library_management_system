@@ -1,20 +1,17 @@
-import 'package:flutter/material.dart';
-
 class Document {
   String? code;
   String? name;
   String? author;
   String? category;
   String? publisher;
+  String? yearPublication;
   String? description;
   int? numberOfPage;
   String? paperSize;
   String? reprint;
   int? numberOfEditions;
-  String? language;
   DateTime? releaseDate;
   DateTime? updateDate;
-  Image? image;
 
   Document({
     this.code,
@@ -22,15 +19,14 @@ class Document {
     this.author,
     this.category,
     this.publisher,
+    this.yearPublication,
     this.description,
     this.numberOfPage,
     this.paperSize,
     this.reprint,
-    this.language,
     this.numberOfEditions,
     this.releaseDate,
     this.updateDate,
-    this.image,
   });
   Document.fromJson(Map<String, dynamic> json) {
     code = json['code'];
@@ -38,9 +34,9 @@ class Document {
     author = json['author'];
     category = json['category'];
     publisher = json['publisher'];
+    yearPublication = json['yearPublication'];
     description = json['description'];
     numberOfPage = json['numberOfPage'];
-    language = json['language'];
     paperSize = json['paperSize'];
     reprint = json['reprint'];
     numberOfEditions = json['numberOfEditions'];
@@ -54,10 +50,10 @@ class Document {
     data['author'] = author;
     data['category'] = category;
     data['publisher'] = publisher;
+    data['yearPublication'] = yearPublication;
     data['description'] = description;
     data['numberOfPage'] = numberOfPage;
     data['paperSize'] = paperSize;
-    data['language'] = language;
     data['reprint'] = reprint;
     data['numberOfEditions'] = numberOfEditions;
     data['releaseDate'] = releaseDate;
