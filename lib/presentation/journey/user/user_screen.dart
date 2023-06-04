@@ -18,155 +18,109 @@ class UserScreen extends GetView<UserController> {
           right: 16.sp,
           top: Get.mediaQuery.padding.top,
         ),
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               "Cài đặt",
               style: ThemeText.heading2.blue800,
             ),
-            
             Column(
               children: [
                 SizedBox(
-                  height: 10,
+                  height: 10.sp,
                 ),
                 Container(
-                    width: 350.h,
-                    height: 138.w,
+                    height: 140.h,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
+                      borderRadius: BorderRadius.all(Radius.circular(8.sp)),
                       color: AppColors.grey1,
                     ),
                     child: Column(
                       children: [
-                        CircleAvatar(
+                        const CircleAvatar(
                           radius: 50,
                           backgroundImage: NetworkImage(
                               "https://s3.o7planning.com/images/boy-128.png"),
                         ),
-                        const SizedBox(
-                          height: 10,
+                        SizedBox(
+                          height: 10.sp,
                         ),
-                        Text(
-                          "Họ và Tên",
-                          style: TextStyle(
-                            fontSize: 22,
-                            color: AppColors.blue700,
-                          ),
-                        ),
+                        Text("Họ và Tên",
+                            style: ThemeText.bodyMedium.s20.blue800),
                       ],
                     )),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: AppColors.grey1,
-                  ),
-                  width: 350.h,
-                  height: 40.w,
-                  child: TextButton.icon(
-                    style: ButtonStyle(alignment: Alignment.bottomLeft),
-                    icon: const Icon(Icons.error_outline),
-                    label: const Text(
-                      'Hướng dẫn sử dụng',
-                      style: TextStyle(color: AppColors.blue700, fontSize: 18),
-                      textAlign: TextAlign.left,
-                    ),
-                    onPressed: () {},
-                  ),
+                buttonOfSetting(
+                  40.h,
+                  "Hướng dẫn sử dụng",
+                  () => null,
+                  const Icon(Icons.error),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: AppColors.grey1,
-                  ),
-                  width: 350.h,
-                  height: 40.w,
-                  child: TextButton.icon(
-                    style: ButtonStyle(alignment: Alignment.bottomLeft),
-                    icon: const Icon(Icons.error_outline),
-                    label: const Text(
-                      'Thông báo',
-                      style: TextStyle(color: AppColors.blue700, fontSize: 18),
-                      textAlign: TextAlign.left,
-                    ),
-                    onPressed: () {},
-                  ),
+                buttonOfSetting(
+                  40.h,
+                  "Thông báo",
+                  () => null,
+                  const Icon(Icons.error),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: AppColors.grey1,
-                  ),
-                  width: 350.h,
-                  height: 40.w,
-                  child: TextButton.icon(
-                    style: ButtonStyle(alignment: Alignment.bottomLeft),
-                    icon: const Icon(Icons.mail_outline_rounded),
-                    label: const Text(
-                      'Gửi Email yêu cầu trợ giúp',
-                      style: TextStyle(color: AppColors.blue700, fontSize: 18),
-                      textAlign: TextAlign.left,
-                    ),
-                    onPressed: () {},
-                  ),
+                buttonOfSetting(
+                  40.h,
+                  "Gửi email yêu cầu trợ giúp",
+                  () => null,
+                  const Icon(Icons.email),
                 ),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: AppColors.grey1,
-                  ),
-                  width: 350.h,
-                  height: 55.w,
-                  child: TextButton.icon(
-                    style: ButtonStyle(alignment: Alignment.bottomLeft),
-                    icon: const Icon(Icons.error_outline),
-                    label: const Text(
-                      'Điều khoản sử dụng và vấn đề bản quyền',
-                      style: TextStyle(color: AppColors.blue700, fontSize: 18),
-                      textAlign: TextAlign.left,
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
+                buttonOfSetting(
+                    60.h,
+                    "Điều khoản sử dụng và vấn đề bản quyền",
+                    () => null,
+                    const Icon(Icons.error)),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: AppColors.grey1,
-                  ),
-                  width: 350.h,
-                  height: 40.w,
-                  child: TextButton.icon(
-                    style: ButtonStyle(alignment: Alignment.bottomLeft),
-                    icon: const Icon(Icons.logout_outlined),
-                    label: const Text(
-                      ///fffff
-                      'Đăng xuất',
-                      style: TextStyle(color: AppColors.blue700, fontSize: 18),
-                      textAlign: TextAlign.left,
-                    ),
-                    onPressed: () {},
-                  ),
-                )
+                buttonOfSetting(
+                  40.h,
+                  "Đăng xuất",
+                  () => null,
+                  const Icon(Icons.logout),
+                ),
               ],
             )
           ],
+        ),
       ),
-    ),
+    );
+  }
+
+  Widget buttonOfSetting(
+      double height, String? label, Function()? onPress, Icon icon) {
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(8.sp)),
+        color: AppColors.grey1,
+      ),
+      width: double.infinity,
+      height: height,
+      child: TextButton.icon(
+        style: const ButtonStyle(alignment: Alignment.bottomLeft),
+        icon: icon,
+        label: Text(
+          label ?? "",
+          style: ThemeText.bodySemibold.s17.blue700,
+          textAlign: TextAlign.left,
+        ),
+        onPressed: onPress,
+      ),
     );
   }
 }
