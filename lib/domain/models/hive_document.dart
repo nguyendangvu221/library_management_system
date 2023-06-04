@@ -32,7 +32,7 @@ class HiveDocument {
   @HiveField(12)
   DateTime? updateDate;
   @HiveField(13)
-  Image? image;
+  String? image;
   HiveDocument({
     this.name,
     this.code,

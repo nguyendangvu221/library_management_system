@@ -18,7 +18,9 @@ class HomeController extends GetxController {
         releaseDate: DateTime.now(),
         reprint: "Lần 3",
         updateDate: DateTime.now(),
-        language: "English"),
+        language: "English",
+        image:
+            "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg"),
     Document(
         name: "Mục thần ký",
         author: "Trạch Trư",
@@ -32,7 +34,9 @@ class HomeController extends GetxController {
         releaseDate: DateTime.now(),
         reprint: "Lần 3",
         updateDate: DateTime.now(),
-        language: "English"),
+        language: "English",
+        image:
+            "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg"),
     Document(
         name: "Mục thần ký",
         author: "Trạch Trư",
@@ -46,7 +50,9 @@ class HomeController extends GetxController {
         releaseDate: DateTime.now(),
         reprint: "Lần 3",
         updateDate: DateTime.now(),
-        language: "English"),
+        language: "English",
+        image:
+            "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg"),
     Document(
         name: "Mục thần ký",
         author: "Trạch Trư",
@@ -60,7 +66,9 @@ class HomeController extends GetxController {
         releaseDate: DateTime.now(),
         reprint: "Lần 3",
         updateDate: DateTime.now(),
-        language: "English")
+        language: "English",
+        image:
+            "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg"),
   ];
   final tabs = <Widget>[
     Text(
