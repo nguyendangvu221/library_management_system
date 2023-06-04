@@ -5,6 +5,7 @@ import 'package:library_management_system/presentation/journey/login/login_contr
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
+import '../../../common/constants/app_routes.dart';
 import '../register/register_screen.dart';
 
 //import 'package:get/get.dart';
@@ -30,6 +31,7 @@ class LoginScreen extends GetView<LoginController> {
                     'Hi, Welcome Back!',
                     textAlign: TextAlign.left,
                     style: TextStyle(
+                      color: AppColors.blue700,
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
                     ),
@@ -40,80 +42,105 @@ class LoginScreen extends GetView<LoginController> {
                 ),
                 Text(
                   'Email',
+                  style: TextStyle(
+                    color: AppColors.blue700,
+                    fontSize: 14,
+                  ),
                   textAlign: TextAlign.left,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
                 Container(
+                  
                   child: Form(
                     key: controller.loginFormKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        TextFormField(
-                          controller: controller.emailController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.r),
+                        Container(
+                          width: 312.h,
+                          height: 80.w,
+                          child: TextFormField(
+                            controller: controller.emailController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: new BorderSide(
+                                  color: AppColors.blue700,
+                                ),
+                                borderRadius: BorderRadius.circular(10.r),
+                              ),
+                              filled: true,
+                              fillColor: AppColors.white1,
+                              hintText: 'example@gmail.com',
+                              hintStyle: TextStyle(color: AppColors.blue700,
+                              fontSize: 16,
+                              ),
                             ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            filled: true,
-                            fillColor: AppColors.white1,
-                            hintText: 'example@gmail.com',
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Emai không hợp lệ';
+                              }
+                              return null;
+                            },
                           ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Emai không hợp lệ';
-                            }
-                            return null;
-                          },
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+                        
                         Text(
                           'Password',
                           textAlign: TextAlign.left,
+                          style: TextStyle(
+                            color: AppColors.blue700,
+                          ),
                         ),
                         const SizedBox(
                           height: 10,
                         ),
                         Obx(
-                          () => TextFormField(
-                            validator: (value) {
-                              if (value == null ||
-                                  value.isEmpty ||
-                                  value.length < 6) {
-                                return 'Mật khẩu > 6 kí tự';
-                              }
-                              return null;
-                            },
-                            controller: controller.passwordController,
-                            obscureText: controller.isPasswordHidden.value,
-                            decoration: InputDecoration(
-                              hintText: 'Enter Your Password',
-                              suffixIcon: IconButton(
-                                padding:
-                                    const EdgeInsetsDirectional.only(end: 12),
-                                icon: controller.isPasswordHidden.value
-                                    ? Icon(Icons.visibility)
-                                    : Icon(Icons.visibility_off),
-                                onPressed: () {
-                                  controller.isPasswordHidden.value =
-                                      !controller.isPasswordHidden.value;
-                                },
+                          () => Container(
+                            width: 312.h,
+                          height: 80.w,
+                            child: TextFormField(
+                              validator: (value) {
+                                if (value == null ||
+                                    value.isEmpty ||
+                                    value.length < 6) {
+                                  return 'Mật khẩu > 6 kí tự';
+                                }
+                                return null;
+                              },
+                              controller: controller.passwordController,
+                              obscureText: controller.isPasswordHidden.value,
+                              decoration: InputDecoration(
+                                hintText: 'Enter Your Password',
+                                hintStyle: TextStyle(color: AppColors.blue700,
+                                fontSize: 16,),
+                                suffixIcon: IconButton(
+                                  padding:
+                                      const EdgeInsetsDirectional.only(end: 12),
+                                  icon: controller.isPasswordHidden.value
+                                      ? Icon(Icons.visibility)
+                                      : Icon(Icons.visibility_off),
+                                  onPressed: () {
+                                    controller.isPasswordHidden.value =
+                                        !controller.isPasswordHidden.value;
+                                  },
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: new BorderSide(
+                                    color: AppColors.blue700,
+                                  ),
+                                  borderRadius: BorderRadius.circular(10.r),
+                                ),
+                                filled: true,
+                                fillColor: AppColors.white1,
                               ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.r),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10.r),
-                              ),
-                              filled: true,
-                              fillColor: AppColors.white1,
                             ),
                           ),
                         ),
@@ -121,9 +148,7 @@ class LoginScreen extends GetView<LoginController> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
+               
                 Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -138,7 +163,9 @@ class LoginScreen extends GetView<LoginController> {
                         },
                       ),
                     ),
-                    Text('Remember Me', textAlign: TextAlign.left),
+                    Text('Remember Me', textAlign: TextAlign.left,
+                    style: TextStyle(fontSize: 15,),
+                    ),
                     const SizedBox(
                       width: 20,
                     ),
@@ -147,15 +174,16 @@ class LoginScreen extends GetView<LoginController> {
                         child: Text(
                           'Forget Password?',
                           textAlign: TextAlign.right,
+                          style: TextStyle(color: AppColors.errorColor,fontSize: 15,),
                         )),
                   ],
                 ),
                 const SizedBox(
-                  height: 10,
+                  height: 20,
                 ),
                 Container(
-                  width: 312,
-                  height: 48,
+                  width: 312.w,
+                  height: 48.h,
                   child: ElevatedButton(
                     onPressed: controller.login,
                     style: ElevatedButton.styleFrom(
@@ -164,65 +192,68 @@ class LoginScreen extends GetView<LoginController> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
-                    child: Text('Login'),
+                    child: Text('Login',style: TextStyle(fontSize: 16),),
                   ),
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 50,
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: Divider(
+                        color: AppColors.blue700,
+                        thickness: 1,
+                      ),
+                    ),
+                    SizedBox(
+                        width: 70.h,
+                        child: Text(
+                          'Or With',
+                          style: TextStyle(color: AppColors.blue700,
+                          fontSize: 18,),
+                          textAlign: TextAlign.center,
+                        )),
+                    Expanded(
+                      child: Divider(
+                        color: AppColors.blue700,
+                        thickness: 1,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 50,
                 ),
                 Container(
-                    alignment: Alignment.center,
+                  width: 312.w,
+                  height: 48.h,
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: AppColors.white,
+
+                      side: BorderSide(color: AppColors.blue700), //<-- SEE HERE
+                    ),
                     child: Text(
-                      'Or With',
-                      textAlign: TextAlign.center,
-                    )),
-                Divider(
-                  color: AppColors.black,
-                  height: 30,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  width: 312,
-                  height: 48,
-                  child: SignInButtonBuilder(
-                    text: 'Login with facebook',
-                    icon: Icons.facebook,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
+                      'Login with Barcode',
+                      style: TextStyle(color: AppColors.blue700,
+                      fontSize: 16,),
                     ),
-                    onPressed: () {},
-                    backgroundColor: AppColors.bluel,
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  width: 312,
-                  height: 48,
-                  child: SignInButton(
-                    Buttons.google,
-                    text: "Login with Google",
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(5.0),
-                    ),
-                    onPressed: () {},
-                  ),
-                ),
-                SizedBox(
-                  height: 20,
-                ),
+                const SizedBox(height: 30,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account", textAlign: TextAlign.center),
+                    Text("Don't have an account", textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16,),),
                     TextButton(
-                        onPressed: () => Get.put(const RegisterScreen()),
+                        onPressed: () =>  Get.offAllNamed(AppRoutes.register),
                         child: Text(
                           'Sign up',
                           textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 16,),
                         )),
                   ],
                 ),
