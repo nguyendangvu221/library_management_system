@@ -31,7 +31,7 @@ class UserScreen extends GetView<UserController> {
                   height: 10.sp,
                 ),
                 Container(
-                    height: 140.h,
+                    height: 140.w,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8.sp)),
                       color: AppColors.grey1,
@@ -50,11 +50,11 @@ class UserScreen extends GetView<UserController> {
                             style: ThemeText.bodyMedium.s20.blue800),
                       ],
                     )),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: 20.h,
                 ),
                 buttonOfSetting(
-                  40.h,
+                  40.w,
                   "Hướng dẫn sử dụng",
                   () => null,
                   const Icon(Icons.error),
@@ -63,7 +63,7 @@ class UserScreen extends GetView<UserController> {
                   height: 20,
                 ),
                 buttonOfSetting(
-                  40.h,
+                  40.w,
                   "Thông báo",
                   () => null,
                   const Icon(Icons.error),
@@ -72,7 +72,7 @@ class UserScreen extends GetView<UserController> {
                   height: 20,
                 ),
                 buttonOfSetting(
-                  40.h,
+                  40.w,
                   "Gửi email yêu cầu trợ giúp",
                   () => null,
                   const Icon(Icons.email),
@@ -81,7 +81,7 @@ class UserScreen extends GetView<UserController> {
                   height: 20,
                 ),
                 buttonOfSetting(
-                    60.h,
+                    60.w,
                     "Điều khoản sử dụng và vấn đề bản quyền",
                     () => null,
                     const Icon(Icons.error)),
@@ -89,7 +89,7 @@ class UserScreen extends GetView<UserController> {
                   height: 20,
                 ),
                 buttonOfSetting(
-                  40.h,
+                  40.w,
                   "Đăng xuất",
                   () => null,
                   const Icon(Icons.logout),
