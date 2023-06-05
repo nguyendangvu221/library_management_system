@@ -23,7 +23,7 @@ class SearchScreen extends GetView<SearchController> {
           children: [
             Text(
               "Tìm kiếm",
-              style: ThemeText.heading2.blue800,
+              style: ThemeText.heading2.blue700,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -31,7 +31,7 @@ class SearchScreen extends GetView<SearchController> {
                 GestureDetector(
                   child: Icon(
                     Icons.search,
-                    color: AppColors.blue800,
+                    color: AppColors.blue700,
                     size: 30.sp,
                   ),
                   onTap: () {},
@@ -43,10 +43,10 @@ class SearchScreen extends GetView<SearchController> {
                       decoration: InputDecoration(
                           enabledBorder: const UnderlineInputBorder(
                             borderSide:
-                                BorderSide(width: 1, color: AppColors.blue800),
+                                BorderSide(width: 1, color: AppColors.blue700),
                           ),
                           hintText: "Nhập tên tài liệu",
-                          hintStyle: ThemeText.bodyMedium.blue800),
+                          hintStyle: ThemeText.bodyMedium.blue700),
                     ),
                   ),
                 ),

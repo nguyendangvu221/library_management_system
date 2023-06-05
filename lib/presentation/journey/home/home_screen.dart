@@ -26,7 +26,7 @@ class HomeScreen extends GetView<HomeController> {
           children: [
             Text(
               "Trang chủ",
-              style: ThemeText.heading2.blue800,
+              style: ThemeText.heading2.blue700,
             ),
             SizedBox(
               height: 20.h,
@@ -41,8 +41,8 @@ class HomeScreen extends GetView<HomeController> {
                     toolbarHeight: 25.sp,
                     flexibleSpace: TabBar(
                       tabs: controller.tabs,
-                      labelColor: AppColors.blue800,
-                      indicatorColor: AppColors.blue800,
+                      labelColor: AppColors.blue700,
+                      indicatorColor: AppColors.blue700,
                     ),
                   ),
                   body: Container(
@@ -104,23 +104,23 @@ class HomeScreen extends GetView<HomeController> {
                       children: [
                         Text(
                           document[index].name ?? "",
-                          style: ThemeText.heading2.s18.blue900,
+                          style: ThemeText.heading2.s18.blue700,
                         ),
                         Text(
                           "Tác giả: ${document[index].author ?? ""}",
-                          style: ThemeText.heading4.blue900,
+                          style: ThemeText.heading4.blue700,
                         ),
                         Text(
                           "Thể loại: ${document[index].category ?? ""}",
-                          style: ThemeText.bodyMedium.blue900,
+                          style: ThemeText.bodyMedium.blue700,
                         ),
                         Text(
                           "Số trang: ${document[index].numberOfPage.toString()}",
-                          style: ThemeText.bodyMedium.blue900,
+                          style: ThemeText.bodyMedium.blue700,
                         ),
                         Text(
                           "Ngày đăng: ${document[index].releaseDate?.day.toString() ?? DateTime.now()}",
-                          style: ThemeText.bodyMedium.blue900,
+                          style: ThemeText.bodyMedium.blue700,
                         ),
                       ],
                     ),

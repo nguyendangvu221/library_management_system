@@ -23,7 +23,7 @@ class BookShelfScreen extends GetView<BookShelfController> {
           children: [
             Text(
               "Kệ sách",
-              style: ThemeText.heading2.blue800,
+              style: ThemeText.heading2.blue700,
             ),
             Expanded(
               child: ListView.builder(
@@ -39,17 +39,18 @@ class BookShelfScreen extends GetView<BookShelfController> {
                           Expanded(
                             flex: 1,
                             child: Container(
-                                height: 160.h,
-                                margin: EdgeInsets.all(7.sp),
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(20.sp),
+                              height: 160.h,
+                              margin: EdgeInsets.all(7.sp),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.sp),
+                              ),
+                              child: Image(
+                                fit: BoxFit.fill,
+                                image: NetworkImage(
+                                  controller.listDocument[index].image ?? "",
                                 ),
-                                child: Image(
-                                  fit: BoxFit.fill,
-                                  image: NetworkImage(
-                                    controller.listDocument[index].image ?? "",
-                                  ),
-                                )),
+                              ),
+                            ),
                           ),
                           Expanded(
                             flex: 2,
@@ -63,23 +64,23 @@ class BookShelfScreen extends GetView<BookShelfController> {
                                 children: [
                                   Text(
                                     controller.listDocument[index].name ?? "",
-                                    style: ThemeText.heading2.s18.blue900,
+                                    style: ThemeText.heading2.s18.blue700,
                                   ),
                                   Text(
                                     "Tác giả: ${controller.listDocument[index].author ?? ""}",
-                                    style: ThemeText.heading4.blue900,
+                                    style: ThemeText.heading4.blue700,
                                   ),
                                   Text(
                                     "Thể loại: ${controller.listDocument[index].category ?? ""}",
-                                    style: ThemeText.bodyMedium.blue900,
+                                    style: ThemeText.bodyMedium.blue700,
                                   ),
                                   Text(
                                     "Số trang: ${controller.listDocument[index].numberOfPage.toString()}",
-                                    style: ThemeText.bodyMedium.blue900,
+                                    style: ThemeText.bodyMedium.blue700,
                                   ),
                                   Text(
                                     "Ngày đăng: ${controller.listDocument[index].releaseDate?.day.toString() ?? DateTime.now()}",
-                                    style: ThemeText.bodyMedium.blue900,
+                                    style: ThemeText.bodyMedium.blue700,
                                   ),
                                 ],
                               ),

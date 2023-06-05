@@ -27,7 +27,7 @@ class AddBookScreen extends GetView<AddBookController> {
           children: [
             Text(
               "Thêm sách",
-              style: ThemeText.heading2.blue800,
+              style: ThemeText.heading2.blue700,
             ),
             SizedBox(
               height: 10.sp,
@@ -115,7 +115,7 @@ class AddBookScreen extends GetView<AddBookController> {
                               icon: Icon(
                                 Icons.calendar_month,
                                 size: 30.sp,
-                                color: AppColors.blue800,
+                                color: AppColors.blue700,
                               ),
                               onPressed: () {},
                             ),
@@ -209,7 +209,7 @@ class AddBookScreen extends GetView<AddBookController> {
                               icon: Icon(
                                 Icons.calendar_month,
                                 size: 30.sp,
-                                color: AppColors.blue800,
+                                color: AppColors.blue700,
                               ),
                               onPressed: () {},
                             ),
@@ -238,7 +238,7 @@ class AddBookScreen extends GetView<AddBookController> {
         outlinedBorder: RoundedRectangleBorder(
             side: BorderSide.none,
             borderRadius: BorderRadius.circular(AppDimens.space_20)),
-        backgroundColor: AppColors.blue800,
+        backgroundColor: AppColors.blue700,
         width: double.infinity,
         margin: EdgeInsets.symmetric(horizontal: 16.sp),
         padding: EdgeInsets.symmetric(vertical: AppDimens.height_14),
@@ -263,7 +263,7 @@ class AddBookScreen extends GetView<AddBookController> {
       children: [
         Text(
           hintText,
-          style: ThemeText.bodySemibold.s15.blue800,
+          style: ThemeText.bodySemibold.s15.blue700,
         ),
         SizedBox(
           height: 5.sp,
@@ -273,7 +273,7 @@ class AddBookScreen extends GetView<AddBookController> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: AppColors.blue800,
+              color: AppColors.blue700,
               width: 0.5,
             ),
           ),

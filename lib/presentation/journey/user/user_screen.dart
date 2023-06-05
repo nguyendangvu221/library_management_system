@@ -23,7 +23,7 @@ class UserScreen extends GetView<UserController> {
           children: [
             Text(
               "Cài đặt",
-              style: ThemeText.heading2.blue800,
+              style: ThemeText.heading2.blue700,
             ),
             Column(
               children: [
@@ -46,8 +46,8 @@ class UserScreen extends GetView<UserController> {
                         SizedBox(
                           height: 10.sp,
                         ),
-                        Text("Họ và Tên",
-                            style: ThemeText.bodyMedium.s20.blue800),
+                        Text("Họ và tên",
+                            style: ThemeText.bodySemibold.s20.blue700),
                       ],
                     )),
                 SizedBox(

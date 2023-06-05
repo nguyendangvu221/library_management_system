@@ -74,17 +74,17 @@ class HomeController extends GetxController {
     Text(
       "Giáo trình",
       textAlign: TextAlign.center,
-      style: ThemeText.heading3,
+      style: ThemeText.heading3.blue700,
     ),
     Text(
       "Tiểu thuyết",
       textAlign: TextAlign.center,
-      style: ThemeText.heading3,
+      style: ThemeText.heading3.blue700,
     ),
     Text(
       "Truyện tranh",
       textAlign: TextAlign.center,
-      style: ThemeText.heading3,
+      style: ThemeText.heading3.blue700,
     ),
   ];
 }
