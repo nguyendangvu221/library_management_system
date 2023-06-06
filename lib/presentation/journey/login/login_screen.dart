@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/presentation/journey/login/login_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
+import 'package:library_management_system/presentation/theme/theme_text.dart';
 import 'package:sign_in_button/sign_in_button.dart';
 
 import '../../../common/constants/app_routes.dart';
@@ -23,165 +24,151 @@ class LoginScreen extends GetView<LoginController> {
             children: [
               Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                 SizedBox(
-                  height: 30,
+                  height: 30.h,
                 ),
                 Container(
                   alignment: Alignment.bottomCenter,
-                  child: Text(
-                    'Hi, Welcome Back!',
-                    textAlign: TextAlign.left,
-                    style: TextStyle(
-                      color: AppColors.blue700,
-                      fontSize: 24,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
+                  child: Text('Hi, Welcome Back!',
+                      textAlign: TextAlign.left,
+                      style: ThemeText.bodyStrong.s24.blue700),
                 ),
                 SizedBox(
                   height: 18.h,
                 ),
                 Text(
-                  'Email',
-                  style: TextStyle(
-                    color: AppColors.blue700,
-                    fontSize: 14,
-                  ),
+                  'Code',
+                  style: ThemeText.bodyMedium.s14.blue700,
                   textAlign: TextAlign.left,
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: 10.h,
                 ),
-                Container(
-                  
-                  child: Form(
-                    key: controller.loginFormKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
+                Form(
+                  key: controller.loginFormKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        width: 312.h,
+                        height: 80.w,
+                        child: TextFormField(
+                          controller: controller.emailController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: const BorderSide(
+                                color: AppColors.blue700,
+                              ),
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            filled: true,
+                            fillColor: AppColors.white1,
+                            hintText: 'example: CT1234',
+                            hintStyle: ThemeText.bodyMedium.s14.blue700,
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Mã sinh viên không hợp lệ';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      Text(
+                        'Password',
+                        textAlign: TextAlign.left,
+                        style: ThemeText.bodyMedium.s14.blue700,
+                      ),
+                      SizedBox(
+                        height: 10.h,
+                      ),
+                      Obx(
+                        () => SizedBox(
                           width: 312.h,
                           height: 80.w,
                           child: TextFormField(
-                            controller: controller.emailController,
+                            validator: (value) {
+                              if (value == null ||
+                                  value.isEmpty ||
+                                  value.length < 6) {
+                                return 'Mật khẩu > 6 kí tự';
+                              }
+                              return null;
+                            },
+                            controller: controller.passwordController,
+                            obscureText: controller.isPasswordHidden.value,
                             decoration: InputDecoration(
+                              hintText: 'Enter Your Password',
+                              hintStyle: ThemeText.bodyMedium.s14.blue700,
+                              suffixIcon: IconButton(
+                                padding:
+                                    const EdgeInsetsDirectional.only(end: 12),
+                                icon: controller.isPasswordHidden.value
+                                    ? const Icon(Icons.visibility)
+                                    : const Icon(Icons.visibility_off),
+                                onPressed: () {
+                                  controller.isPasswordHidden.value =
+                                      !controller.isPasswordHidden.value;
+                                },
+                              ),
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
                               enabledBorder: OutlineInputBorder(
-                                borderSide: new BorderSide(
+                                borderSide: const BorderSide(
                                   color: AppColors.blue700,
                                 ),
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
                               filled: true,
                               fillColor: AppColors.white1,
-                              hintText: 'example@gmail.com',
-                              hintStyle: TextStyle(color: AppColors.blue700,
-                              fontSize: 16,
-                              ),
-                            ),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Emai không hợp lệ';
-                              }
-                              return null;
-                            },
-                          ),
-                        ),
-                        
-                        Text(
-                          'Password',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: AppColors.blue700,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Obx(
-                          () => Container(
-                            width: 312.h,
-                          height: 80.w,
-                            child: TextFormField(
-                              validator: (value) {
-                                if (value == null ||
-                                    value.isEmpty ||
-                                    value.length < 6) {
-                                  return 'Mật khẩu > 6 kí tự';
-                                }
-                                return null;
-                              },
-                              controller: controller.passwordController,
-                              obscureText: controller.isPasswordHidden.value,
-                              decoration: InputDecoration(
-                                hintText: 'Enter Your Password',
-                                hintStyle: TextStyle(color: AppColors.blue700,
-                                fontSize: 16,),
-                                suffixIcon: IconButton(
-                                  padding:
-                                      const EdgeInsetsDirectional.only(end: 12),
-                                  icon: controller.isPasswordHidden.value
-                                      ? Icon(Icons.visibility)
-                                      : Icon(Icons.visibility_off),
-                                  onPressed: () {
-                                    controller.isPasswordHidden.value =
-                                        !controller.isPasswordHidden.value;
-                                  },
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: new BorderSide(
-                                    color: AppColors.blue700,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10.r),
-                                ),
-                                filled: true,
-                                fillColor: AppColors.white1,
-                              ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-               
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Obx(
-                      () => Checkbox(
-                        value: controller.ischeck.value,
-                        checkColor: AppColors.white1,
-                        shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(1))),
-                        onChanged: (value) {
-                          controller.ischeck.value = !controller.ischeck.value;
-                        },
-                      ),
-                    ),
-                    Text('Remember Me', textAlign: TextAlign.left,
-                    style: TextStyle(fontSize: 15,),
-                    ),
-                    const SizedBox(
-                      width: 20,
-                    ),
-                    TextButton(
-                        onPressed: () {},
-                        child: Text(
-                          'Forget Password?',
-                          textAlign: TextAlign.right,
-                          style: TextStyle(color: AppColors.errorColor,fontSize: 15,),
-                        )),
-                  ],
-                ),
+                // Row(
+                //   crossAxisAlignment: CrossAxisAlignment.center,
+                //   children: [
+                //     Obx(
+                //       () => Checkbox(
+                //         value: controller.ischeck.value,
+                //         checkColor: AppColors.white1,
+                //         shape: const RoundedRectangleBorder(
+                //             borderRadius: BorderRadius.all(Radius.circular(1))),
+                //         onChanged: (value) {
+                //           controller.ischeck.value = !controller.ischeck.value;
+                //         },
+                //       ),
+                //     ),
+                //     Text(
+                //       'Remember Me',
+                //       textAlign: TextAlign.left,
+                //       style: ThemeText.bodyMedium.copyWith(fontSize: 13.sp),
+                //     ),
+                //     const SizedBox(
+                //       width: 20,
+                //     ),
+                //     TextButton(
+                //         onPressed: () {},
+                //         child: Text(
+                //           'Forget Password?',
+                //           textAlign: TextAlign.right,
+                //           style: ThemeText.bodySemibold.copyWith(
+                //             color: Colors.red,
+                //             fontSize: 12.sp,
+                //           ),
+                //         )),
+                //   ],
+                // ),
                 const SizedBox(
                   height: 20,
                 ),
-                Container(
+                SizedBox(
                   width: 312.w,
                   height: 48.h,
                   child: ElevatedButton(
@@ -192,15 +179,20 @@ class LoginScreen extends GetView<LoginController> {
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
-                    child: Text('Login',style: TextStyle(fontSize: 16),),
+                    child: Text(
+                      'Login',
+                      style: ThemeText.bodySemibold.s16.copyWith(
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
-                const SizedBox(
-                  height: 50,
+                SizedBox(
+                  height: 50.h,
                 ),
                 Row(
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Divider(
                         color: AppColors.blue700,
                         thickness: 1,
@@ -210,11 +202,10 @@ class LoginScreen extends GetView<LoginController> {
                         width: 70.h,
                         child: Text(
                           'Or With',
-                          style: TextStyle(color: AppColors.blue700,
-                          fontSize: 18,),
+                          style: ThemeText.bodyMedium.s14.blue700,
                           textAlign: TextAlign.center,
                         )),
-                    Expanded(
+                    const Expanded(
                       child: Divider(
                         color: AppColors.blue700,
                         thickness: 1,
@@ -225,7 +216,7 @@ class LoginScreen extends GetView<LoginController> {
                 const SizedBox(
                   height: 50,
                 ),
-                Container(
+                SizedBox(
                   width: 312.w,
                   height: 48.h,
                   child: OutlinedButton(
@@ -237,23 +228,28 @@ class LoginScreen extends GetView<LoginController> {
                     ),
                     child: Text(
                       'Login with Barcode',
-                      style: TextStyle(color: AppColors.blue700,
-                      fontSize: 16,),
+                      style: ThemeText.bodySemibold.s14.blue700,
                     ),
                   ),
                 ),
-                const SizedBox(height: 30,),
+                SizedBox(
+                  height: 30.h,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Don't have an account", textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16,),),
+                    Text(
+                      "Don't have an account?",
+                      textAlign: TextAlign.center,
+                      style: ThemeText.bodyMedium.s14
+                          .copyWith(color: Colors.black87),
+                    ),
                     TextButton(
-                        onPressed: () =>  Get.offAllNamed(AppRoutes.register),
+                        onPressed: () => Get.offAllNamed(AppRoutes.register),
                         child: Text(
                           'Sign up',
                           textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 16,),
+                          style: ThemeText.bodySemibold.s14.blue700,
                         )),
                   ],
                 ),
