@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:library_management_system/presentation/journey/home/book_screen.dart';
+import 'package:library_management_system/common/constants/app_dimens.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
+import 'package:library_management_system/presentation/widget/app_touchable.dart';
 
 import '../../../common/constants/app_routes.dart';
 import 'home_controller.dart';
@@ -19,318 +20,265 @@ class BookScreen extends GetView<HomeController> {
         padding: EdgeInsets.only(
           left: 16.sp,
           right: 16.sp,
+          top: Get.mediaQuery.padding.top,
         ),
-        child: ListView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextButton.icon(
-              style: ButtonStyle(alignment: Alignment.bottomLeft),
-              icon: const Icon(
+            GestureDetector(
+              child: Icon(
                 Icons.arrow_back,
-                size: 40,
+                color: AppColors.blue700,
+                size: 40.sp,
               ),
-              label: const Text(
-                '',
-                style: TextStyle(color: AppColors.blue700, fontSize: 18),
-                textAlign: TextAlign.left,
-              ),
-              onPressed: () => Get.offAllNamed(AppRoutes.home),
+              onTap: () => Get.offAllNamed(AppRoutes.home),
             ),
-            Column(
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                    width: 350.h,
-                    height: 304.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      color: AppColors.grey1,
-                    ),
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 20,
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                        width: double.infinity,
+                        height: 304.w,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(8.sp)),
+                          color: AppColors.grey200,
                         ),
-                        const Image(
-                            height: 242.57,
-                            width: 170,
-                            fit: BoxFit.fill,
-                            image: NetworkImage(
-                                "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg")),
-                        const SizedBox(
-                          height: 20,
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 20.h,
+                            ),
+                            const Image(
+                                height: 242.57,
+                                fit: BoxFit.fill,
+                                image: NetworkImage(
+                                    "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg")),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Text(
+                              "Kinh tế chính trị Mác- Lênin",
+                              style: ThemeText.bodySemibold.s18.blue700,
+                            ),
+                          ],
+                        )),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8.sp)),
+                        color: AppColors.grey200,
+                      ),
+                      width: double.infinity,
+                      height: 290.h,
+                      child: Padding(
+                        padding: EdgeInsets.all(16.sp),
+                        child: Column(
+                          children: [
+                            // SizedBox(
+                            //   height: 15.h,
+                            // ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Tác giả: ',
+                                  style: ThemeText.bodyMedium.s16.blue700,
+                                ),
+                                Text(
+                                  'Võ Văn Thưởng',
+                                  style: ThemeText.bodySemibold.s16.blue700,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Thể loại:',
+                                  style: ThemeText.bodyMedium.s16.blue700,
+                                ),
+                                Text(
+                                  'Giáo trình',
+                                  style: ThemeText.bodySemibold.s16.blue700,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Số trang:',
+                                  style: ThemeText.bodyMedium.s16.blue700,
+                                ),
+                                Text(
+                                  ' 1500',
+                                  style: ThemeText.bodySemibold.s16.blue700,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Id:',
+                                  style: ThemeText.bodyMedium.s16.blue700,
+                                ),
+                                Text(
+                                  ' KMAKTCT',
+                                  style: ThemeText.bodySemibold.s16.blue700,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Nhà xuất bản:',
+                                  style: ThemeText.bodyMedium.s16.blue700,
+                                ),
+                                Text(
+                                  ' KMA',
+                                  style: ThemeText.bodySemibold.s16.blue700,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Khổ giấy:',
+                                  style: ThemeText.bodyMedium.s16.blue700,
+                                ),
+                                Text(
+                                  ' A4',
+                                  style: ThemeText.bodySemibold.s16.blue700,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Ngôn ngữ:',
+                                  style: ThemeText.bodyMedium.s16.blue700,
+                                ),
+                                Text(
+                                  ' tiếng Việt',
+                                  style: ThemeText.bodySemibold.s16.blue700,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Số lần tái bản:',
+                                  style: ThemeText.bodyMedium.s16.blue700,
+                                ),
+                                Text(
+                                  ' 3',
+                                  style: ThemeText.bodySemibold.s16.blue700,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Ngày xuất bản:',
+                                  style: ThemeText.bodyMedium.s16.blue700,
+                                ),
+                                Text(
+                                  ' 01/01/2023',
+                                  style: ThemeText.bodySemibold.s16.blue700,
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 5.h,
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                  'Ngày chỉnh sửa:',
+                                  style: ThemeText.bodyMedium.s16.blue700,
+                                ),
+                                Text(
+                                  ' 10/01/2023',
+                                  style: ThemeText.bodySemibold.s16.blue700,
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                          ],
                         ),
-                        Text(
-                          "Kinh tế  chính trị Mác- Lênin",
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: AppColors.blue700,
-                          ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8.sp)),
+                        color: AppColors.grey200,
+                      ),
+                      width: double.infinity,
+                      height: 200.w,
+                      child: Padding(
+                        padding: EdgeInsets.all(16.sp),
+                        child: Text(
+                          'Giáo trình Kinh tế chính trị của Mác-Lênin là một tài liệu lý thuyết và phân tích quan trọng về mối quan hệ kinh tế và chính trị trong thời kỳ cách mạng. Nó cung cấp cái nhìn đa chiều về hệ thống kinh tế và xã hội, và bao gồm các khái niệm quan trọng như cấu trúc kinh tế và quy luật sản xuất.',
+                          style: ThemeText.bodyMedium.s16.blue700,
+                          textAlign: TextAlign.justify,
                         ),
-                      ],
-                    )),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8)),
-                      color: AppColors.grey1,
-                    ),
-                    width: 350.h,
-                    height: 300.w,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 16.sp,
-                        right: 16.sp,
-                      ),
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 15,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Tác giả:',
-                                style: TextStyle(
-                                    color: AppColors.blue700, fontSize: 18),
-                              ),
-                              Text(
-                                'Võ Văn Thưởng',
-                                style: TextStyle(
-                                    color: AppColors.blue700,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Thể loại:',
-                                style: TextStyle(
-                                    color: AppColors.blue700, fontSize: 18),
-                              ),
-                              Text(
-                                'Giáo trình',
-                                style: TextStyle(
-                                    color: AppColors.blue700,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Số trang:',
-                                style: TextStyle(
-                                    color: AppColors.blue700, fontSize: 18),
-                              ),
-                              Text(
-                                ' 1500',
-                                style: TextStyle(
-                                    color: AppColors.blue700,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Id:',
-                                style: TextStyle(
-                                    color: AppColors.blue700, fontSize: 18),
-                              ),
-                              Text(
-                                ' KMAKTCT',
-                                style: TextStyle(
-                                    color: AppColors.blue700,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Nhà xuất bản:',
-                                style: TextStyle(
-                                    color: AppColors.blue700, fontSize: 18),
-                              ),
-                              Text(
-                                ' KMA',
-                                style: TextStyle(
-                                    color: AppColors.blue700,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Khổ giấy:',
-                                style: TextStyle(
-                                    color: AppColors.blue700, fontSize: 18),
-                              ),
-                              Text(
-                                ' A4',
-                                style: TextStyle(
-                                    color: AppColors.blue700,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Ngôn ngữ:',
-                                style: TextStyle(
-                                    color: AppColors.blue700, fontSize: 18),
-                              ),
-                              Text(
-                                ' tiếng Việt',
-                                style: TextStyle(
-                                    color: AppColors.blue700,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Số lần tái bản:',
-                                style: TextStyle(
-                                    color: AppColors.blue700, fontSize: 18),
-                              ),
-                              Text(
-                                ' 3',
-                                style: TextStyle(
-                                    color: AppColors.blue700,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Ngày xuất bản:',
-                                style: TextStyle(
-                                    color: AppColors.blue700, fontSize: 18),
-                              ),
-                              Text(
-                                ' 01/01/2023',
-                                style: TextStyle(
-                                    color: AppColors.blue700,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Ngày chỉnh sửa:',
-                                style: TextStyle(
-                                    color: AppColors.blue700, fontSize: 18),
-                              ),
-                              Text(
-                                ' 10/01/2023',
-                                style: TextStyle(
-                                    color: AppColors.blue700,
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                        ],
-                      ),
-                    )),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(8)),
-                    color: AppColors.grey1,
-                  ),
-                  width: 350.h,
-                  height: 200.w,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 16.sp,
-                      right: 16.sp,
-                    ),
-                    child: Column(children: [
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Text(
-                        'Giáo trình Kinh tế chính trị của Mác-Lênin là một tài liệu lý thuyết và phân tích quan trọng về mối quan hệ kinh tế và chính trị trong thời kỳ cách mạng. Nó cung cấp cái nhìn đa chiều về hệ thống kinh tế và xã hội, và bao gồm các khái niệm quan trọng như cấu trúc kinh tế và quy luật sản xuất.',
-                        style:
-                            TextStyle(color: AppColors.blue700, fontSize: 18),
-                        textAlign: TextAlign.justify,
-                      )
-                    ]),
-                  ),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Container(
-                  width: 350.w,
-                  height: 40.h,
-                  child: ElevatedButton(
-                    onPressed: (){},
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.bluef,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
                       ),
                     ),
-                    child: Text('Thêm tài liệu',style: TextStyle(fontSize: 20),),
-                  ),
+                    SizedBox(
+                      height: 50.h,
+                    ),
+                  ],
                 ),
-              ],
+              ),
             )
           ],
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: AppTouchable(
+        onPressed: () {},
+        outlinedBorder: RoundedRectangleBorder(
+            side: BorderSide.none,
+            borderRadius: BorderRadius.circular(AppDimens.space_20)),
+        backgroundColor: AppColors.blue700,
+        width: double.infinity,
+        margin: EdgeInsets.symmetric(horizontal: 16.sp),
+        padding: EdgeInsets.symmetric(vertical: AppDimens.height_14),
+        child: Text(
+          'Thêm tài liệu',
+          style: ThemeText.bodySemibold.copyWith(
+            color: AppColors.bianca,
+            fontSize: AppDimens.space_18,
+          ),
         ),
       ),
     );
