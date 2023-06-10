@@ -32,32 +32,8 @@ class HomeScreen extends GetView<HomeController> {
               height: 20.h,
             ),
             Expanded(
-              child: DefaultTabController(
-                length: 3,
-                child: Scaffold(
-                  appBar: AppBar(
-                    backgroundColor: AppColors.backgroundColor,
-                    elevation: 0,
-                    toolbarHeight: 25.sp,
-                    flexibleSpace: TabBar(
-                      tabs: controller.tabs,
-                      labelColor: AppColors.blue700,
-                      indicatorColor: AppColors.blue700,
-                    ),
-                  ),
-                  body: Container(
-                    decoration: const BoxDecoration(
-                      color: AppColors.backgroundColor,
-                    ),
-                    child: TabBarView(
-                      children: [
-                        listBuilderTabBarView(controller.listDocument),
-                        listBuilderTabBarView(controller.listDocument),
-                        listBuilderTabBarView(controller.listDocument),
-                      ],
-                    ),
-                  ),
-                ),
+              child: CustomScrollView(
+                slivers: [listBuilderTabBarView(controller.listDocument)],
               ),
             )
           ],
@@ -67,71 +43,87 @@ class HomeScreen extends GetView<HomeController> {
   }
 
   Widget listBuilderTabBarView(List<Document> document) {
-    return ListView.builder(
-      itemBuilder: (context, index) {
-        return Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Card(
-            color: AppColors.grey200,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
-                      height: 160.h,
-                      margin: EdgeInsets.all(7.sp),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20.sp),
-                      ),
-                      child: Image(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(
-                          document[index].image ?? "",
-                        ),
-                      )),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    margin: EdgeInsets.only(
-                      left: 10.sp,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          document[index].name ?? "",
-                          style: ThemeText.heading2.s18.blue700,
-                        ),
-                        Text(
-                          "Tác giả: ${document[index].author ?? ""}",
-                          style: ThemeText.heading4.blue700,
-                        ),
-                        Text(
-                          "Thể loại: ${document[index].category ?? ""}",
-                          style: ThemeText.bodyMedium.blue700,
-                        ),
-                        Text(
-                          "Số trang: ${document[index].numberOfPage.toString()}",
-                          style: ThemeText.bodyMedium.blue700,
-                        ),
-                        Text(
-                          "Ngày đăng: ${document[index].releaseDate?.day.toString() ?? DateTime.now()}",
-                          style: ThemeText.bodyMedium.blue700,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
             ),
-          ),
-        );
-      },
-      itemCount: document.length,
+            child: Card(
+              color: AppColors.grey200,
+              child: SizedBox(
+                height: 150.h,
+                child: Row(
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                          margin: EdgeInsets.all(5.sp),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20.sp),
+                          ),
+                          child: Image(
+                            fit: BoxFit.fill,
+                            image: NetworkImage(
+                              document[index].image ?? "",
+                            ),
+                          )),
+                    ),
+                    Expanded(
+                      flex: 5,
+                      child: Container(
+                        alignment: Alignment.centerLeft,
+                        margin: EdgeInsets.only(
+                          top: 15.sp,
+                          left: 10.sp,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Container(
+                            //   margin: EdgeInsets.only(left: 200.sp),
+                            //   // child: GestureDetector(
+                            //   //   onTap: () {},
+                            //   //   child: Icon(
+                            //   //     Icons.more_vert,
+                            //   //     size: 20.sp,
+                            //   //     color: AppColors.blue700,
+                            //   //   ),
+                            //   // ),
+                            // ),
+                            Text(
+                              document[index].name ?? "",
+                              style: ThemeText.heading1.s18.blue700,
+                            ),
+                            Text(
+                              "Tác giả: ${document[index].author ?? ""}",
+                              style: ThemeText.heading4.blue700,
+                            ),
+                            Text(
+                              "Thể loại: ${document[index].category ?? ""}",
+                              style: ThemeText.bodyMedium.blue700,
+                            ),
+                            Text(
+                              "Số trang: ${document[index].numberOfPage.toString()}",
+                              style: ThemeText.bodyMedium.blue700,
+                            ),
+                            Text(
+                              "Ngày đăng: ${document[index].releaseDate?.day.toString() ?? DateTime.now()}",
+                              style: ThemeText.bodyMedium.blue700,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
+        childCount: document.length,
+      ),
     );
   }
 }

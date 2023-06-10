@@ -46,7 +46,7 @@ class UserScreen extends GetView<UserController> {
                         SizedBox(
                           height: 10.sp,
                         ),
-                        Text("Họ và tên",
+                        Text("Nguyễn Đăng Vũ",
                             style: ThemeText.bodySemibold.s20.blue700),
                       ],
                     )),

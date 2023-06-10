@@ -70,21 +70,21 @@ class HomeController extends GetxController {
         image:
             "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg"),
   ];
-  final tabs = <Widget>[
-    Text(
-      "Giáo trình",
-      textAlign: TextAlign.center,
-      style: ThemeText.heading3.blue700,
-    ),
-    Text(
-      "Tiểu thuyết",
-      textAlign: TextAlign.center,
-      style: ThemeText.heading3.blue700,
-    ),
-    Text(
-      "Truyện tranh",
-      textAlign: TextAlign.center,
-      style: ThemeText.heading3.blue700,
-    ),
-  ];
+  // final tabs = <Widget>[
+  //   Text(
+  //     "Giáo trình",
+  //     textAlign: TextAlign.center,
+  //     style: ThemeText.heading3.blue700,
+  //   ),
+  //   Text(
+  //     "Tiểu thuyết",
+  //     textAlign: TextAlign.center,
+  //     style: ThemeText.heading3.blue700,
+  //   ),
+  //   Text(
+  //     "Truyện tranh",
+  //     textAlign: TextAlign.center,
+  //     style: ThemeText.heading3.blue700,
+  //   ),
+  // ];
 }

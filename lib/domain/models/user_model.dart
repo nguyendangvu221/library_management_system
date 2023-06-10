@@ -1,40 +1,24 @@
-class User {
-  String? code;
-  String? name;
-  String? age;
-  String? gender;
-  String? jobTitle;
-  String? email;
-  String? numberPhone;
+import 'package:library_management_system/domain/models/account_model.dart';
 
+class User {
+  Account? account;
+  String? nameDocument;
+  String? loanPeriod;
   User({
-    this.code,
-    this.name,
-    this.age,
-    this.gender,
-    this.jobTitle,
-    this.email,
-    this.numberPhone,
+    this.account,
+    this.loanPeriod,
+    this.nameDocument,
   });
   User.fromJson(Map<String, dynamic> json) {
-    code = json['code'];
-    name = json['name'];
-    age = json['age'];
-    gender = json['gender'];
-    jobTitle = json['jobTitle'];
-    email = json['email'];
-    numberPhone = json['numberPhone'];
+    nameDocument = json['nameDocument'];
+    loanPeriod = json['loanPeriod'];
+    account = json['account'];
   }
-
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['code'] = code;
-    data['name'] = name;
-    data['age'] = age;
-    data['gender'] = gender;
-    data['jobTitle'] = jobTitle;
-    data['email'] = email;
-    data['numberPhone'] = numberPhone;
+    Map<String, dynamic> data = <String, dynamic>{};
+    data['nameDocument'] = nameDocument;
+    data['loanPeriod'] = loanPeriod;
+    data['account'] = account;
     return data;
   }
 }

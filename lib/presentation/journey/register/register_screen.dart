@@ -149,8 +149,12 @@ class RegisterScreen extends GetView<RegisterController> {
                                 padding:
                                     const EdgeInsetsDirectional.only(end: 12),
                                 icon: controller.isPasswordHidden1.value
-                                    ? const Icon(Icons.visibility)
-                                    : const Icon(Icons.visibility_off),
+                                    ? const Icon(
+                                        Icons.visibility,
+                                        color: AppColors.blue700,
+                                      )
+                                    : const Icon(Icons.visibility_off,
+                                        color: AppColors.blue700),
                                 onPressed: () {
                                   controller.isPasswordHidden1.value =
                                       !controller.isPasswordHidden1.value;

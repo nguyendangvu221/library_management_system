@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
 
-class BookShelfController extends GetxController {
+class BorrowerController extends GetxController {
   final List<Document> listDocument = [
     Document(
         name: "Kinh tế chính trị Mác-Lênin",

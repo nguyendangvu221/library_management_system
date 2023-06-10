@@ -3,7 +3,7 @@ import 'dart:ffi';
 import 'package:get/get.dart';
 import 'package:library_management_system/presentation/controllers/app_controller.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_controller.dart';
-import 'package:library_management_system/presentation/journey/book_shelf/book_shelf_controller.dart';
+import 'package:library_management_system/presentation/journey/borrower/borrower_controller.dart';
 import 'package:library_management_system/presentation/journey/home/home_controller.dart';
 import 'package:library_management_system/presentation/journey/login/login_controller.dart';
 import 'package:library_management_system/presentation/journey/main/main_controller.dart';
@@ -57,14 +57,14 @@ class HomeBinding extends Bindings {
 class SearchBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(SearchController());
+    Get.put(SearchsController());
   }
 }
 
-class BookShelfBinding extends Bindings {
+class BorrowerBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(BookShelfController());
+    Get.put(BorrowerController());
   }
 }
 

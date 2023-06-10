@@ -4,10 +4,7 @@ import 'package:get/get.dart';
 import 'package:library_management_system/presentation/journey/login/login_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
-import 'package:sign_in_button/sign_in_button.dart';
-
 import '../../../common/constants/app_routes.dart';
-import '../register/register_screen.dart';
 
 //import 'package:get/get.dart';
 class LoginScreen extends GetView<LoginController> {

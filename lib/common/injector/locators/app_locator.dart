@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:library_management_system/presentation/controllers/app_controller.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_controller.dart';
-import 'package:library_management_system/presentation/journey/book_shelf/book_shelf_controller.dart';
+import 'package:library_management_system/presentation/journey/borrower/borrower_controller.dart';
 import 'package:library_management_system/presentation/journey/home/home_controller.dart';
 import 'package:library_management_system/presentation/journey/login/login_controller.dart';
 import 'package:library_management_system/presentation/journey/main/main_controller.dart';
@@ -20,8 +20,8 @@ void configLocator() {
   getIt.registerFactory(() => HomeController());
   getIt.registerFactory(() => LoginController());
   getIt.registerFactory(() => RegisterController());
-  getIt.registerFactory(() => SearchController());
-  getIt.registerFactory(() => BookShelfController());
+  getIt.registerFactory(() => SearchsController());
+  getIt.registerFactory(() => BorrowerController());
   getIt.registerFactory(() => AddBookController());
   getIt.registerFactory(() => UserController());
 

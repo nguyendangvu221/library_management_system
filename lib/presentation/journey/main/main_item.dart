@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_screen.dart';
-import 'package:library_management_system/presentation/journey/book_shelf/book_shelf_screen.dart';
+import 'package:library_management_system/presentation/journey/borrower/Borrower_screen.dart';
 import 'package:library_management_system/presentation/journey/home/home_screen.dart';
 import 'package:library_management_system/presentation/journey/search/search_screen.dart';
 import 'package:library_management_system/presentation/journey/user/user_screen.dart';
@@ -8,7 +8,7 @@ import 'package:library_management_system/presentation/journey/user/user_screen.
 enum MainItem {
   home,
   search,
-  bookShelf,
+  borrower,
   addBook,
   user,
 }
@@ -20,8 +20,8 @@ extension MainItemExtension on MainItem {
         return const HomeScreen();
       case MainItem.search:
         return const SearchScreen();
-      case MainItem.bookShelf:
-        return const BookShelfScreen();
+      case MainItem.borrower:
+        return const BorrowerScreen();
       case MainItem.addBook:
         return const AddBookScreen();
       case MainItem.user:
@@ -35,7 +35,7 @@ extension MainItemExtension on MainItem {
         return 0;
       case MainItem.search:
         return 1;
-      case MainItem.bookShelf:
+      case MainItem.borrower:
         return 2;
       case MainItem.addBook:
         return 3;
@@ -50,8 +50,8 @@ extension MainItemExtension on MainItem {
         return Icons.home;
       case MainItem.search:
         return Icons.search;
-      case MainItem.bookShelf:
-        return Icons.library_books;
+      case MainItem.borrower:
+        return Icons.list;
       case MainItem.addBook:
         return Icons.library_add;
       case MainItem.user:

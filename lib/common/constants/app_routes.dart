@@ -5,7 +5,7 @@ class AppRoutes {
   static const String register = '/register';
   static const String home = '/home';
   static const String search = '/search';
-  static const String bookShelf = '/bookShelf';
+  static const String borrower = '/borrower';
   static const String addBook = '/addBook';
   static const String user = '/user';
 }
