@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/common/constants/app_dimens.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_screen.dart';
-import 'package:library_management_system/presentation/journey/book_shelf/book_shelf_screen.dart';
+import 'package:library_management_system/presentation/journey/borrower/Borrower_screen.dart';
 import 'package:library_management_system/presentation/journey/home/home_screen.dart';
 import 'package:library_management_system/presentation/journey/main/main_controller.dart';
 import 'package:library_management_system/presentation/journey/search/search_screen.dart';
@@ -76,7 +76,7 @@ class MainScreen extends GetView<MainController> {
     final List<Widget> listScreenTab = [
       const HomeScreen(),
       const SearchScreen(),
-      const BookShelfScreen(),
+      const BorrowerScreen(),
       const AddBookScreen(),
       const UserScreen(),
     ];
