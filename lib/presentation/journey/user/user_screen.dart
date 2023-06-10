@@ -16,7 +16,7 @@ class UserScreen extends GetView<UserController> {
         padding: EdgeInsets.only(
           left: 16.sp,
           right: 16.sp,
-          top: Get.mediaQuery.padding.top,
+          
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

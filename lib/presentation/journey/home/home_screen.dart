@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
+import 'package:library_management_system/presentation/journey/home/book_screen.dart';
 import 'package:library_management_system/presentation/journey/home/home_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
@@ -73,60 +74,62 @@ class HomeScreen extends GetView<HomeController> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
           ),
-          child: Card(
-            color: AppColors.grey200,
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: Container(
+          child: TextButton(
+            onPressed: () => Get.to(BookScreen()),
+            child: Card(
+              color: AppColors.grey200,
+              child: Row(
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: Container(
                       height: 160.h,
                       margin: EdgeInsets.all(7.sp),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.sp),
                       ),
-                      child: Image(
-                        fit: BoxFit.fill,
-                        image: NetworkImage(
-                          document[index].image ?? "",
-                        ),
-                      )),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                    alignment: Alignment.centerLeft,
-                    margin: EdgeInsets.only(
-                      left: 10.sp,
-                    ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          document[index].name ?? "",
-                          style: ThemeText.heading2.s18.blue900,
-                        ),
-                        Text(
-                          "Tác giả: ${document[index].author ?? ""}",
-                          style: ThemeText.heading4.blue900,
-                        ),
-                        Text(
-                          "Thể loại: ${document[index].category ?? ""}",
-                          style: ThemeText.bodyMedium.blue900,
-                        ),
-                        Text(
-                          "Số trang: ${document[index].numberOfPage.toString()}",
-                          style: ThemeText.bodyMedium.blue900,
-                        ),
-                        Text(
-                          "Ngày đăng: ${document[index].releaseDate?.day.toString() ?? DateTime.now()}",
-                          style: ThemeText.bodyMedium.blue900,
-                        ),
-                      ],
+                      child: const Image(
+                          fit: BoxFit.fill,
+                          image: NetworkImage(
+                              "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg")),
                     ),
                   ),
-                ),
-              ],
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      alignment: Alignment.centerLeft,
+                      margin: EdgeInsets.only(
+                        left: 10.sp,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            document[index].name!,
+                            style: ThemeText.heading2.s18.blue900,
+                          ),
+                          Text(
+                            "Tác giả: ${document[index].author!}",
+                            style: ThemeText.heading4.blue900,
+                          ),
+                          Text(
+                            "Thể loại: ${document[index].category!}",
+                            style: ThemeText.bodyMedium.blue900,
+                          ),
+                          Text(
+                            "Số trang: ${document[index].numberOfPage.toString()}",
+                            style: ThemeText.bodyMedium.blue900,
+                          ),
+                          Text(
+                            "Ngày đăng: ${document[index].releaseDate!.day.toString()}",
+                            style: ThemeText.bodyMedium.blue900,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         );
