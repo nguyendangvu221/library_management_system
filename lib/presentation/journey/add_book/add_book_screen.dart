@@ -42,7 +42,7 @@ class AddBookScreen extends GetView<AddBookController> {
                           hintText: "Tên sách",
                           controller: controller.nameBook,
                           errorText: controller.validateNameBook.value,
-                          height: 40.sp),
+                          height: 45.sp),
                       Row(
                         children: [
                           Expanded(
@@ -54,7 +54,7 @@ class AddBookScreen extends GetView<AddBookController> {
                                   controller: controller.authorBook,
                                   errorText:
                                       controller.validateAuthorBook.value,
-                                  height: 40.sp),
+                                  height: 45.sp),
                             ),
                           ),
                           Expanded(
@@ -65,7 +65,7 @@ class AddBookScreen extends GetView<AddBookController> {
                                   hintText: "Id",
                                   controller: controller.idBook,
                                   errorText: controller.validateIdBook.value,
-                                  height: 40.sp),
+                                  height: 45.sp),
                             ),
                           )
                         ],
@@ -81,7 +81,7 @@ class AddBookScreen extends GetView<AddBookController> {
                                   controller: controller.reprintBook,
                                   errorText:
                                       controller.validateReprintBook.value,
-                                  height: 40.sp),
+                                  height: 45.sp),
                             ),
                           ),
                           Expanded(
@@ -93,7 +93,7 @@ class AddBookScreen extends GetView<AddBookController> {
                                   controller: controller.categoryBook,
                                   errorText:
                                       controller.validateCategoryBook.value,
-                                  height: 40.sp),
+                                  height: 45.sp),
                             ),
                           )
                         ],
@@ -109,7 +109,7 @@ class AddBookScreen extends GetView<AddBookController> {
                                   controller: controller.releaseDateBook,
                                   errorText:
                                       controller.validateReleaseDateBook.value,
-                                  height: 40.sp),
+                                  height: 45.sp),
                             ),
                           ),
                           // Expanded(
@@ -136,10 +136,10 @@ class AddBookScreen extends GetView<AddBookController> {
                               margin: EdgeInsets.only(right: 5.sp, top: 15.sp),
                               child: textField(
                                   hintText: "Số trang",
-                                  controller: controller.paperSizeBook,
+                                  controller: controller.numberOfBook,
                                   errorText:
                                       controller.validatePaperSizeBook.value,
-                                  height: 40.sp),
+                                  height: 45.sp),
                             ),
                           ),
                           Expanded(
@@ -151,7 +151,7 @@ class AddBookScreen extends GetView<AddBookController> {
                                   controller: controller.paperSizeBook,
                                   errorText:
                                       controller.validatePaperSizeBook.value,
-                                  height: 40.sp),
+                                  height: 45.sp),
                             ),
                           )
                         ],
@@ -162,7 +162,7 @@ class AddBookScreen extends GetView<AddBookController> {
                             hintText: "Nhà xuất bản",
                             controller: controller.publisherBook,
                             errorText: controller.validatePublisherBook.value,
-                            height: 40.sp),
+                            height: 45.sp),
                       ),
                       Row(
                         children: [
@@ -175,7 +175,7 @@ class AddBookScreen extends GetView<AddBookController> {
                                   controller: controller.numberOfEditionsBook,
                                   errorText: controller
                                       .validateNumberOfEditionBook.value,
-                                  height: 40.sp),
+                                  height: 45.sp),
                             ),
                           ),
                           Expanded(
@@ -187,7 +187,7 @@ class AddBookScreen extends GetView<AddBookController> {
                                   controller: controller.languageBook,
                                   errorText:
                                       controller.validateLanguageBook.value,
-                                  height: 40.sp),
+                                  height: 45.sp),
                             ),
                           )
                         ],
@@ -196,7 +196,7 @@ class AddBookScreen extends GetView<AddBookController> {
                           hintText: "Link ảnh",
                           controller: controller.imageBook,
                           errorText: controller.validateImageBook.value,
-                          height: 40.sp),
+                          height: 45.sp),
                       Row(
                         children: [
                           Expanded(
@@ -204,7 +204,7 @@ class AddBookScreen extends GetView<AddBookController> {
                             child: Container(
                               margin: EdgeInsets.only(top: 15.sp),
                               child: textField(
-                                  height: 40.sp,
+                                  height: 45.sp,
                                   hintText: "Ngày cập nhật",
                                   controller: controller.updateDateBook,
                                   errorText:

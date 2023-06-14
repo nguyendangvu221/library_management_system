@@ -1,10 +1,8 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:library_management_system/common/constants/app_dimens.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
-import 'package:library_management_system/presentation/journey/home/book_screen.dart';
 import 'package:library_management_system/presentation/journey/home/home_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
@@ -16,34 +14,36 @@ class HomeScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
-      body: Padding(
-        padding: EdgeInsets.only(
-          left: 16.sp,
-          right: 16.sp,
-          top: Get.mediaQuery.padding.top,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Trang chủ",
-              style: ThemeText.heading2.blue700,
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Expanded(
-              child: CustomScrollView(
-                slivers: [listBuilderTabBarView(controller.listDocument)],
+      body: Obx(
+        () => Padding(
+          padding: EdgeInsets.only(
+            left: 16.sp,
+            right: 16.sp,
+            top: Get.mediaQuery.padding.top,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Trang chủ",
+                style: ThemeText.heading2.blue700,
               ),
-            )
-          ],
+              SizedBox(
+                height: 20.h,
+              ),
+              Expanded(
+                child: CustomScrollView(
+                  slivers: [listSliver(controller.listDocument)],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget listBuilderTabBarView(List<Document> document) {
+  Widget listSliver(List<Document> document) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
@@ -54,7 +54,6 @@ class HomeScreen extends GetView<HomeController> {
             child: Card(
               color: AppColors.grey200,
               child: SizedBox(
-                height: 150.h,
                 child: Row(
                   children: [
                     Expanded(
@@ -76,23 +75,34 @@ class HomeScreen extends GetView<HomeController> {
                       child: Container(
                         alignment: Alignment.centerLeft,
                         margin: EdgeInsets.only(
-                          top: 15.sp,
                           left: 10.sp,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Container(
-                            //   margin: EdgeInsets.only(left: 200.sp),
-                            //   // child: GestureDetector(
-                            //   //   onTap: () {},
-                            //   //   child: Icon(
-                            //   //     Icons.more_vert,
-                            //   //     size: 20.sp,
-                            //   //     color: AppColors.blue700,
-                            //   //   ),
-                            //   // ),
-                            // ),
+                            Container(
+                              alignment: Alignment.centerRight,
+                              height: 20.sp,
+                              child: PopupMenuButton(
+                                  icon: Icon(
+                                    Icons.more_vert_rounded,
+                                    color: AppColors.blue700,
+                                    size: 20.sp,
+                                  ),
+                                  itemBuilder: (context) {
+                                    return [
+                                      _buildAppBarPopUpItem(
+                                          title: "Xem thông tin"),
+                                      _buildAppBarPopUpItem(
+                                          title: "Sửa tài liệu"),
+                                      _buildAppBarPopUpItem(
+                                          title: "Xóa tài liệu",
+                                          onTap: () {
+                                            controller.delDocument(index);
+                                          }),
+                                    ];
+                                  }),
+                            ),
                             Text(
                               document[index].name ?? "",
                               style: ThemeText.heading1.s18.blue700,
@@ -110,9 +120,12 @@ class HomeScreen extends GetView<HomeController> {
                               style: ThemeText.bodyMedium.blue700,
                             ),
                             Text(
-                              "Ngày đăng: ${document[index].releaseDate?.day.toString() ?? DateTime.now()}",
+                              "Ngày đăng: ${document[index].releaseDate.toString()}",
                               style: ThemeText.bodyMedium.blue700,
                             ),
+                            SizedBox(
+                              height: 10.sp,
+                            )
                           ],
                         ),
                       ),
@@ -124,6 +137,33 @@ class HomeScreen extends GetView<HomeController> {
           );
         },
         childCount: document.length,
+      ),
+    );
+  }
+
+  PopupMenuItem _buildAppBarPopUpItem({
+    required String title,
+    Icon? icon,
+    Function()? onTap,
+  }) {
+    return PopupMenuItem(
+      onTap: onTap,
+      child: Row(
+        children: [
+          icon ??
+              Icon(
+                Icons.info_outline_rounded,
+                color: AppColors.blue700,
+                size: 25.sp,
+              ),
+          // SizedBox(
+          //   width: AppDimens.width_8,
+          // ),
+          Text(
+            title,
+            style: ThemeText.bodySemibold.s16.blue700,
+          ),
+        ],
       ),
     );
   }

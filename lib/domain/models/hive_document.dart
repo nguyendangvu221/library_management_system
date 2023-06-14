@@ -15,30 +15,29 @@ class HiveDocument {
   @HiveField(4)
   String? publisher;
   @HiveField(5)
-  String? yearPublication;
-  @HiveField(6)
   String? description;
-  @HiveField(7)
+  @HiveField(6)
   int? numberOfPage;
-  @HiveField(8)
+  @HiveField(7)
   String? paperSize;
-  @HiveField(9)
+  @HiveField(8)
   String? reprint;
-  @HiveField(10)
+  @HiveField(9)
   int? numberOfEditions;
+  @HiveField(10)
+  String? releaseDate;
   @HiveField(11)
-  DateTime? releaseDate;
+  String? updateDate;
   @HiveField(12)
-  DateTime? updateDate;
-  @HiveField(13)
   String? image;
+  @HiveField(13)
+  String? language;
   HiveDocument({
     this.name,
     this.code,
     this.category,
     this.author,
     this.publisher,
-    this.yearPublication,
     this.description,
     this.numberOfPage,
     this.paperSize,
@@ -47,5 +46,6 @@ class HiveDocument {
     this.releaseDate,
     this.updateDate,
     this.image,
+    this.language,
   });
 }

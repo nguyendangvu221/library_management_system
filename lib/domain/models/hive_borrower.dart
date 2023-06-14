@@ -1,9 +1,10 @@
 import 'package:hive/hive.dart';
 import 'package:library_management_system/common/config/database/hive_type_constants.dart';
-part 'hive_user.g.dart';
+import 'package:library_management_system/domain/models/borrower_model.dart';
+part 'hive_borrower.g.dart';
 
-@HiveType(typeId: 0)
-class HiveUser {
+@HiveType(typeId: HiveTypeConstants.borrower)
+class HiveBorrower {
   @HiveField(0)
   String? codeUser;
   @HiveField(1)
@@ -11,18 +12,12 @@ class HiveUser {
   @HiveField(2)
   String? email;
   @HiveField(3)
-  String? nameDocument;
-  @HiveField(4)
-  String? loanPeriod;
-  @HiveField(5)
-  String? idDocument;
+  List<BorrowedDocument>? borrowedDocument;
 
-  HiveUser({
+  HiveBorrower({
     this.codeUser,
     this.nameUser,
     this.email,
-    this.loanPeriod,
-    this.nameDocument,
-    this.idDocument,
+    this.borrowedDocument,
   });
 }

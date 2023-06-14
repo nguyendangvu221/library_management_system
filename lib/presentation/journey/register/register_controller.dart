@@ -1,13 +1,25 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:library_management_system/common/constants/app_routes.dart';
+import 'package:library_management_system/domain/models/hive_account.dart';
+import 'package:library_management_system/domain/models/hive_borrower.dart';
+import 'package:library_management_system/domain/usecase/borrower_usecase.dart';
+import 'package:library_management_system/domain/usecase/register_usecase.dart';
+import 'package:library_management_system/presentation/journey/login/login_screen.dart';
 
 class RegisterController extends GetxController {
+  BorrowerUsecase borrowerUsecase;
+  RegisterUseCase registerUseCase;
+  RegisterController(
+      {required this.borrowerUsecase, required this.registerUseCase});
   var isPasswordHidden1 = true.obs;
   var ischeck1 = false.obs;
   final loginFormKey1 = GlobalKey<FormState>();
 
   final usernameController1 = TextEditingController();
-  final phonenumberController1 = TextEditingController();
+  final nameController1 = TextEditingController();
   final emailController1 = TextEditingController();
   final passwordController1 = TextEditingController();
 
@@ -19,7 +31,7 @@ class RegisterController extends GetxController {
   @override
   void onClose() {
     usernameController1.dispose();
-    phonenumberController1.dispose();
+    nameController1.dispose();
     emailController1.dispose();
     passwordController1.dispose();
     super.onClose();
@@ -27,21 +39,37 @@ class RegisterController extends GetxController {
 
   void login1() {
     if (loginFormKey1.currentState!.validate()) {
-      checkUser1(
-        usernameController1.text,
-        phonenumberController1.text,
-        emailController1.text,
-        passwordController1.text,
-      ).then((auth) {
-        if (auth) {
-          Get.snackbar('Sign', 'Sign  successfully');
-        } else {
-          Get.snackbar(
-              'Sign', 'Invalid email or password or phonenumber or username');
-        }
-        passwordController1.clear();
-      });
-    }
+      registerUseCase.addAccount(
+        HiveAccounts(
+          code: usernameController1.text,
+          name: nameController1.text,
+          email: emailController1.text,
+          password: passwordController1.text,
+        ),
+      );
+      borrowerUsecase.addBorrower(
+        HiveBorrower(
+          codeUser: usernameController1.text,
+          nameUser: nameController1.text,
+          email: emailController1.text,
+          borrowedDocument: [],
+        ),
+      );
+      Get.offNamed(AppRoutes.login);
+      log("register thanh cong");
+      log(borrowerUsecase.getCode(0).toString());
+      log(registerUseCase.getCode(0).toString());
+      // Get.snackbar(
+      //     'Sign', 'Invalid email or password or phonenumber or username');
+    } else {}
+    clearData();
+  }
+
+  clearData() {
+    usernameController1.clear();
+    nameController1.clear();
+    emailController1.clear();
+    passwordController1.clear();
   }
 
   int? strlen() {

@@ -16,7 +16,7 @@ class UserScreen extends GetView<UserController> {
         padding: EdgeInsets.only(
           left: 16.sp,
           right: 16.sp,
-          
+          top: Get.mediaQuery.padding.top,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,25 +31,29 @@ class UserScreen extends GetView<UserController> {
                   height: 10.sp,
                 ),
                 Container(
-                    height: 140.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-                      color: AppColors.grey1,
-                    ),
-                    child: Column(
-                      children: [
-                        const CircleAvatar(
-                          radius: 50,
-                          backgroundImage: NetworkImage(
-                              "https://s3.o7planning.com/images/boy-128.png"),
+                  height: 140.w,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(8.sp)),
+                    color: AppColors.grey200,
+                  ),
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 50.sp,
+                        backgroundColor: AppColors.grey200,
+                        backgroundImage: const AssetImage(
+                          'assets/images/user.png',
                         ),
-                        SizedBox(
-                          height: 10.sp,
-                        ),
-                        Text("Nguyễn Đăng Vũ",
-                            style: ThemeText.bodySemibold.s20.blue700),
-                      ],
-                    )),
+                      ),
+                      SizedBox(
+                        height: 10.sp,
+                      ),
+                      Text(controller.getNameLogin() ?? "",
+                          style: ThemeText.bodySemibold.s20.blue700),
+                    ],
+                  ),
+                ),
                 SizedBox(
                   height: 20.h,
                 ),
@@ -67,6 +71,24 @@ class UserScreen extends GetView<UserController> {
                   "Thông báo",
                   () => null,
                   const Icon(Icons.error),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                buttonOfSetting(
+                  40.w,
+                  "Kệ sách",
+                  () => null,
+                  const Icon(Icons.library_books),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                buttonOfSetting(
+                  40.w,
+                  "Đổi mật khẩu",
+                  () => null,
+                  const Icon(Icons.settings),
                 ),
                 const SizedBox(
                   height: 20,
@@ -91,7 +113,7 @@ class UserScreen extends GetView<UserController> {
                 buttonOfSetting(
                   40.w,
                   "Đăng xuất",
-                  () => null,
+                  controller.onPressedOfLogout(),
                   const Icon(Icons.logout),
                 ),
               ],
@@ -103,11 +125,11 @@ class UserScreen extends GetView<UserController> {
   }
 
   Widget buttonOfSetting(
-      double height, String? label, Function()? onPress, Icon icon) {
+      double height, String? label, Function()? onPressed, Icon icon) {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-        color: AppColors.grey1,
+        color: AppColors.grey200,
       ),
       width: double.infinity,
       height: height,
@@ -119,7 +141,7 @@ class UserScreen extends GetView<UserController> {
           style: ThemeText.bodySemibold.s17.blue700,
           textAlign: TextAlign.left,
         ),
-        onPressed: onPress,
+        onPressed: onPressed,
       ),
     );
   }

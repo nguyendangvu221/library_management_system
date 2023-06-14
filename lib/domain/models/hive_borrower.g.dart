@@ -1,34 +1,33 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'hive_user.dart';
+part of 'hive_borrower.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class HiveUserAdapter extends TypeAdapter<HiveUser> {
+class HiveBorrowerAdapter extends TypeAdapter<HiveBorrower> {
   @override
-  final int typeId = 0;
+  final int typeId = 1;
 
   @override
-  HiveUser read(BinaryReader reader) {
+  HiveBorrower read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return HiveUser(
+    return HiveBorrower(
       codeUser: fields[0] as String?,
       nameUser: fields[1] as String?,
       email: fields[2] as String?,
-      loanPeriod: fields[3] as String?,
-      nameDocument: fields[4] as String?,
+      borrowedDocument: (fields[3] as List?)?.cast<BorrowedDocument>(),
     );
   }
 
   @override
-  void write(BinaryWriter writer, HiveUser obj) {
+  void write(BinaryWriter writer, HiveBorrower obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.codeUser)
       ..writeByte(1)
@@ -36,9 +35,7 @@ class HiveUserAdapter extends TypeAdapter<HiveUser> {
       ..writeByte(2)
       ..write(obj.email)
       ..writeByte(3)
-      ..write(obj.nameDocument)
-      ..writeByte(4)
-      ..write(obj.loanPeriod);
+      ..write(obj.borrowedDocument);
   }
 
   @override
@@ -47,7 +44,7 @@ class HiveUserAdapter extends TypeAdapter<HiveUser> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is HiveUserAdapter &&
+      other is HiveBorrowerAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

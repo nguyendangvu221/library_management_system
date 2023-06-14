@@ -2,15 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/common/constants/app_dimens.dart';
+import 'package:library_management_system/domain/models/document_model.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 import 'package:library_management_system/presentation/widget/app_touchable.dart';
 
-import '../../../common/constants/app_routes.dart';
 import 'home_controller.dart';
 
 class BookScreen extends GetView<HomeController> {
-  const BookScreen({super.key});
+  final Document document;
+  const BookScreen({required this.document, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +26,18 @@ class BookScreen extends GetView<HomeController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GestureDetector(
-              child: Icon(
-                Icons.arrow_back,
-                color: AppColors.blue700,
-                size: 40.sp,
-              ),
-              onTap: () => Get.offAllNamed(AppRoutes.home),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: AppColors.blue700,
+                    size: 40.sp,
+                  ),
+                  onTap: () => Get.back(),
+                ),
+              ],
             ),
             Expanded(
               child: SingleChildScrollView(
@@ -49,16 +55,15 @@ class BookScreen extends GetView<HomeController> {
                             SizedBox(
                               height: 20.h,
                             ),
-                            const Image(
-                                height: 242.57,
+                            Image(
+                                height: 240.h,
                                 fit: BoxFit.fill,
-                                image: NetworkImage(
-                                    "https://cdn.luatminhkhue.vn/lmk/article/Sach-luat/Giao-trinh-kinh-te-chinh-tri-Mac-Lenin.jpg")),
+                                image: NetworkImage(document.image ?? "")),
                             const SizedBox(
                               height: 20,
                             ),
                             Text(
-                              "Kinh tế chính trị Mác- Lênin",
+                              document.name ?? "",
                               style: ThemeText.bodySemibold.s18.blue700,
                             ),
                           ],
@@ -87,7 +92,7 @@ class BookScreen extends GetView<HomeController> {
                                   style: ThemeText.bodyMedium.s16.blue700,
                                 ),
                                 Text(
-                                  'Võ Văn Thưởng',
+                                  document.author ?? "",
                                   style: ThemeText.bodySemibold.s16.blue700,
                                 ),
                               ],
@@ -102,7 +107,7 @@ class BookScreen extends GetView<HomeController> {
                                   style: ThemeText.bodyMedium.s16.blue700,
                                 ),
                                 Text(
-                                  'Giáo trình',
+                                  document.category ?? "",
                                   style: ThemeText.bodySemibold.s16.blue700,
                                 ),
                               ],
@@ -117,7 +122,7 @@ class BookScreen extends GetView<HomeController> {
                                   style: ThemeText.bodyMedium.s16.blue700,
                                 ),
                                 Text(
-                                  ' 1500',
+                                  document.numberOfPage.toString(),
                                   style: ThemeText.bodySemibold.s16.blue700,
                                 ),
                               ],
@@ -128,11 +133,11 @@ class BookScreen extends GetView<HomeController> {
                             Row(
                               children: [
                                 Text(
-                                  'Id:',
+                                  'Id: ',
                                   style: ThemeText.bodyMedium.s16.blue700,
                                 ),
                                 Text(
-                                  ' KMAKTCT',
+                                  document.code ?? "",
                                   style: ThemeText.bodySemibold.s16.blue700,
                                 ),
                               ],
@@ -143,11 +148,11 @@ class BookScreen extends GetView<HomeController> {
                             Row(
                               children: [
                                 Text(
-                                  'Nhà xuất bản:',
+                                  'Nhà xuất bản: ',
                                   style: ThemeText.bodyMedium.s16.blue700,
                                 ),
                                 Text(
-                                  ' KMA',
+                                  document.publisher ?? "",
                                   style: ThemeText.bodySemibold.s16.blue700,
                                 ),
                               ],
@@ -158,11 +163,11 @@ class BookScreen extends GetView<HomeController> {
                             Row(
                               children: [
                                 Text(
-                                  'Khổ giấy:',
+                                  'Khổ giấy: ',
                                   style: ThemeText.bodyMedium.s16.blue700,
                                 ),
                                 Text(
-                                  ' A4',
+                                  document.paperSize ?? "",
                                   style: ThemeText.bodySemibold.s16.blue700,
                                 ),
                               ],
@@ -177,7 +182,7 @@ class BookScreen extends GetView<HomeController> {
                                   style: ThemeText.bodyMedium.s16.blue700,
                                 ),
                                 Text(
-                                  ' tiếng Việt',
+                                  document.language ?? "",
                                   style: ThemeText.bodySemibold.s16.blue700,
                                 ),
                               ],
@@ -188,11 +193,11 @@ class BookScreen extends GetView<HomeController> {
                             Row(
                               children: [
                                 Text(
-                                  'Số lần tái bản:',
+                                  "Số lần: ",
                                   style: ThemeText.bodyMedium.s16.blue700,
                                 ),
                                 Text(
-                                  ' 3',
+                                  document.reprint ?? "",
                                   style: ThemeText.bodySemibold.s16.blue700,
                                 ),
                               ],
@@ -207,7 +212,7 @@ class BookScreen extends GetView<HomeController> {
                                   style: ThemeText.bodyMedium.s16.blue700,
                                 ),
                                 Text(
-                                  ' 01/01/2023',
+                                  document.releaseDate ?? "",
                                   style: ThemeText.bodySemibold.s16.blue700,
                                 ),
                               ],
@@ -222,7 +227,7 @@ class BookScreen extends GetView<HomeController> {
                                   style: ThemeText.bodyMedium.s16.blue700,
                                 ),
                                 Text(
-                                  ' 10/01/2023',
+                                  document.updateDate ?? "",
                                   style: ThemeText.bodySemibold.s16.blue700,
                                 ),
                               ],
@@ -247,7 +252,7 @@ class BookScreen extends GetView<HomeController> {
                       child: Padding(
                         padding: EdgeInsets.all(16.sp),
                         child: Text(
-                          'Giáo trình Kinh tế chính trị của Mác-Lênin là một tài liệu lý thuyết và phân tích quan trọng về mối quan hệ kinh tế và chính trị trong thời kỳ cách mạng. Nó cung cấp cái nhìn đa chiều về hệ thống kinh tế và xã hội, và bao gồm các khái niệm quan trọng như cấu trúc kinh tế và quy luật sản xuất.',
+                          document.description ?? "",
                           style: ThemeText.bodyMedium.s16.blue700,
                           textAlign: TextAlign.justify,
                         ),
@@ -274,7 +279,7 @@ class BookScreen extends GetView<HomeController> {
         margin: EdgeInsets.symmetric(horizontal: 16.sp),
         padding: EdgeInsets.symmetric(vertical: AppDimens.height_14),
         child: Text(
-          'Thêm tài liệu',
+          'Thêm Vào Kệ Sách',
           style: ThemeText.bodySemibold.copyWith(
             color: AppColors.bianca,
             fontSize: AppDimens.space_18,

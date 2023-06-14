@@ -49,7 +49,7 @@ class LoginScreen extends GetView<LoginController> {
                         width: 312.h,
                         height: 80.w,
                         child: TextFormField(
-                          controller: controller.emailController,
+                          controller: controller.codeController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(10.r),
@@ -187,51 +187,51 @@ class LoginScreen extends GetView<LoginController> {
                 SizedBox(
                   height: 50.h,
                 ),
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Divider(
-                        color: AppColors.blue700,
-                        thickness: 1,
-                      ),
-                    ),
-                    SizedBox(
-                        width: 70.h,
-                        child: Text(
-                          'Or With',
-                          style: ThemeText.bodyMedium.s14.blue700,
-                          textAlign: TextAlign.center,
-                        )),
-                    const Expanded(
-                      child: Divider(
-                        color: AppColors.blue700,
-                        thickness: 1,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 50,
-                ),
-                SizedBox(
-                  width: 312.w,
-                  height: 48.h,
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    style: OutlinedButton.styleFrom(
-                      backgroundColor: AppColors.white,
+                // Row(
+                //   children: [
+                //     const Expanded(
+                //       child: Divider(
+                //         color: AppColors.blue700,
+                //         thickness: 1,
+                //       ),
+                //     ),
+                //     SizedBox(
+                //         width: 70.h,
+                //         child: Text(
+                //           'Or With',
+                //           style: ThemeText.bodyMedium.s14.blue700,
+                //           textAlign: TextAlign.center,
+                //         )),
+                //     const Expanded(
+                //       child: Divider(
+                //         color: AppColors.blue700,
+                //         thickness: 1,
+                //       ),
+                //     ),
+                //   ],
+                // ),
+                // const SizedBox(
+                //   height: 50,
+                // ),
+                // SizedBox(
+                //   width: 312.w,
+                //   height: 48.h,
+                //   child: OutlinedButton(
+                //     onPressed: () {},
+                //     style: OutlinedButton.styleFrom(
+                //       backgroundColor: AppColors.white,
 
-                      side: BorderSide(color: AppColors.blue700), //<-- SEE HERE
-                    ),
-                    child: Text(
-                      'Login with Barcode',
-                      style: ThemeText.bodySemibold.s14.blue700,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 30.h,
-                ),
+                //       side: BorderSide(color: AppColors.blue700), //<-- SEE HERE
+                //     ),
+                //     child: Text(
+                //       'Login with Barcode',
+                //       style: ThemeText.bodySemibold.s14.blue700,
+                //     ),
+                //   ),
+                // ),
+                // SizedBox(
+                //   height: 30.h,
+                // ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

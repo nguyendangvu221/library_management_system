@@ -10,8 +10,8 @@ class Document {
   String? reprint;
   int? numberOfEditions;
   String? language;
-  DateTime? releaseDate;
-  DateTime? updateDate;
+  String? releaseDate;
+  String? updateDate;
   String? image;
 
   Document({

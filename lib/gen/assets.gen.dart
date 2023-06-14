@@ -41,10 +41,43 @@ class $AssetsFontsGen {
       ];
 }
 
+class $AssetsImagesGen {
+  const $AssetsImagesGen();
+
+  /// File path: assets/images/settings.png
+  AssetGenImage get settings =>
+      const AssetGenImage('assets/images/settings.png');
+
+  /// File path: assets/images/user.jpeg
+  AssetGenImage get userJpeg => const AssetGenImage('assets/images/user.jpeg');
+
+  /// File path: assets/images/user.png
+  AssetGenImage get userPng => const AssetGenImage('assets/images/user.png');
+
+  /// File path: assets/images/user_round.png
+  AssetGenImage get userRound =>
+      const AssetGenImage('assets/images/user_round.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [settings, userJpeg, userPng, userRound];
+}
+
+class $AssetsSvgGen {
+  const $AssetsSvgGen();
+
+  /// File path: assets/svg/user.svg
+  String get user => 'assets/svg/user.svg';
+
+  /// List of all assets
+  List<String> get values => [user];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsFontsGen fonts = $AssetsFontsGen();
+  static const $AssetsImagesGen images = $AssetsImagesGen();
+  static const $AssetsSvgGen svg = $AssetsSvgGen();
 }
 
 class AssetGenImage {

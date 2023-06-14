@@ -1,5 +1,9 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:library_management_system/domain/models/hive_document.dart';
+import 'package:library_management_system/domain/usecase/add_book_usecase.dart';
 
 class AddBookController extends GetxController {
   TextEditingController nameBook = TextEditingController();
@@ -30,13 +34,45 @@ class AddBookController extends GetxController {
   RxString validateUpdateDateBook = ''.obs;
   RxString validateLanguageBook = ''.obs;
   RxString validateImageBook = ''.obs;
-
+  final AddBookUsecase addBookUsecase;
+  AddBookController({required this.addBookUsecase});
   bool checkValidate({required textValidator, required textController}) {
     if (textController.text.trim().isEmpty) {
       textValidator.value = "Vui lòng điền đủ các trường";
       return false;
     }
     return true;
+  }
+
+  void clearData() {
+    nameBook.clear();
+    authorBook.clear();
+    idBook.clear();
+    categoryBook.clear();
+    publisherBook.clear();
+    descriptionBook.clear();
+    numberOfBook.clear();
+    paperSizeBook.clear();
+    reprintBook.clear();
+    numberOfEditionsBook.clear();
+    releaseDateBook.clear();
+    updateDateBook.clear();
+    languageBook.clear();
+    imageBook.clear();
+    validateNameBook.value = '';
+    validateAuthorBook.value = '';
+    validateIdBook.value = '';
+    validateCategoryBook.value = '';
+    validatePublisherBook.value = '';
+    validateDescriptionBook.value = '';
+    validateNumberOfBook.value = '';
+    validatePaperSizeBook.value = '';
+    validateReprintBook.value = '';
+    validateNumberOfEditionBook.value = '';
+    validateReleaseDateBook.value = '';
+    validateUpdateDateBook.value = '';
+    validateLanguageBook.value = '';
+    validateImageBook.value = '';
   }
 
   Future<void> addDocument() async {
@@ -103,6 +139,26 @@ class AddBookController extends GetxController {
     }
     if (flag) {
       return;
+    } else {
+      addBookUsecase.insertDocument(
+        HiveDocument(
+          name: nameBook.text,
+          author: authorBook.text,
+          category: categoryBook.text,
+          code: idBook.text,
+          description: descriptionBook.text,
+          language: languageBook.text,
+          numberOfEditions: int.parse(numberOfEditionsBook.text),
+          numberOfPage: int.parse(numberOfBook.text),
+          paperSize: paperSizeBook.text,
+          publisher: publisherBook.text,
+          reprint: reprintBook.text,
+          releaseDate: releaseDateBook.text,
+          updateDate: updateDateBook.text,
+          image: imageBook.text,
+        ),
+      );
+      clearData();
     }
   }
 }

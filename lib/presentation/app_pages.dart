@@ -1,6 +1,14 @@
 import 'package:get/get.dart';
 import 'package:library_management_system/common/constants/app_routes.dart';
-import 'package:library_management_system/common/injector/bindings/app_binding.dart';
+import 'package:library_management_system/common/injector/bindings/add_book_binding.dart';
+import 'package:library_management_system/common/injector/bindings/borrower_binding.dart';
+import 'package:library_management_system/common/injector/bindings/home_binding.dart';
+import 'package:library_management_system/common/injector/bindings/login_binding.dart';
+import 'package:library_management_system/common/injector/bindings/main_binding.dart';
+import 'package:library_management_system/common/injector/bindings/register_binding.dart';
+import 'package:library_management_system/common/injector/bindings/search_binding.dart';
+import 'package:library_management_system/common/injector/bindings/splash_binding.dart';
+import 'package:library_management_system/common/injector/bindings/user_binding.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_screen.dart';
 import 'package:library_management_system/presentation/journey/borrower/Borrower_screen.dart';
 import 'package:library_management_system/presentation/journey/home/home_screen.dart';
@@ -24,7 +32,7 @@ List<GetPage> myPages = [
     bindings: [
       MainBinding(),
       HomeBinding(),
-      SearchBinding(),
+      SearchsBinding(),
       BorrowerBinding(),
       AddBookBinding(),
       UserBinding(),
@@ -48,7 +56,7 @@ List<GetPage> myPages = [
   GetPage(
     name: AppRoutes.search,
     page: () => const SearchScreen(),
-    binding: SearchBinding(),
+    binding: SearchsBinding(),
   ),
   GetPage(
     name: AppRoutes.borrower,
