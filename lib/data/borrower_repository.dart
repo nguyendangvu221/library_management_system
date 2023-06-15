@@ -1,5 +1,6 @@
 import 'package:library_management_system/common/config/database/hive_config.dart';
 import 'package:library_management_system/domain/models/borrower_model.dart';
+import 'package:library_management_system/domain/models/hive_borrowed_document.dart';
 import 'package:library_management_system/domain/models/hive_borrower.dart';
 
 class BorrowerRepository {
@@ -17,6 +18,23 @@ class BorrowerRepository {
     await hiveConfig.userBox.deleteAt(index);
   }
 
+  List<HiveBorrower> getAllListBorrower() {
+    List<HiveBorrower> listBorrower = [];
+    for (int i = 0; i < hiveConfig.userBox.length; i++) {
+      listBorrower.add(HiveBorrower(
+        codeUser: hiveConfig.userBox.getAt(i)?.codeUser,
+        email: hiveConfig.userBox.getAt(i)?.email,
+        nameUser: hiveConfig.userBox.getAt(i)?.nameUser,
+        borrowedDocument: hiveConfig.userBox.getAt(i)!.borrowedDocument,
+      ));
+    }
+    return listBorrower;
+  }
+
+  bool? getIsLogin(int index) {
+    return hiveConfig.userBox.getAt(index)?.isLogin;
+  }
+
   String? getCode(int index) {
     return hiveConfig.userBox.getAt(index)?.codeUser;
   }
@@ -29,7 +47,7 @@ class BorrowerRepository {
     return hiveConfig.userBox.getAt(index)?.email;
   }
 
-  List<BorrowedDocument>? getBorrowedDocument(int index) {
+  List<HiveBorrowedDocument>? getBorrowedDocument(int index) {
     return hiveConfig.userBox.getAt(index)?.borrowedDocument;
   }
 

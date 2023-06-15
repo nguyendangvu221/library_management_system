@@ -88,4 +88,16 @@ class AddBookUsecase {
   List<Document> getAllListDocument() {
     return documentRepository.getAllListDocument();
   }
+
+  List<Document> getListBorrowedDocument() {
+    return documentRepository.getListDocumentBorrowed();
+  }
+
+  int? getIndex(String code) {
+    return documentRepository.getIndex(code);
+  }
+
+  List<Document> searchDocument(String name) {
+    return documentRepository.searchDocument(name);
+  }
 }

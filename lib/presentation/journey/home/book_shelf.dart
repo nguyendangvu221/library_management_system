@@ -6,8 +6,8 @@ import 'package:library_management_system/presentation/journey/home/home_control
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
-class HomeScreen extends GetView<HomeController> {
-  const HomeScreen({super.key});
+class BookShelfScreen extends GetView<HomeController> {
+  const BookShelfScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,22 +24,37 @@ class HomeScreen extends GetView<HomeController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    "Trang chủ",
-                    style: ThemeText.heading2.blue700,
-                  ),
                   GestureDetector(
                     child: Icon(
-                      Icons.refresh_rounded,
+                      Icons.arrow_back,
                       color: AppColors.blue700,
-                      size: 30.sp,
+                      size: 40.sp,
                     ),
-                    onTap: () {
-                      controller.addLocalData();
-                      Get.snackbar("Refresh", "Refresh thành công");
-                    },
+                    onTap: () => Get.back(),
+                  ),
+                  SizedBox(
+                    width: 5.sp,
+                  ),
+                  Text(
+                    "Kệ sách",
+                    style: ThemeText.heading2.blue700,
+                  ),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    margin: EdgeInsets.only(left: 175.sp),
+                    child: GestureDetector(
+                      child: Icon(
+                        Icons.refresh_rounded,
+                        color: AppColors.blue700,
+                        size: 30.sp,
+                      ),
+                      onTap: () {
+                        controller.addDocumentBorrowed();
+                        Get.snackbar("Refresh", "Refresh thành công");
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -48,7 +63,7 @@ class HomeScreen extends GetView<HomeController> {
               ),
               Expanded(
                 child: CustomScrollView(
-                  slivers: [listSliver(controller.listDocument)],
+                  slivers: [listSliver(controller.listBorrowed)],
                 ),
               )
             ],
@@ -109,16 +124,11 @@ class HomeScreen extends GetView<HomeController> {
                                     _buildAppBarPopUpItem(
                                         title: "Xem thông tin",
                                         onTap: controller.onTapDocument(
-                                            index, false)),
-                                    _buildAppBarPopUpItem(
-                                      title: "Sửa tài liệu",
-                                      onTap:
-                                          controller.onTapEditDocument(index),
-                                    ),
+                                            index, true)),
                                     _buildAppBarPopUpItem(
                                       title: "Xóa tài liệu",
                                       onTap: () {
-                                        controller.delDocument(index);
+                                        controller.delBorrowedDocument(index);
                                       },
                                     ),
                                   ];

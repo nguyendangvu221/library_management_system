@@ -45,12 +45,4 @@ class AccountRepository {
     if (hiveConfig.accountBox.values.elementAt(i).code == code) return true;
     return false;
   }
-
-  Document searchDocument(Document document, String name) {
-    if (name.toLowerCase() == document.name?.toLowerCase()) {
-      return document;
-    } else {
-      return Document();
-    }
-  }
 }

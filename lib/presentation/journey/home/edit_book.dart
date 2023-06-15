@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/common/constants/app_dimens.dart';
-import 'package:library_management_system/common/ultils/translations/app_utils.dart';
-import 'package:library_management_system/presentation/journey/add_book/add_book_controller.dart';
+import 'package:library_management_system/presentation/journey/home/home_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 import 'package:library_management_system/presentation/widget/app_touchable.dart';
 
-class AddBookScreen extends GetView<AddBookController> {
-  const AddBookScreen({super.key});
+class EditBookScreen extends GetView<HomeController> {
+  final int index;
+  const EditBookScreen({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
-    logger('Building BookScreen');
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       resizeToAvoidBottomInset: true,
@@ -22,15 +21,30 @@ class AddBookScreen extends GetView<AddBookController> {
           padding: EdgeInsets.only(
             left: 16.sp,
             right: 16.sp,
-            // bottom: Get.mediaQuery.padding.bottom,
             top: Get.mediaQuery.padding.top,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Thêm sách",
-                style: ThemeText.heading2.blue700,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  GestureDetector(
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: AppColors.blue700,
+                      size: 40.sp,
+                    ),
+                    onTap: () => Get.back(),
+                  ),
+                  SizedBox(
+                    width: 5.sp,
+                  ),
+                  Text(
+                    "Sửa tài liệu",
+                    style: ThemeText.heading2.blue700,
+                  ),
+                ],
               ),
               SizedBox(
                 height: 10.sp,
@@ -62,9 +76,7 @@ class AddBookScreen extends GetView<AddBookController> {
                           Expanded(
                             flex: 2,
                             child: Container(
-                              margin: controller.validateIdBook.value != ''
-                                  ? EdgeInsets.only(top: 10.sp)
-                                  : EdgeInsets.only(top: 0),
+                              margin: EdgeInsets.only(top: 10.sp),
                               child: textField(
                                   hintText: "Id",
                                   controller: controller.idBook,
@@ -79,10 +91,7 @@ class AddBookScreen extends GetView<AddBookController> {
                           Expanded(
                             flex: 2,
                             child: Container(
-                              margin:
-                                  controller.validateCategoryBook.value != ''
-                                      ? EdgeInsets.only(top: 10.sp, right: 5.sp)
-                                      : EdgeInsets.only(top: 0, right: 5.sp),
+                              margin: EdgeInsets.only(right: 5.sp, top: 10.sp),
                               child: textField(
                                   hintText: "Số tái bản",
                                   controller: controller.reprintBook,
@@ -94,6 +103,7 @@ class AddBookScreen extends GetView<AddBookController> {
                           Expanded(
                             flex: 3,
                             child: Container(
+                              // margin: EdgeInsets.only(top: 10.sp),
                               child: textField(
                                   hintText: "Thể loại",
                                   controller: controller.categoryBook,
@@ -118,20 +128,6 @@ class AddBookScreen extends GetView<AddBookController> {
                                   height: 45.sp),
                             ),
                           ),
-                          // Expanded(
-                          //   flex: 1,
-                          //   child: Container(
-                          //     margin: EdgeInsets.only(top: 15.sp),
-                          //     child: IconButton(
-                          //       icon: Icon(
-                          //         Icons.calendar_month,
-                          //         size: 30.sp,
-                          //         color: AppColors.blue700,
-                          //       ),
-                          //       onPressed: () {},
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                       Row(
@@ -187,10 +183,7 @@ class AddBookScreen extends GetView<AddBookController> {
                           Expanded(
                             flex: 2,
                             child: Container(
-                              margin:
-                                  controller.validateLanguageBook.value != ''
-                                      ? EdgeInsets.only(top: 10.sp)
-                                      : EdgeInsets.only(top: 0),
+                              margin: EdgeInsets.only(top: 10.sp),
                               child: textField(
                                   hintText: "Ngôn ngữ",
                                   controller: controller.languageBook,
@@ -220,20 +213,6 @@ class AddBookScreen extends GetView<AddBookController> {
                                       controller.validateUpdateDateBook.value),
                             ),
                           ),
-                          // Expanded(
-                          //   flex: 1,
-                          //   child: Container(
-                          //     margin: EdgeInsets.only(top: 15.sp),
-                          //     child: IconButton(
-                          //       icon: Icon(
-                          //         Icons.calendar_month,
-                          //         size: 30.sp,
-                          //         color: AppColors.blue700,
-                          //       ),
-                          //       onPressed: () {},
-                          //     ),
-                          //   ),
-                          // ),
                         ],
                       ),
                       Container(
@@ -254,7 +233,7 @@ class AddBookScreen extends GetView<AddBookController> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AppTouchable(
-        onPressed: () => _buttonAddDocument(context),
+        onPressed: () => _buttonAddDocument(context, index),
         outlinedBorder: RoundedRectangleBorder(
             side: BorderSide.none,
             borderRadius: BorderRadius.circular(AppDimens.space_20)),
@@ -317,19 +296,15 @@ class AddBookScreen extends GetView<AddBookController> {
         SizedBox(
           height: 5.sp,
         ),
-        errorText?.trim() != null
-            ? Text(
-                errorText ?? "",
-                style: ThemeText.errorText.red.s10,
-              )
-            : SizedBox(
-                height: 7.sp,
-              ),
+        Text(
+          errorText ?? '',
+          style: ThemeText.errorText.red.s10,
+        ),
       ],
     );
   }
 
-  _buttonAddDocument(BuildContext context) async {
-    await controller.addDocument();
+  _buttonAddDocument(BuildContext context, int index) async {
+    await controller.addDocument(index);
   }
 }

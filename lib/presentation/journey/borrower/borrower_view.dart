@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/domain/models/borrower_model.dart';
+import 'package:library_management_system/domain/models/hive_borrower.dart';
 import 'package:library_management_system/presentation/journey/borrower/borrower_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
 class BorrowerView extends GetView<BorrowerController> {
-  final Borrower borrower;
+  final HiveBorrower borrower;
   const BorrowerView({required this.borrower, super.key});
 
   @override
@@ -44,7 +45,7 @@ class BorrowerView extends GetView<BorrowerController> {
     );
   }
 
-  Widget displayInfoBorrower(Borrower borrower) {
+  Widget displayInfoBorrower(HiveBorrower borrower) {
     return Column(
       children: [
         Container(

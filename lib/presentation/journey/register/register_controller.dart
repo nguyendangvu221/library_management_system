@@ -53,14 +53,14 @@ class RegisterController extends GetxController {
           nameUser: nameController1.text,
           email: emailController1.text,
           borrowedDocument: [],
+          isLogin: false,
         ),
       );
       Get.offNamed(AppRoutes.login);
       log("register thanh cong");
       log(borrowerUsecase.getCode(0).toString());
       log(registerUseCase.getCode(0).toString());
-      // Get.snackbar(
-      //     'Sign', 'Invalid email or password or phonenumber or username');
+      Get.snackbar('Sign', 'Sign up successfully');
     } else {}
     clearData();
   }
@@ -77,14 +77,14 @@ class RegisterController extends GetxController {
     return null; //return null for now;
   }
 
-  Future<bool> checkUser1(
-      String user, String password, String username, String phonenumber) {
-    if (username == 'abc' &&
-        phonenumber == '123' &&
-        user == 'foo@foo.com' &&
-        password == '123') {
-      return Future.value(true);
-    }
-    return Future.value(false);
-  }
+  // Future<bool> checkUser1(
+  //     String user, String password, String username, String phonenumber) {
+  //   if (username == 'abc' &&
+  //       phonenumber == '123' &&
+  //       user == 'foo@foo.com' &&
+  //       password == '123') {
+  //     return Future.value(true);
+  //   }
+  //   return Future.value(false);
+  // }
 }

@@ -1,10 +1,14 @@
 import 'package:get/get.dart';
 import 'package:library_management_system/domain/models/hive_account.dart';
+import 'package:library_management_system/domain/models/hive_borrower.dart';
+import 'package:library_management_system/domain/usecase/borrower_usecase.dart';
 import 'package:library_management_system/domain/usecase/register_usecase.dart';
 
 class UserController extends GetxController {
   RegisterUseCase registerUseCase;
-  UserController({required this.registerUseCase});
+  BorrowerUsecase borrowerUsecase;
+  UserController(
+      {required this.registerUseCase, required this.borrowerUsecase});
 
   String? getNameLogin() {
     for (int i = 0; i < registerUseCase.getLength(); i++) {
@@ -16,9 +20,9 @@ class UserController extends GetxController {
   }
 
   Function()? onPressedOfLogout() {
-    for (int i = 0; i < registerUseCase.getLength(); i++) {
-      if (registerUseCase.getIsLogin(i) == true) {
-        return () {
+    return () {
+      for (int i = 0; i < registerUseCase.getLength(); i++) {
+        if (registerUseCase.getIsLogin(i) == true) {
           registerUseCase.updateAccount(
               HiveAccounts(
                 code: registerUseCase.getCode(i),
@@ -28,10 +32,23 @@ class UserController extends GetxController {
                 isLogin: false,
               ),
               i);
-          Get.offNamed('/login');
-        };
+        }
       }
-    }
-    return null;
+      for (int i = 0; i < borrowerUsecase.getLength(); i++) {
+        if (borrowerUsecase.getIsLogin(i) == true) {
+          borrowerUsecase.updateBorrower(
+            HiveBorrower(
+              codeUser: registerUseCase.getCode(i),
+              nameUser: registerUseCase.getName(i),
+              email: registerUseCase.getEmail(i),
+              borrowedDocument: [],
+              isLogin: false,
+            ),
+            i,
+          );
+        }
+      }
+      Get.offNamed('/login');
+    };
   }
 }

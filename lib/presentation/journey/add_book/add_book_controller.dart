@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:library_management_system/domain/models/hive_document.dart';
 import 'package:library_management_system/domain/usecase/add_book_usecase.dart';
+import 'package:library_management_system/presentation/journey/main/main_screen.dart';
 
 class AddBookController extends GetxController {
   TextEditingController nameBook = TextEditingController();
@@ -156,9 +157,12 @@ class AddBookController extends GetxController {
           releaseDate: releaseDateBook.text,
           updateDate: updateDateBook.text,
           image: imageBook.text,
+          isBorrowed: false,
         ),
       );
       clearData();
+      Get.to(() => const MainScreen());
+      Get.snackbar("Thêm sách", "Thêm sách thành công!!");
     }
   }
 }

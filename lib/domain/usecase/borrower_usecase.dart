@@ -1,5 +1,5 @@
 import 'package:library_management_system/data/borrower_repository.dart';
-import 'package:library_management_system/domain/models/borrower_model.dart';
+import 'package:library_management_system/domain/models/hive_borrowed_document.dart';
 import 'package:library_management_system/domain/models/hive_borrower.dart';
 
 class BorrowerUsecase {
@@ -22,6 +22,10 @@ class BorrowerUsecase {
     return borrowerRepository.getCode(index);
   }
 
+  bool? getIsLogin(int index) {
+    return borrowerRepository.getIsLogin(index);
+  }
+
   String? getName(int index) {
     return borrowerRepository.getName(index);
   }
@@ -34,7 +38,11 @@ class BorrowerUsecase {
     return borrowerRepository.getLength();
   }
 
-  List<BorrowedDocument>? getBorrowedDocument(int index) {
+  List<HiveBorrowedDocument>? getBorrowedDocument(int index) {
     return borrowerRepository.getBorrowedDocument(index);
+  }
+
+  List<HiveBorrower> getAllListBorrower() {
+    return borrowerRepository.getAllListBorrower();
   }
 }

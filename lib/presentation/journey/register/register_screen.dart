@@ -29,7 +29,7 @@ class RegisterScreen extends GetView<RegisterController> {
                 Container(
                   alignment: Alignment.bottomCenter,
                   child: Text(
-                    'Connect with your friends today!',
+                    'Expand your knowledge every day!',
                     style: ThemeText.bodySemibold.s16.blue700,
                   ),
                 ),
@@ -193,51 +193,9 @@ class RegisterScreen extends GetView<RegisterController> {
                           ),
                         ),
                       ),
-                      // SizedBox(
-                      //   height: 30.h,
-                      // ),
-                      // Row(
-                      //   children: [
-                      //     const Expanded(
-                      //       child:
-                      //           Divider(color: AppColors.blue700, thickness: 1),
-                      //     ),
-                      //     SizedBox(
-                      //         width: 70.h,
-                      //         child: Text(
-                      //           'Or With',
-                      //           style: ThemeText.bodyRegular.s16.blue700,
-                      //           textAlign: TextAlign.center,
-                      //         )),
-                      //     const Expanded(
-                      //       child: Divider(
-                      //         color: AppColors.blue700,
-                      //         thickness: 1,
-                      //       ),
-                      //     ),
-                      //   ],
-                      // ),
                       SizedBox(
                         height: 30.h,
                       ),
-                      // SizedBox(
-                      //   width: 312.w,
-                      //   height: 48.h,
-                      //   child: OutlinedButton(
-                      //     onPressed: () {},
-                      //     style: OutlinedButton.styleFrom(
-                      //       backgroundColor: AppColors.white,
-
-                      //       side: const BorderSide(
-                      //           color: AppColors.blue700), //<-- SEE HERE
-                      //     ),
-                      //     child: Text('Login with Barcode',
-                      //         style: ThemeText.bodySemibold.s16.blue700),
-                      //   ),
-                      // ),
-                      // SizedBox(
-                      //   height: 30.h,
-                      // ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

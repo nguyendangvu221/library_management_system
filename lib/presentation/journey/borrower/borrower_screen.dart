@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:library_management_system/domain/models/borrower_model.dart';
+import 'package:library_management_system/domain/models/hive_borrower.dart';
 import 'package:library_management_system/presentation/journey/borrower/borrower_controller.dart';
-import 'package:library_management_system/presentation/journey/borrower/borrower_view.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
@@ -25,9 +23,25 @@ class BorrowerScreen extends GetView<BorrowerController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Người mượn",
-                style: ThemeText.heading2.blue700,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Người mượn",
+                    style: ThemeText.heading2.blue700,
+                  ),
+                  GestureDetector(
+                    child: Icon(
+                      Icons.refresh_rounded,
+                      color: AppColors.blue700,
+                      size: 30.sp,
+                    ),
+                    onTap: () {
+                      controller.addLocalData();
+                      Get.snackbar("Refresh", "Refresh thành công");
+                    },
+                  ),
+                ],
               ),
               SizedBox(
                 height: 20.h,
@@ -44,76 +58,129 @@ class BorrowerScreen extends GetView<BorrowerController> {
     );
   }
 
-  Widget listBorrower(List<Borrower> listBorrower) {
+  Widget listBorrower(List<HiveBorrower> listBorrower) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
-          return GestureDetector(
-            onTap: () => Get.to(
-              () => BorrowerView(borrower: listBorrower[index]),
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
             ),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-              ),
-              height: 110.h,
-              child: Card(
-                color: AppColors.grey200,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      left: 8.sp, right: 8.sp, top: 5.sp, bottom: 5.sp),
-                  child: Row(
-                    children: [
-                      Flexible(
-                        flex: 2,
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 5.sp),
-                          child: CircleAvatar(
-                            backgroundColor: AppColors.grey200,
-                            backgroundImage: const AssetImage(
-                              'assets/images/user.png',
+            child: Card(
+              color: AppColors.grey200,
+              child: Padding(
+                padding: EdgeInsets.only(
+                    left: 8.sp, right: 8.sp, top: 5.sp, bottom: 5.sp),
+                child: Row(
+                  children: [
+                    Flexible(
+                      flex: 2,
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 5.sp),
+                        child: CircleAvatar(
+                          backgroundColor: AppColors.grey200,
+                          backgroundImage: const AssetImage(
+                            'assets/images/user.png',
+                          ),
+                          radius: 30.0.sp,
+                        ),
+                      ),
+                    ),
+                    const VerticalDivider(
+                      color: AppColors.blue700,
+                      width: 1,
+                    ),
+                    Flexible(
+                      flex: 5,
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10.sp),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                              alignment: Alignment.topRight,
+                              height: 20.sp,
+                              child: PopupMenuButton(
+                                icon: Icon(
+                                  Icons.more_vert_rounded,
+                                  color: AppColors.blue700,
+                                  size: 20.sp,
+                                ),
+                                itemBuilder: (context) {
+                                  return [
+                                    _buildAppBarPopUpItem(
+                                        title: "Xem thông tin",
+                                        onTap: controller.onTapDocument(index)),
+                                    _buildAppBarPopUpItem(
+                                      title: "Xóa người dùng",
+                                      onTap: () {
+                                        controller.delBorrower(index);
+                                        Get.snackbar("Xóa", "Xóa thành công");
+                                      },
+                                    ),
+                                  ];
+                                },
+                              ),
                             ),
-                            radius: 30.0.sp,
-                          ),
+                            Text(
+                              listBorrower[index].codeUser ?? "",
+                              style: ThemeText.bodySemibold.s18.blue700,
+                            ),
+                            SizedBox(height: 2.h),
+                            Text(
+                              "Họ tên: ${listBorrower[index].nameUser}",
+                              style: ThemeText.bodyMedium.s14.blue700,
+                            ),
+                            SizedBox(height: 2.h),
+                            Text(
+                              'email: ',
+                              style: ThemeText.bodyMedium.s14.blue700,
+                            ),
+                            Text(
+                              listBorrower[index].email ?? "",
+                              style: ThemeText.bodyMedium.s14.blue700,
+                            ),
+                            SizedBox(
+                              height: 13.h,
+                            )
+                          ],
                         ),
                       ),
-                      const VerticalDivider(
-                        color: AppColors.blue700,
-                        width: 1,
-                      ),
-                      Flexible(
-                        flex: 5,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 10.sp),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                listBorrower[index].codeUser ?? "",
-                                style: ThemeText.bodySemibold.s18.blue700,
-                              ),
-                              SizedBox(height: 2.h),
-                              Text(
-                                "Họ tên: ${listBorrower[index].nameUser}",
-                                style: ThemeText.bodyMedium.s14.blue700,
-                              ),
-                              SizedBox(height: 2.h),
-                              Text(
-                                'email: ${listBorrower[index].email}',
-                                style: ThemeText.bodyMedium.s14.blue700,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
           );
         },
         childCount: listBorrower.length,
+      ),
+    );
+  }
+
+  PopupMenuItem _buildAppBarPopUpItem({
+    required String title,
+    Icon? icon,
+    Function()? onTap,
+  }) {
+    return PopupMenuItem(
+      onTap: onTap,
+      child: Row(
+        children: [
+          icon ??
+              Icon(
+                Icons.info_outline_rounded,
+                color: AppColors.blue700,
+                size: 25.sp,
+              ),
+          // SizedBox(
+          //   width: AppDimens.width_8,
+          // ),
+          Text(
+            title,
+            style: ThemeText.bodySemibold.s16.blue700,
+          ),
+        ],
       ),
     );
   }

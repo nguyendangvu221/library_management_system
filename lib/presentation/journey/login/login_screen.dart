@@ -33,7 +33,7 @@ class LoginScreen extends GetView<LoginController> {
                   height: 18.h,
                 ),
                 Text(
-                  'Code',
+                  'Student ID',
                   style: ThemeText.bodyMedium.s14.blue700,
                   textAlign: TextAlign.left,
                 ),
@@ -62,7 +62,7 @@ class LoginScreen extends GetView<LoginController> {
                             ),
                             filled: true,
                             fillColor: AppColors.white1,
-                            hintText: 'example: CT1234',
+                            hintText: 'Example: CT1234',
                             hintStyle: ThemeText.bodyMedium.s14.blue700,
                           ),
                           validator: (value) {

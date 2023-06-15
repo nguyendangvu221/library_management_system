@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/common/constants/app_dimens.dart';
+import 'package:library_management_system/common/ultils/translations/app_utils.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
@@ -10,11 +13,18 @@ import 'package:library_management_system/presentation/widget/app_touchable.dart
 import 'home_controller.dart';
 
 class BookScreen extends GetView<HomeController> {
+  final bool isBookShelf;
   final Document document;
-  const BookScreen({required this.document, super.key});
+  final int index;
+  const BookScreen(
+      {required this.document,
+      required this.index,
+      required this.isBookShelf,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
+    logger('Building BookScreen');
     return Scaffold(
       backgroundColor: AppColors.backgroundColor,
       body: Padding(
@@ -56,9 +66,10 @@ class BookScreen extends GetView<HomeController> {
                               height: 20.h,
                             ),
                             Image(
-                                height: 240.h,
-                                fit: BoxFit.fill,
-                                image: NetworkImage(document.image ?? "")),
+                              height: 240.h,
+                              fit: BoxFit.fill,
+                              image: NetworkImage(document.image ?? ""),
+                            ),
                             const SizedBox(
                               height: 20,
                             ),
@@ -82,9 +93,6 @@ class BookScreen extends GetView<HomeController> {
                         padding: EdgeInsets.all(16.sp),
                         child: Column(
                           children: [
-                            // SizedBox(
-                            //   height: 15.h,
-                            // ),
                             Row(
                               children: [
                                 Text(
@@ -269,23 +277,25 @@ class BookScreen extends GetView<HomeController> {
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: AppTouchable(
-        onPressed: () {},
-        outlinedBorder: RoundedRectangleBorder(
-            side: BorderSide.none,
-            borderRadius: BorderRadius.circular(AppDimens.space_20)),
-        backgroundColor: AppColors.blue700,
-        width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: 16.sp),
-        padding: EdgeInsets.symmetric(vertical: AppDimens.height_14),
-        child: Text(
-          'Thêm Vào Kệ Sách',
-          style: ThemeText.bodySemibold.copyWith(
-            color: AppColors.bianca,
-            fontSize: AppDimens.space_18,
-          ),
-        ),
-      ),
+      floatingActionButton: !isBookShelf
+          ? AppTouchable(
+              onPressed: controller.onTapAddBorrower(index),
+              outlinedBorder: RoundedRectangleBorder(
+                  side: BorderSide.none,
+                  borderRadius: BorderRadius.circular(AppDimens.space_20)),
+              backgroundColor: AppColors.blue700,
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: 16.sp),
+              padding: EdgeInsets.symmetric(vertical: AppDimens.height_14),
+              child: Text(
+                'Thêm Vào Kệ Sách',
+                style: ThemeText.bodySemibold.copyWith(
+                  color: AppColors.bianca,
+                  fontSize: AppDimens.space_18,
+                ),
+              ),
+            )
+          : null,
     );
   }
 }

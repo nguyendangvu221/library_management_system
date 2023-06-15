@@ -18,6 +18,15 @@ class DocumentRepository {
     await hiveConfig.documentBox.deleteAt(index);
   }
 
+  int? getIndex(String code) {
+    for (int i = 0; i < hiveConfig.documentBox.length; i++) {
+      if (hiveConfig.documentBox.values.elementAt(i).code == code) {
+        return i;
+      }
+    }
+    return null;
+  }
+
   String? getCode(int index) {
     return hiveConfig.documentBox.getAt(index)?.code;
   }
@@ -107,8 +116,82 @@ class DocumentRepository {
           updateDate: hiveConfig.documentBox.values.elementAt(i).updateDate,
           language: hiveConfig.documentBox.values.elementAt(i).language,
           image: hiveConfig.documentBox.values.elementAt(i).image,
+          isBorrowed: hiveConfig.documentBox.values.elementAt(i).isBorrowed,
         ),
       );
+    }
+    return listDocument;
+  }
+
+  List<Document> getListDocumentBorrowed() {
+    List<Document> listDocument = [];
+    for (int i = 0; i < hiveConfig.documentBox.length; i++) {
+      if (hiveConfig.documentBox.values.elementAt(i).isBorrowed == true) {
+        listDocument.add(
+          Document(
+            name: hiveConfig.documentBox.values.elementAt(i).name,
+            author: hiveConfig.documentBox.values.elementAt(i).author,
+            category: hiveConfig.documentBox.values.elementAt(i).category,
+            code: hiveConfig.documentBox.values.elementAt(i).code,
+            description: hiveConfig.documentBox.values.elementAt(i).description,
+            numberOfEditions:
+                hiveConfig.documentBox.values.elementAt(i).numberOfEditions,
+            numberOfPage:
+                hiveConfig.documentBox.values.elementAt(i).numberOfPage,
+            paperSize: hiveConfig.documentBox.values.elementAt(i).paperSize,
+            publisher: hiveConfig.documentBox.values.elementAt(i).publisher,
+            releaseDate: hiveConfig.documentBox.values.elementAt(i).releaseDate,
+            reprint: hiveConfig.documentBox.values.elementAt(i).reprint,
+            updateDate: hiveConfig.documentBox.values.elementAt(i).updateDate,
+            language: hiveConfig.documentBox.values.elementAt(i).language,
+            image: hiveConfig.documentBox.values.elementAt(i).image,
+            isBorrowed: hiveConfig.documentBox.values.elementAt(i).isBorrowed,
+          ),
+        );
+      }
+    }
+    return listDocument;
+  }
+
+  List<Document> searchDocument(String name) {
+    List<Document> listDocument = [];
+    for (int index = 0; index < hiveConfig.documentBox.length; index++) {
+      if (hiveConfig.documentBox.values.elementAt(index).name != null) {
+        if (hiveConfig.documentBox.values
+            .elementAt(index)
+            .name!
+            .toLowerCase()
+            .contains(name.toLowerCase())) {
+          listDocument.add(
+            Document(
+              name: hiveConfig.documentBox.values.elementAt(index).name,
+              author: hiveConfig.documentBox.values.elementAt(index).author,
+              category: hiveConfig.documentBox.values.elementAt(index).category,
+              code: hiveConfig.documentBox.values.elementAt(index).code,
+              description:
+                  hiveConfig.documentBox.values.elementAt(index).description,
+              numberOfPage:
+                  hiveConfig.documentBox.values.elementAt(index).numberOfPage,
+              numberOfEditions: hiveConfig.documentBox.values
+                  .elementAt(index)
+                  .numberOfEditions,
+              paperSize:
+                  hiveConfig.documentBox.values.elementAt(index).paperSize,
+              publisher:
+                  hiveConfig.documentBox.values.elementAt(index).publisher,
+              releaseDate:
+                  hiveConfig.documentBox.values.elementAt(index).releaseDate,
+              reprint: hiveConfig.documentBox.values.elementAt(index).reprint,
+              updateDate:
+                  hiveConfig.documentBox.values.elementAt(index).updateDate,
+              language: hiveConfig.documentBox.values.elementAt(index).language,
+              image: hiveConfig.documentBox.values.elementAt(index).image,
+              isBorrowed:
+                  hiveConfig.documentBox.values.elementAt(index).isBorrowed,
+            ),
+          );
+        }
+      }
     }
     return listDocument;
   }

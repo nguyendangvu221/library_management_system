@@ -31,13 +31,14 @@ class HiveDocumentAdapter extends TypeAdapter<HiveDocument> {
       updateDate: fields[11] as String?,
       image: fields[12] as String?,
       language: fields[13] as String?,
+      isBorrowed: fields[14] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveDocument obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -65,7 +66,9 @@ class HiveDocumentAdapter extends TypeAdapter<HiveDocument> {
       ..writeByte(12)
       ..write(obj.image)
       ..writeByte(13)
-      ..write(obj.language);
+      ..write(obj.language)
+      ..writeByte(14)
+      ..write(obj.isBorrowed);
   }
 
   @override

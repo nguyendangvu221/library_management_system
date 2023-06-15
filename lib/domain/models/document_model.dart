@@ -13,6 +13,7 @@ class Document {
   String? releaseDate;
   String? updateDate;
   String? image;
+  bool? isBorrowed;
 
   Document({
     this.code,
@@ -29,6 +30,7 @@ class Document {
     this.releaseDate,
     this.updateDate,
     this.image,
+    this.isBorrowed,
   });
   Document.fromJson(Map<String, dynamic> json) {
     code = json['code'];
@@ -44,6 +46,8 @@ class Document {
     numberOfEditions = json['numberOfEditions'];
     releaseDate = json['releaseDate'];
     updateDate = json['updateDate'];
+    image = json['image'];
+    isBorrowed = json['isBorrowed'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
@@ -60,6 +64,8 @@ class Document {
     data['numberOfEditions'] = numberOfEditions;
     data['releaseDate'] = releaseDate;
     data['updateDate'] = updateDate;
+    data['image'] = image;
+    data['isBorrowed'] = isBorrowed;
     return data;
   }
 }

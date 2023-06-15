@@ -32,6 +32,8 @@ class HiveDocument {
   String? image;
   @HiveField(13)
   String? language;
+  @HiveField(14)
+  bool? isBorrowed;
   HiveDocument({
     this.name,
     this.code,
@@ -47,5 +49,6 @@ class HiveDocument {
     this.updateDate,
     this.image,
     this.language,
+    this.isBorrowed,
   });
 }

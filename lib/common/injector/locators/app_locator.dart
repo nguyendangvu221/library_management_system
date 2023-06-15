@@ -26,16 +26,23 @@ void configLocator() {
   getIt.registerFactory<MainController>(() => MainController());
   getIt.registerFactory<HomeController>(() => HomeController(
         addBookUsecase: getIt<AddBookUsecase>(),
+        borrowerUsecase: getIt<BorrowerUsecase>(),
+        registerUseCase: getIt<RegisterUseCase>(),
       ));
   getIt.registerFactory<LoginController>(() => LoginController(
         registerUseCase: getIt<RegisterUseCase>(),
+        borrowerUsecase: getIt<BorrowerUsecase>(),
       ));
   getIt.registerFactory<RegisterController>(() => RegisterController(
         borrowerUsecase: getIt<BorrowerUsecase>(),
         registerUseCase: getIt<RegisterUseCase>(),
       ));
-  getIt.registerFactory<SearchsController>(() => SearchsController());
-  getIt.registerFactory<BorrowerController>(() => BorrowerController());
+  getIt.registerFactory<SearchsController>(() => SearchsController(
+        addBookUsecase: getIt<AddBookUsecase>(),
+      ));
+  getIt.registerFactory<BorrowerController>(() => BorrowerController(
+        borrowerUsecase: getIt<BorrowerUsecase>(),
+      ));
   getIt.registerFactory<AddBookController>(
     () => AddBookController(
       addBookUsecase: getIt<AddBookUsecase>(),
@@ -43,6 +50,7 @@ void configLocator() {
   );
   getIt.registerFactory<UserController>(() => UserController(
         registerUseCase: getIt<RegisterUseCase>(),
+        borrowerUsecase: getIt<BorrowerUsecase>(),
       ));
 
   //usecase
