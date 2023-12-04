@@ -12,6 +12,18 @@ import 'package:flutter/widgets.dart';
 class $AssetsFontsGen {
   const $AssetsFontsGen();
 
+  /// File path: assets/fonts/Inter-Bold.ttf
+  String get interBold => 'assets/fonts/Inter-Bold.ttf';
+
+  /// File path: assets/fonts/Inter-Medium.ttf
+  String get interMedium => 'assets/fonts/Inter-Medium.ttf';
+
+  /// File path: assets/fonts/Inter-Regular.ttf
+  String get interRegular => 'assets/fonts/Inter-Regular.ttf';
+
+  /// File path: assets/fonts/Inter-SemiBold.ttf
+  String get interSemiBold => 'assets/fonts/Inter-SemiBold.ttf';
+
   /// File path: assets/fonts/Montserrat-Bold.ttf
   String get montserratBold => 'assets/fonts/Montserrat-Bold.ttf';
 
@@ -30,14 +42,34 @@ class $AssetsFontsGen {
   /// File path: assets/fonts/Montserrat-SemiBold.ttf
   String get montserratSemiBold => 'assets/fonts/Montserrat-SemiBold.ttf';
 
+  /// File path: assets/fonts/NotoSerif-Bold.ttf
+  String get notoSerifBold => 'assets/fonts/NotoSerif-Bold.ttf';
+
+  /// File path: assets/fonts/NotoSerif-Medium.ttf
+  String get notoSerifMedium => 'assets/fonts/NotoSerif-Medium.ttf';
+
+  /// File path: assets/fonts/NotoSerif-Regular.ttf
+  String get notoSerifRegular => 'assets/fonts/NotoSerif-Regular.ttf';
+
+  /// File path: assets/fonts/NotoSerif-SemiBold.ttf
+  String get notoSerifSemiBold => 'assets/fonts/NotoSerif-SemiBold.ttf';
+
   /// List of all assets
   List<String> get values => [
+        interBold,
+        interMedium,
+        interRegular,
+        interSemiBold,
         montserratBold,
         montserratExtraBold,
         montserratLight,
         montserratMedium,
         montserratRegular,
-        montserratSemiBold
+        montserratSemiBold,
+        notoSerifBold,
+        notoSerifMedium,
+        notoSerifRegular,
+        notoSerifSemiBold
       ];
 }
 
@@ -65,11 +97,24 @@ class $AssetsImagesGen {
 class $AssetsSvgGen {
   const $AssetsSvgGen();
 
+  /// File path: assets/svg/add_image.svg
+  String get addImage => 'assets/svg/add_image.svg';
+
+  /// File path: assets/svg/fill_document.svg
+  String get fillDocument => 'assets/svg/fill_document.svg';
+
+  /// File path: assets/svg/image-gallery.svg
+  String get imageGallery => 'assets/svg/image-gallery.svg';
+
+  /// File path: assets/svg/new-document.svg
+  String get newDocument => 'assets/svg/new-document.svg';
+
   /// File path: assets/svg/user.svg
   String get user => 'assets/svg/user.svg';
 
   /// List of all assets
-  List<String> get values => [user];
+  List<String> get values =>
+      [addImage, fillDocument, imageGallery, newDocument, user];
 }
 
 class Assets {

@@ -5,6 +5,7 @@ import 'package:library_management_system/data/borrower_repository.dart';
 import 'package:library_management_system/data/document_repository.dart';
 import 'package:library_management_system/domain/usecase/add_book_usecase.dart';
 import 'package:library_management_system/domain/usecase/borrower_usecase.dart';
+import 'package:library_management_system/domain/usecase/document_usecase.dart';
 import 'package:library_management_system/domain/usecase/register_usecase.dart';
 import 'package:library_management_system/presentation/controllers/app_controller.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_controller.dart';
@@ -24,11 +25,11 @@ void configLocator() {
   getIt.registerLazySingleton(() => AppController());
   getIt.registerFactory<SplashController>(() => SplashController());
   getIt.registerFactory<MainController>(() => MainController());
-  getIt.registerFactory<HomeController>(() => HomeController(
-        addBookUsecase: getIt<AddBookUsecase>(),
-        borrowerUsecase: getIt<BorrowerUsecase>(),
-        registerUseCase: getIt<RegisterUseCase>(),
-      ));
+  getIt.registerFactory<HomeController>(
+    () => HomeController(
+      documentUsecase: getIt<DocumentUsecase>(),
+    ),
+  );
   getIt.registerFactory<LoginController>(() => LoginController());
   getIt.registerFactory<RegisterController>(() => RegisterController());
   getIt.registerFactory<SearchsController>(() => SearchsController(
@@ -44,7 +45,6 @@ void configLocator() {
   );
   getIt.registerFactory<UserController>(() => UserController(
         registerUseCase: getIt<RegisterUseCase>(),
-        borrowerUsecase: getIt<BorrowerUsecase>(),
       ));
 
   //usecase
@@ -63,6 +63,11 @@ void configLocator() {
       getIt<BorrowerRepository>(),
     ),
   );
+  getIt.registerFactory<DocumentUsecase>(
+    () => DocumentUsecase(
+      documentRepository: getIt<DocumentRepository>(),
+    ),
+  );
 
   //repository
   getIt.registerFactory<AccountRepository>(
@@ -71,9 +76,7 @@ void configLocator() {
     ),
   );
   getIt.registerFactory(
-    () => BorrowerRepository(
-      getIt<HiveConfig>(),
-    ),
+    () => BorrowerRepository(),
   );
   getIt.registerFactory(
     () => DocumentRepository(

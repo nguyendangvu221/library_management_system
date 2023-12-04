@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 import 'package:library_management_system/common/config/database/hive_config.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
 import 'package:library_management_system/domain/models/hive_document.dart';
@@ -5,6 +7,20 @@ import 'package:library_management_system/domain/models/hive_document.dart';
 class DocumentRepository {
   final HiveConfig hiveConfig;
   DocumentRepository(this.hiveConfig);
+  RxList<Document> listDocument = <Document>[].obs;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  Future<List<Document>> fetchListDocument() async {
+    List<Document> listDocument = [];
+    await firestore.collection('documents').get().then((value) {
+      for (var element in value.docs) {
+        listDocument.add(Document.fromJson({
+          'id': element.id,
+          ...element.data(),
+        }));
+      }
+    });
+    return listDocument;
+  }
 
   Future<void> insertDocument(HiveDocument HiveDocument) async {
     await hiveConfig.documentBox.add(HiveDocument);
@@ -106,8 +122,7 @@ class DocumentRepository {
           category: hiveConfig.documentBox.values.elementAt(i).category,
           code: hiveConfig.documentBox.values.elementAt(i).code,
           description: hiveConfig.documentBox.values.elementAt(i).description,
-          numberOfEditions:
-              hiveConfig.documentBox.values.elementAt(i).numberOfEditions,
+          numberOfEditions: hiveConfig.documentBox.values.elementAt(i).numberOfEditions,
           numberOfPage: hiveConfig.documentBox.values.elementAt(i).numberOfPage,
           paperSize: hiveConfig.documentBox.values.elementAt(i).paperSize,
           publisher: hiveConfig.documentBox.values.elementAt(i).publisher,
@@ -116,7 +131,6 @@ class DocumentRepository {
           updateDate: hiveConfig.documentBox.values.elementAt(i).updateDate,
           language: hiveConfig.documentBox.values.elementAt(i).language,
           image: hiveConfig.documentBox.values.elementAt(i).image,
-          isBorrowed: hiveConfig.documentBox.values.elementAt(i).isBorrowed,
         ),
       );
     }
@@ -134,10 +148,8 @@ class DocumentRepository {
             category: hiveConfig.documentBox.values.elementAt(i).category,
             code: hiveConfig.documentBox.values.elementAt(i).code,
             description: hiveConfig.documentBox.values.elementAt(i).description,
-            numberOfEditions:
-                hiveConfig.documentBox.values.elementAt(i).numberOfEditions,
-            numberOfPage:
-                hiveConfig.documentBox.values.elementAt(i).numberOfPage,
+            numberOfEditions: hiveConfig.documentBox.values.elementAt(i).numberOfEditions,
+            numberOfPage: hiveConfig.documentBox.values.elementAt(i).numberOfPage,
             paperSize: hiveConfig.documentBox.values.elementAt(i).paperSize,
             publisher: hiveConfig.documentBox.values.elementAt(i).publisher,
             releaseDate: hiveConfig.documentBox.values.elementAt(i).releaseDate,
@@ -145,7 +157,6 @@ class DocumentRepository {
             updateDate: hiveConfig.documentBox.values.elementAt(i).updateDate,
             language: hiveConfig.documentBox.values.elementAt(i).language,
             image: hiveConfig.documentBox.values.elementAt(i).image,
-            isBorrowed: hiveConfig.documentBox.values.elementAt(i).isBorrowed,
           ),
         );
       }
@@ -157,37 +168,23 @@ class DocumentRepository {
     List<Document> listDocument = [];
     for (int index = 0; index < hiveConfig.documentBox.length; index++) {
       if (hiveConfig.documentBox.values.elementAt(index).name != null) {
-        if (hiveConfig.documentBox.values
-            .elementAt(index)
-            .name!
-            .toLowerCase()
-            .contains(name.toLowerCase())) {
+        if (hiveConfig.documentBox.values.elementAt(index).name!.toLowerCase().contains(name.toLowerCase())) {
           listDocument.add(
             Document(
               name: hiveConfig.documentBox.values.elementAt(index).name,
               author: hiveConfig.documentBox.values.elementAt(index).author,
               category: hiveConfig.documentBox.values.elementAt(index).category,
               code: hiveConfig.documentBox.values.elementAt(index).code,
-              description:
-                  hiveConfig.documentBox.values.elementAt(index).description,
-              numberOfPage:
-                  hiveConfig.documentBox.values.elementAt(index).numberOfPage,
-              numberOfEditions: hiveConfig.documentBox.values
-                  .elementAt(index)
-                  .numberOfEditions,
-              paperSize:
-                  hiveConfig.documentBox.values.elementAt(index).paperSize,
-              publisher:
-                  hiveConfig.documentBox.values.elementAt(index).publisher,
-              releaseDate:
-                  hiveConfig.documentBox.values.elementAt(index).releaseDate,
+              description: hiveConfig.documentBox.values.elementAt(index).description,
+              numberOfPage: hiveConfig.documentBox.values.elementAt(index).numberOfPage,
+              numberOfEditions: hiveConfig.documentBox.values.elementAt(index).numberOfEditions,
+              paperSize: hiveConfig.documentBox.values.elementAt(index).paperSize,
+              publisher: hiveConfig.documentBox.values.elementAt(index).publisher,
+              releaseDate: hiveConfig.documentBox.values.elementAt(index).releaseDate,
               reprint: hiveConfig.documentBox.values.elementAt(index).reprint,
-              updateDate:
-                  hiveConfig.documentBox.values.elementAt(index).updateDate,
+              updateDate: hiveConfig.documentBox.values.elementAt(index).updateDate,
               language: hiveConfig.documentBox.values.elementAt(index).language,
               image: hiveConfig.documentBox.values.elementAt(index).image,
-              isBorrowed:
-                  hiveConfig.documentBox.values.elementAt(index).isBorrowed,
             ),
           );
         }

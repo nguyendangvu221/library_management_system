@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:library_management_system/domain/models/hive_borrower.dart';
+import 'package:library_management_system/domain/models/user_model.dart';
 import 'package:library_management_system/presentation/journey/borrower/borrower_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
 class BorrowerView extends GetView<BorrowerController> {
-  final HiveBorrower borrower;
-  const BorrowerView({required this.borrower, super.key});
+  final User user;
+  const BorrowerView({required this.user, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -28,13 +28,13 @@ class BorrowerView extends GetView<BorrowerController> {
               child: Icon(
                 Icons.arrow_back,
                 color: AppColor.blue.shade700,
-                size: 40.sp,
+                size: 30.sp,
               ),
             ),
             SizedBox(
               height: 20.sp,
             ),
-            displayInfoBorrower(borrower),
+            displayInfoBorrower(user),
             SizedBox(
               height: 20.sp,
             ),
@@ -44,7 +44,7 @@ class BorrowerView extends GetView<BorrowerController> {
     );
   }
 
-  Widget displayInfoBorrower(HiveBorrower borrower) {
+  Widget displayInfoBorrower(User user) {
     return Column(
       children: [
         Container(
@@ -52,7 +52,7 @@ class BorrowerView extends GetView<BorrowerController> {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-            color: AppColor.grey.shade200,
+            color: AppColor.grey.shade100,
           ),
           child: Column(
             children: [
@@ -61,7 +61,7 @@ class BorrowerView extends GetView<BorrowerController> {
               ),
               CircleAvatar(
                 radius: 50.sp,
-                backgroundColor: AppColor.grey.shade200,
+                backgroundColor: AppColor.grey.shade100,
                 backgroundImage: const AssetImage(
                   'assets/images/user.png',
                 ),
@@ -69,19 +69,24 @@ class BorrowerView extends GetView<BorrowerController> {
               SizedBox(
                 height: 10.sp,
               ),
-              Text(borrower.codeUser ?? "",
-                  style: AppTheme.textM.copyWith(
-                    color: AppColor.blue.shade700,
-                    fontSize: 20.sp,
-                  )),
+              Text(
+                user.name ?? "",
+                style: AppTheme.textMBold.copyWith(
+                  color: AppColor.blue.shade700,
+                  fontSize: 20.sp,
+                ),
+              ),
             ],
           ),
+        ),
+        SizedBox(
+          height: 20.sp,
         ),
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-            color: AppColor.grey.shade200,
+            color: AppColor.grey.shade100,
           ),
           child: Padding(
             padding: EdgeInsets.all(16.sp),
@@ -90,7 +95,7 @@ class BorrowerView extends GetView<BorrowerController> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Họ tên: ${borrower.nameUser}",
+                    "Email: ${user.email}",
                     style: AppTheme.textM.copyWith(
                       color: AppColor.blue.shade700,
                       fontSize: 15.sp,
@@ -99,8 +104,15 @@ class BorrowerView extends GetView<BorrowerController> {
                   SizedBox(
                     height: 5.sp,
                   ),
+                  Divider(
+                    color: AppColor.blue.shade700,
+                    height: 1,
+                  ),
+                  SizedBox(
+                    height: 5.sp,
+                  ),
                   Text(
-                    "Email: ${borrower.email}",
+                    "Số điện thoại: ${user.phoneNumber}",
                     style: AppTheme.textM.copyWith(
                       color: AppColor.blue.shade700,
                       fontSize: 15.sp,
@@ -109,49 +121,54 @@ class BorrowerView extends GetView<BorrowerController> {
                   SizedBox(
                     height: 5.sp,
                   ),
+                  Divider(
+                    color: AppColor.blue.shade700,
+                    height: 1,
+                  ),
+                  SizedBox(
+                    height: 5.sp,
+                  ),
                   Text(
-                    "Danh sách tài liệu: ",
+                    "Địa chỉ: ${user.address}",
                     style: AppTheme.textM.copyWith(
                       color: AppColor.blue.shade700,
                       fontSize: 15.sp,
                     ),
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 10.sp),
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemBuilder: (context, index) => Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text("- ${borrower.borrowedDocument?[index].nameDocument}",
-                              style: AppTheme.textM.copyWith(
-                                color: AppColor.blue.shade700,
-                                fontSize: 15.sp,
-                              )),
-                          Container(
-                            margin: EdgeInsets.only(left: 10.sp),
-                            child: Text("+ ID: ${borrower.borrowedDocument?[index].idDocument}",
-                                style: AppTheme.textM.copyWith(
-                                  color: AppColor.blue.shade700,
-                                  fontSize: 15.sp,
-                                )),
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(left: 10.sp),
-                            child: Text("+ Hạn trả: ${borrower.borrowedDocument?[index].loanPeriod}",
-                                style: AppTheme.textM.copyWith(
-                                  color: AppColor.blue.shade700,
-                                  fontSize: 15.sp,
-                                )),
-                          ),
-                          SizedBox(
-                            height: 10.sp,
-                          ),
-                        ],
-                      ),
-                      itemCount: borrower.borrowedDocument?.length,
+                  SizedBox(
+                    height: 5.sp,
+                  ),
+                  Divider(
+                    color: AppColor.blue.shade700,
+                    height: 1,
+                  ),
+                  SizedBox(
+                    height: 5.sp,
+                  ),
+                  Text(
+                    "Ngày sinh: ${user.dateOfBirth.toString().split(" ")[0]}",
+                    style: AppTheme.textM.copyWith(
+                      color: AppColor.blue.shade700,
+                      fontSize: 15.sp,
                     ),
-                  )
+                  ),
+                  SizedBox(
+                    height: 5.sp,
+                  ),
+                  Divider(
+                    color: AppColor.blue.shade700,
+                    height: 1,
+                  ),
+                  SizedBox(
+                    height: 5.sp,
+                  ),
+                  Text(
+                    "Giới tính: ${user.gender}",
+                    style: AppTheme.textM.copyWith(
+                      color: AppColor.blue.shade700,
+                      fontSize: 15.sp,
+                    ),
+                  ),
                 ],
               ),
             ),

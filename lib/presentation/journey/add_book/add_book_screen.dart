@@ -261,23 +261,38 @@ class AddBookScreen extends GetView<AddBookController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Center(
-                              child: SvgPicture.asset(
-                                'assets/svg/image-gallery.svg',
-                                colorFilter: ColorFilter.mode(
-                                  AppColor.blue.shade700,
-                                  BlendMode.srcIn,
-                                ),
-                                height: 25.sp,
-                                width: 25.sp,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/svg/image-gallery.svg',
+                                    colorFilter: ColorFilter.mode(
+                                      AppColor.blue.shade700,
+                                      BlendMode.srcIn,
+                                    ),
+                                    height: 25.sp,
+                                    width: 25.sp,
+                                  ),
+                                  SizedBox(
+                                    width: 10.sp,
+                                  ),
+                                  CustomIconButton(
+                                    isBorder: false,
+                                    onTap: () {
+                                      controller.nameImage.value = '';
+                                      controller.imageBook.value = '';
+                                    },
+                                    isDisable: false,
+                                    icon: Icons.cancel,
+                                  )
+                                ],
                               ),
                             ),
-                            Center(
-                              child: Text(
-                                controller.nameImage.value,
-                                style: AppTheme.textMReg.copyWith(
-                                  color: AppColor.blue.shade700,
-                                  fontSize: 14.sp,
-                                ),
+                            Text(
+                              controller.nameImage.value,
+                              style: AppTheme.textMReg.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 14.sp,
                               ),
                             ),
                           ],
@@ -317,17 +332,33 @@ class AddBookScreen extends GetView<AddBookController> {
                           ],
                         )
                       : Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Center(
-                              child: SvgPicture.asset(
-                                'assets/svg/fill_document.svg',
-                                colorFilter: ColorFilter.mode(
-                                  AppColor.blue.shade700,
-                                  BlendMode.srcIn,
-                                ),
-                                height: 25.sp,
-                                width: 25.sp,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  SvgPicture.asset(
+                                    'assets/svg/fill_document.svg',
+                                    colorFilter: ColorFilter.mode(
+                                      AppColor.blue.shade700,
+                                      BlendMode.srcIn,
+                                    ),
+                                    height: 25.sp,
+                                    width: 25.sp,
+                                  ),
+                                  SizedBox(
+                                    width: 10.sp,
+                                  ),
+                                  CustomIconButton(
+                                    isBorder: false,
+                                    onTap: () {
+                                      controller.pdfPicker.value = '';
+                                      controller.namePdf.value = '';
+                                    },
+                                    isDisable: false,
+                                    icon: Icons.cancel,
+                                  ),
+                                ],
                               ),
                             ),
                             Center(

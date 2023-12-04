@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:library_management_system/domain/models/hive_borrower.dart';
+import 'package:library_management_system/common/constants/button.dart';
+import 'package:library_management_system/common/constants/text_input.dart';
+import 'package:library_management_system/domain/models/user_model.dart';
 import 'package:library_management_system/presentation/journey/borrower/borrower_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
@@ -27,7 +29,7 @@ class BorrowerScreen extends GetView<BorrowerController> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Người mượn",
+                    "Người dùng",
                     style: AppTheme.heading2.copyWith(
                       color: AppColor.blue.shade700,
                       fontSize: 24.sp,
@@ -40,7 +42,7 @@ class BorrowerScreen extends GetView<BorrowerController> {
                       size: 30.sp,
                     ),
                     onTap: () {
-                      controller.addLocalData();
+                      controller.onRefresh();
                       Get.snackbar("Refresh", "Refresh thành công");
                     },
                   ),
@@ -49,9 +51,31 @@ class BorrowerScreen extends GetView<BorrowerController> {
               SizedBox(
                 height: 20.h,
               ),
+              CustomTextInput(
+                controller: controller.searchController,
+                isDisable: false,
+                hintText: 'Tìm kiếm',
+                hintStyle: AppTheme.textM.copyWith(
+                  color: AppColor.blue.shade700,
+                  fontSize: 14.sp,
+                ),
+                seffixIcon: CustomIconButton(
+                  isBorder: false,
+                  onTap: () {
+                    controller.onTapSearch();
+                  },
+                  isDisable: false,
+                  icon: Icons.search,
+                  colorIcon: AppColor.blue.shade700,
+                  size: 20.sp,
+                ),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
               Expanded(
                 child: CustomScrollView(
-                  slivers: [listBorrower(controller.listBorrower)],
+                  slivers: [listBorrower(controller.listUser)],
                 ),
               ),
             ],
@@ -61,7 +85,7 @@ class BorrowerScreen extends GetView<BorrowerController> {
     );
   }
 
-  Widget listBorrower(List<HiveBorrower> listBorrower) {
+  Widget listBorrower(List<User> listBorrower) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
@@ -70,7 +94,7 @@ class BorrowerScreen extends GetView<BorrowerController> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Card(
-              color: AppColor.grey.shade200,
+              color: AppColor.grey.shade100,
               child: Padding(
                 padding: EdgeInsets.only(left: 8.sp, right: 8.sp, top: 5.sp, bottom: 5.sp),
                 child: Row(
@@ -115,7 +139,7 @@ class BorrowerScreen extends GetView<BorrowerController> {
                                     _buildAppBarPopUpItem(
                                       title: "Xóa người dùng",
                                       onTap: () {
-                                        controller.delBorrower(index);
+                                        controller.deleteUserData(listBorrower[index].id ?? "");
                                         Get.snackbar("Xóa", "Xóa thành công");
                                       },
                                     ),
@@ -124,15 +148,7 @@ class BorrowerScreen extends GetView<BorrowerController> {
                               ),
                             ),
                             Text(
-                              listBorrower[index].codeUser ?? "",
-                              style: AppTheme.textM.copyWith(
-                                color: AppColor.blue.shade700,
-                                fontSize: 18.sp,
-                              ),
-                            ),
-                            SizedBox(height: 2.h),
-                            Text(
-                              "Họ tên: ${listBorrower[index].nameUser}",
+                              "Họ tên: ${listBorrower[index].name}",
                               style: AppTheme.textM.copyWith(
                                 color: AppColor.blue.shade700,
                                 fontSize: 14.sp,
@@ -140,7 +156,7 @@ class BorrowerScreen extends GetView<BorrowerController> {
                             ),
                             SizedBox(height: 2.h),
                             Text(
-                              'email: ',
+                              'Email: ',
                               style: AppTheme.textM.copyWith(
                                 color: AppColor.blue.shade700,
                                 fontSize: 14.sp,
@@ -153,9 +169,6 @@ class BorrowerScreen extends GetView<BorrowerController> {
                                 fontSize: 14.sp,
                               ),
                             ),
-                            SizedBox(
-                              height: 13.h,
-                            )
                           ],
                         ),
                       ),

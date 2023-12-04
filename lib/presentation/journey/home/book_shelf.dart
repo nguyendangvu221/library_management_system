@@ -24,37 +24,39 @@ class BookShelfScreen extends GetView<HomeController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Row(
+                    children: [
+                      GestureDetector(
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: AppColor.blue.shade700,
+                          size: 25.sp,
+                        ),
+                        onTap: () => Get.back(),
+                      ),
+                      SizedBox(
+                        width: 5.sp,
+                      ),
+                      Text(
+                        "Kệ sách",
+                        style: AppTheme.heading2.copyWith(
+                          color: AppColor.blue.shade700,
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                    ],
+                  ),
                   GestureDetector(
                     child: Icon(
-                      Icons.arrow_back,
+                      Icons.refresh_rounded,
                       color: AppColor.blue.shade700,
-                      size: 40.sp,
+                      size: 25.sp,
                     ),
-                    onTap: () => Get.back(),
-                  ),
-                  SizedBox(
-                    width: 5.sp,
-                  ),
-                  Text(
-                    "Kệ sách",
-                    style: AppTheme.heading2.copyWith(color: AppColor.blue.shade700),
-                  ),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    margin: EdgeInsets.only(left: 175.sp),
-                    child: GestureDetector(
-                      child: Icon(
-                        Icons.refresh_rounded,
-                        color: AppColor.blue.shade700,
-                        size: 30.sp,
-                      ),
-                      onTap: () {
-                        controller.addDocumentBorrowed();
-                        Get.snackbar("Refresh", "Refresh thành công");
-                      },
-                    ),
+                    onTap: () {
+                      Get.snackbar("Refresh", "Refresh thành công");
+                    },
                   ),
                 ],
               ),
@@ -63,7 +65,9 @@ class BookShelfScreen extends GetView<HomeController> {
               ),
               Expanded(
                 child: CustomScrollView(
-                  slivers: [listSliver(controller.listBorrowed)],
+                  slivers: [
+                    // listSliver(controller.listBorrowed),
+                  ],
                 ),
               )
             ],
@@ -121,14 +125,14 @@ class BookShelfScreen extends GetView<HomeController> {
                                 ),
                                 itemBuilder: (context) {
                                   return [
-                                    _buildAppBarPopUpItem(
-                                        title: "Xem thông tin", onTap: controller.onTapDocument(index, true)),
-                                    _buildAppBarPopUpItem(
-                                      title: "Xóa tài liệu",
-                                      onTap: () {
-                                        controller.delBorrowedDocument(index);
-                                      },
-                                    ),
+                                    // _buildAppBarPopUpItem(
+                                    //     title: "Xem thông tin", onTap: controller.onTapDocument(index, true)),
+                                    // _buildAppBarPopUpItem(
+                                    //   title: "Xóa tài liệu",
+                                    //   onTap: () {
+                                    //     // controller.delBorrowedDocument(index);
+                                    //   },
+                                    // ),
                                   ];
                                 },
                               ),

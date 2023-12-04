@@ -39,13 +39,13 @@ class UserScreen extends GetView<UserController> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-                      color: AppColor.grey.shade200,
+                      color: AppColor.grey.shade50,
                     ),
                     child: Column(
                       children: [
                         CircleAvatar(
                           radius: 50.sp,
-                          backgroundColor: AppColor.grey.shade200,
+                          backgroundColor: AppColor.grey.shade50,
                           backgroundImage: const AssetImage(
                             'assets/images/user.png',
                           ),
@@ -135,7 +135,7 @@ class UserScreen extends GetView<UserController> {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-        color: AppColor.grey.shade200,
+        color: AppColor.grey.shade50,
       ),
       width: double.infinity,
       height: height,

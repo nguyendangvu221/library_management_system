@@ -1,48 +1,20 @@
 import 'package:library_management_system/data/borrower_repository.dart';
 import 'package:library_management_system/domain/models/hive_borrowed_document.dart';
 import 'package:library_management_system/domain/models/hive_borrower.dart';
+import 'package:library_management_system/domain/models/user_model.dart';
 
 class BorrowerUsecase {
   final BorrowerRepository borrowerRepository;
   BorrowerUsecase(this.borrowerRepository);
-
-  Future<void> addBorrower(HiveBorrower HiveBorrower) async {
-    return await borrowerRepository.addBorrower(HiveBorrower);
+  Future<List<User>> fetchListUser() {
+    return borrowerRepository.fetchListUser();
   }
 
-  Future<void> updateBorrower(HiveBorrower HiveBorrower, int index) async {
-    return await borrowerRepository.updateBorrower(HiveBorrower, index);
+  Future<void> deleteUserData(String id) async {
+    await borrowerRepository.deleteUserData(id);
   }
 
-  Future<void> deleteBorrower(int index) async {
-    return await borrowerRepository.deleteBorrower(index);
-  }
-
-  String? getCode(int index) {
-    return borrowerRepository.getCode(index);
-  }
-
-  bool? getIsLogin(int index) {
-    return borrowerRepository.getIsLogin(index);
-  }
-
-  String? getName(int index) {
-    return borrowerRepository.getName(index);
-  }
-
-  String? getEmail(int index) {
-    return borrowerRepository.getEmail(index);
-  }
-
-  int getLength() {
-    return borrowerRepository.getLength();
-  }
-
-  List<HiveBorrowedDocument>? getBorrowedDocument(int index) {
-    return borrowerRepository.getBorrowedDocument(index);
-  }
-
-  List<HiveBorrower> getAllListBorrower() {
-    return borrowerRepository.getAllListBorrower();
+  Future<List<User>> searchUsers(String keyword) async {
+    return borrowerRepository.searchUsers(keyword);
   }
 }

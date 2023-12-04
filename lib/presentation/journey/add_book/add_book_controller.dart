@@ -1,13 +1,17 @@
 import 'dart:developer';
 
-import 'package:analyzer/file_system/file_system.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:library_management_system/common/constants/app_routes.dart';
+import 'package:library_management_system/presentation/journey/main/main_screen.dart';
+import 'package:path/path.dart' as path;
+import 'dart:io';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:library_management_system/domain/models/hive_document.dart';
 import 'package:library_management_system/domain/usecase/add_book_usecase.dart';
-import 'package:library_management_system/presentation/journey/main/main_screen.dart';
 
 class AddBookController extends GetxController {
   TextEditingController nameBook = TextEditingController();
@@ -41,13 +45,99 @@ class AddBookController extends GetxController {
   RxString validateLanguageBook = ''.obs;
   RxString validateImageBook = ''.obs;
   final AddBookUsecase addBookUsecase;
-  AddBookController({required this.addBookUsecase});
-  bool checkValidate({required textValidator, required textController}) {
-    if (textController.text.trim().isEmpty) {
-      textValidator.value = "Vui lòng điền đủ các trường";
-      return false;
+  FirebaseStorage storage = FirebaseStorage.instance;
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+  bool validate1() {
+    bool isValid = true;
+
+    // Kiểm tra và đặt giá trị cho errorName
+    if (nameBook.text.isEmpty) {
+      validateNameBook.value = 'Tên không được để trống';
+      isValid = false;
+    } else {
+      validateNameBook.value = '';
     }
-    return true;
+    if (authorBook.text.isEmpty) {
+      validateAuthorBook.value = 'Tác giả không được để trống';
+      isValid = false;
+    } else {
+      validateAuthorBook.value = '';
+    }
+    if (categoryBook.text.isEmpty) {
+      validateCategoryBook.value = 'Thể loại không được để trống';
+      isValid = false;
+    } else {
+      validateCategoryBook.value = '';
+    }
+    if (publisherBook.text.isEmpty) {
+      validatePublisherBook.value = 'Nhà xuất bản không được để trống';
+      isValid = false;
+    } else {
+      validatePublisherBook.value = '';
+    }
+    if (descriptionBook.text.isEmpty) {
+      validateDescriptionBook.value = 'Mô tả không được để trống';
+      isValid = false;
+    } else {
+      validateDescriptionBook.value = '';
+    }
+    if (numberOfBook.text.isEmpty) {
+      validateNumberOfBook.value = 'Số lượng không được để trống';
+      isValid = false;
+    } else {
+      validateNumberOfBook.value = '';
+    }
+    if (paperSizeBook.text.isEmpty) {
+      validatePaperSizeBook.value = 'Kích thước không được để trống';
+      isValid = false;
+    } else {
+      validatePaperSizeBook.value = '';
+    }
+    if (reprintBook.text.isEmpty) {
+      validateReprintBook.value = 'Lần tái bản không được để trống';
+      isValid = false;
+    } else {
+      validateReprintBook.value = '';
+    }
+    if (numberOfEditionsBook.text.isEmpty) {
+      validateNumberOfEditionBook.value = 'Số lần xuất bản không được để trống';
+      isValid = false;
+    } else {
+      validateNumberOfEditionBook.value = '';
+    }
+    if (releaseDateBook.text.isEmpty) {
+      validateReleaseDateBook.value = 'Ngày xuất bản không được để trống';
+      isValid = false;
+    } else {
+      validateReleaseDateBook.value = '';
+    }
+    if (updateDateBook.text.isEmpty) {
+      validateUpdateDateBook.value = 'Ngày cập nhật không được để trống';
+      isValid = false;
+    } else {
+      validateUpdateDateBook.value = '';
+    }
+    if (languageBook.text.isEmpty) {
+      validateLanguageBook.value = 'Ngôn ngữ không được để trống';
+      isValid = false;
+    } else {
+      validateLanguageBook.value = '';
+    }
+
+    return isValid;
+  }
+
+  AddBookController({required this.addBookUsecase});
+
+  Future<void> addDocument() async {
+    if (validate1()) {
+      return;
+    } else {
+      Get.snackbar("Thêm sách", "Thêm sách thành công!!");
+      Get.offAllNamed(AppRoutes.main);
+      await uploadDataAndFilesToFirebase();
+      clearData();
+    }
   }
 
   void clearData() {
@@ -63,70 +153,64 @@ class AddBookController extends GetxController {
     releaseDateBook.clear();
     updateDateBook.clear();
     languageBook.clear();
-    validateNameBook.value = '';
-    validateAuthorBook.value = '';
-    validateIdBook.value = '';
-    validateCategoryBook.value = '';
-    validatePublisherBook.value = '';
-    validateDescriptionBook.value = '';
-    validateNumberOfBook.value = '';
-    validatePaperSizeBook.value = '';
-    validateReprintBook.value = '';
-    validateNumberOfEditionBook.value = '';
-    validateReleaseDateBook.value = '';
-    validateUpdateDateBook.value = '';
-    validateLanguageBook.value = '';
-    validateImageBook.value = '';
+    pdfPicker.value = '';
+    namePdf.value = '';
+    imageBook.value = '';
+    nameImage.value = '';
   }
 
-  Future<void> addDocument() async {
-    bool flag = false;
+  Future<void> uploadDataAndFilesToFirebase() async {
+    try {
+      // Upload ảnh lên Firebase Storage và lấy URL
+      String imageUrl = await uploadFileToFirebaseStorage(imageBook.value, 'images');
 
-    if (!checkValidate(textController: nameBook, textValidator: validateNameBook)) {
-      flag = true;
+      // Upload file PDF lên Firebase Storage và lấy URL
+      String pdfUrl = await uploadFileToFirebaseStorage(pdfPicker.value, 'pdfs');
+
+      // Upload dữ liệu lên Firestore
+      await firestore.collection('documents').add({
+        'name': nameBook.text,
+        'author': authorBook.text,
+        'category': categoryBook.text,
+        'publisher': publisherBook.text,
+        'description': descriptionBook.text,
+        'numberOfBook': int.parse(numberOfBook.text),
+        'paperSize': paperSizeBook.text,
+        'reprint': reprintBook.text,
+        'numberOfEditions': int.parse(numberOfEditionsBook.text),
+        'releaseDate': releaseDateBook.text,
+        'updateDate': updateDateBook.text,
+        'language': languageBook.text,
+        'image': imageUrl,
+        'pdf': pdfUrl,
+      });
+
+      print('Data and files uploaded successfully');
+    } catch (error) {
+      print('Failed to upload data and files: $error');
     }
-    if (!checkValidate(textController: authorBook, textValidator: validateAuthorBook)) {
-      flag = true;
-    }
-    if (!checkValidate(textController: categoryBook, textValidator: validateCategoryBook)) {
-      flag = true;
-    }
-    if (!checkValidate(textController: publisherBook, textValidator: validatePublisherBook)) {
-      flag = true;
-    }
-    if (!checkValidate(textController: descriptionBook, textValidator: validateDescriptionBook)) {
-      flag = true;
-    }
-    if (!checkValidate(textController: numberOfBook, textValidator: validateNumberOfBook)) {
-      flag = true;
-    }
-    if (!checkValidate(textController: paperSizeBook, textValidator: validatePaperSizeBook)) {
-      flag = true;
-    }
-    if (!checkValidate(textController: reprintBook, textValidator: validateReprintBook)) {
-      flag = true;
-    }
-    if (!checkValidate(textController: numberOfEditionsBook, textValidator: validateNumberOfEditionBook)) {
-      flag = true;
-    }
-    if (!checkValidate(textController: releaseDateBook, textValidator: validateReleaseDateBook)) {
-      flag = true;
-    }
-    if (!checkValidate(textController: updateDateBook, textValidator: validateUpdateDateBook)) {
-      flag = true;
-    }
-    if (!checkValidate(textController: languageBook, textValidator: validateLanguageBook)) {
-      flag = true;
-    }
-    if (!checkValidate(textController: imageBook, textValidator: validateImageBook)) {
-      flag = true;
-    }
-    if (flag) {
-      return;
-    } else {
-      clearData();
-      Get.to(() => const MainScreen());
-      Get.snackbar("Thêm sách", "Thêm sách thành công!!");
+  }
+
+// Phương thức để tải file lên Firebase Storage
+  Future<String> uploadFileToFirebaseStorage(String filePath, String storagePath) async {
+    try {
+      UploadTask? uploadTask;
+      final File file = File(filePath);
+      final String fileName = path.basename(file.path);
+
+      final storageRef = storage.ref().child('$storagePath/$fileName');
+
+      uploadTask = storageRef.putFile(file);
+
+      final snapshot = await uploadTask.whenComplete(
+        () {},
+      );
+      final url = await snapshot.ref.getDownloadURL();
+      log(url);
+      return url;
+    } catch (error) {
+      log('Failed to upload file to Firebase Storage: $error');
+      return '';
     }
   }
 

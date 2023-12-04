@@ -59,8 +59,8 @@ class ListSearchScreen extends GetView<SearchsController> {
             onTap: () {
               Get.to(() => BookScreen(
                     document: document[index],
-                    index: index,
-                    isBookShelf: false,
+                    // index: index,
+                    // isBookShelf: false,
                   ));
             },
             child: Container(

@@ -11,6 +11,6 @@ class SearchsController extends GetxController {
   RxList<Document> rxListDocument = <Document>[].obs;
 
   void searchDocument(String name) {
-    rxListDocument.value = addBookUsecase.searchDocument(name);
+    // rxListDocument.value = addBookUsecase.searchDocument(name);
   }
 }

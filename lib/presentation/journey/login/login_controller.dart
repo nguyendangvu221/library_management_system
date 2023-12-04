@@ -4,10 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/common/constants/app_routes.dart';
-import 'package:library_management_system/domain/models/hive_account.dart';
-import 'package:library_management_system/domain/models/hive_borrower.dart';
-import 'package:library_management_system/domain/usecase/borrower_usecase.dart';
-import 'package:library_management_system/domain/usecase/register_usecase.dart';
 
 class LoginController extends GetxController {
   var isPasswordHidden = true.obs;
