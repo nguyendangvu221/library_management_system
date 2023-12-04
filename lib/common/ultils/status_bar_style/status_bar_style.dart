@@ -4,11 +4,9 @@ import 'package:library_management_system/common/ultils/status_bar_style/style_o
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 
 class StatusBarStyle {
-  Color setStatusBarColor() => AppColors.transparent; // Android only
+  Color setStatusBarColor() => AppColor.transparent; // Android only
   void setStatusBarStyle(StyleOfStatusBarContent styleOfStatusBarContent) {
     SystemChrome.setSystemUIOverlayStyle(styleOfStatusBarContent.androidStyle
-        .copyWith(
-            statusBarColor: setStatusBarColor(),
-            statusBarBrightness: styleOfStatusBarContent.iosStyle));
+        .copyWith(statusBarColor: setStatusBarColor(), statusBarBrightness: styleOfStatusBarContent.iosStyle));
   }
 }

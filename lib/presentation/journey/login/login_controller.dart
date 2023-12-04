@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/common/constants/app_routes.dart';
@@ -9,13 +12,13 @@ import 'package:library_management_system/domain/usecase/register_usecase.dart';
 class LoginController extends GetxController {
   var isPasswordHidden = true.obs;
   var ischeck = false.obs;
-  final loginFormKey = GlobalKey<FormState>();
-  final codeController = TextEditingController();
+  final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  RegisterUseCase registerUseCase;
-  BorrowerUsecase borrowerUsecase;
-  LoginController(
-      {required this.registerUseCase, required this.borrowerUsecase});
+  final errorEmail = ''.obs;
+  final errorPassword = ''.obs;
+
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   @override
   void onInit() {
     // Simulating obtaining the user name from some local storage
@@ -25,51 +28,60 @@ class LoginController extends GetxController {
 
   @override
   void onClose() {
-    codeController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     super.onClose();
   }
 
-  void login() {
-    if (loginFormKey.currentState!.validate()) {
-      for (int index = 0; index < registerUseCase.getLength(); index++) {
-        if (registerUseCase.getCode(index)?.toLowerCase() ==
-            codeController.text.toLowerCase()) {
-          if (registerUseCase.getPassword(index)?.toLowerCase() ==
-              passwordController.text.toLowerCase()) {
-            registerUseCase.updateAccount(
-                HiveAccounts(
-                  code: registerUseCase.getCode(index),
-                  name: registerUseCase.getName(index),
-                  email: registerUseCase.getEmail(index),
-                  password: registerUseCase.getPassword(index),
-                  isLogin: true,
-                ),
-                index);
-            borrowerUsecase.updateBorrower(
-                HiveBorrower(
-                  codeUser: borrowerUsecase.getCode(index),
-                  nameUser: borrowerUsecase.getName(index),
-                  email: borrowerUsecase.getEmail(index),
-                  borrowedDocument: [],
-                  isLogin: true,
-                ),
-                index);
-            Get.offNamed(AppRoutes.main);
-            Get.snackbar("Login", "Login thành công!!");
-            return;
-          }
-        }
+  void login() async {
+    try {
+      await auth.signInWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+      Get.snackbar('Success', 'login successfully');
+      Get.offAllNamed(AppRoutes.main);
+    } on FirebaseAuthException catch (e) {
+      // Xử lý các mã lỗi khác nhau khi đăng ký không thành công
+      if (e.code == 'user-not-found') {
+        Get.snackbar('Error', 'No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        Get.snackbar('Error', 'Wrong password provided for that user.');
+      } else {
+        // Xử lý các lỗi khác (nếu cần)
+        Get.snackbar('Error', 'Login failed. ${e.message}');
       }
-
-      Get.snackbar("Login", "mật khẩu hoặc tài khoản không đúng!!!");
+    } catch (e) {
+      // Xử lý lỗi chung (nếu cần)
+      log(e.toString());
     }
   }
 
-  Future<bool> checkUser(String user, String password) {
-    if (user == 'gfgf' && password == '') {
-      return Future.value(true);
+  bool validate() {
+    bool isValid = true;
+
+    // Kiểm tra và đặt giá trị cho errorEmail
+    if (emailController.text.isEmpty) {
+      errorEmail.value = 'Email không được để trống';
+      isValid = false;
+    } else {
+      errorEmail.value = '';
     }
-    return Future.value(false);
+
+    // Kiểm tra và đặt giá trị cho errorPassword
+    if (passwordController.text.isEmpty) {
+      errorPassword.value = 'Password không được để trống';
+      isValid = false;
+    } else {
+      errorPassword.value = '';
+    }
+
+    return isValid;
+  }
+
+  // Hàm onRegister sử dụng hàm validate để kiểm tra và thực hiện đăng ký
+  void onLogin() {
+    if (validate()) {
+      login();
+    } else {
+      return;
+    }
   }
 }

@@ -35,10 +35,8 @@ class AppTouchable extends StatelessWidget {
       child: TextButton(
         onPressed: onPressed,
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
-              backgroundColor ?? AppColors.transparent),
-          overlayColor: MaterialStateProperty.all(
-              rippleColor ?? const Color.fromRGBO(204, 223, 242, 0.4)),
+          backgroundColor: MaterialStateProperty.all(backgroundColor ?? AppColor.transparent),
+          overlayColor: MaterialStateProperty.all(rippleColor ?? const Color.fromRGBO(204, 223, 242, 0.4)),
           shape: MaterialStateProperty.all(
             outlinedBorder ??
                 RoundedRectangleBorder(

@@ -12,7 +12,7 @@ class BookShelfScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColor.backgroundColor,
       body: Obx(
         () => Padding(
           padding: EdgeInsets.only(
@@ -29,7 +29,7 @@ class BookShelfScreen extends GetView<HomeController> {
                   GestureDetector(
                     child: Icon(
                       Icons.arrow_back,
-                      color: AppColors.blue700,
+                      color: AppColor.blue.shade700,
                       size: 40.sp,
                     ),
                     onTap: () => Get.back(),
@@ -39,7 +39,7 @@ class BookShelfScreen extends GetView<HomeController> {
                   ),
                   Text(
                     "Kệ sách",
-                    style: ThemeText.heading2.blue700,
+                    style: AppTheme.heading2.copyWith(color: AppColor.blue.shade700),
                   ),
                   Container(
                     alignment: Alignment.centerRight,
@@ -47,7 +47,7 @@ class BookShelfScreen extends GetView<HomeController> {
                     child: GestureDetector(
                       child: Icon(
                         Icons.refresh_rounded,
-                        color: AppColors.blue700,
+                        color: AppColor.blue.shade700,
                         size: 30.sp,
                       ),
                       onTap: () {
@@ -82,7 +82,7 @@ class BookShelfScreen extends GetView<HomeController> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Card(
-              color: AppColors.grey200,
+              color: AppColor.grey.shade200,
               child: SizedBox(
                 child: Row(
                   children: [
@@ -116,15 +116,13 @@ class BookShelfScreen extends GetView<HomeController> {
                               child: PopupMenuButton(
                                 icon: Icon(
                                   Icons.more_vert_rounded,
-                                  color: AppColors.blue700,
+                                  color: AppColor.blue.shade700,
                                   size: 20.sp,
                                 ),
                                 itemBuilder: (context) {
                                   return [
                                     _buildAppBarPopUpItem(
-                                        title: "Xem thông tin",
-                                        onTap: controller.onTapDocument(
-                                            index, true)),
+                                        title: "Xem thông tin", onTap: controller.onTapDocument(index, true)),
                                     _buildAppBarPopUpItem(
                                       title: "Xóa tài liệu",
                                       onTap: () {
@@ -137,23 +135,37 @@ class BookShelfScreen extends GetView<HomeController> {
                             ),
                             Text(
                               document[index].name ?? "",
-                              style: ThemeText.heading1.s18.blue700,
+                              style: AppTheme.heading2.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 18.sp,
+                              ),
                             ),
                             Text(
                               "Tác giả: ${document[index].author ?? ""}",
-                              style: ThemeText.heading4.blue700,
+                              style: AppTheme.heading2.copyWith(
+                                color: AppColor.blue.shade700,
+                              ),
                             ),
                             Text(
                               "Thể loại: ${document[index].category ?? ""}",
-                              style: ThemeText.bodyMedium.blue700,
+                              style: AppTheme.textM.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 14.sp,
+                              ),
                             ),
                             Text(
                               "Số trang: ${document[index].numberOfPage.toString()}",
-                              style: ThemeText.bodyMedium.blue700,
+                              style: AppTheme.textM.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 14.sp,
+                              ),
                             ),
                             Text(
                               "Ngày đăng: ${document[index].releaseDate.toString()}",
-                              style: ThemeText.bodyMedium.blue700,
+                              style: AppTheme.textM.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 14.sp,
+                              ),
                             ),
                             SizedBox(
                               height: 10.sp,
@@ -185,7 +197,7 @@ class BookShelfScreen extends GetView<HomeController> {
           icon ??
               Icon(
                 Icons.info_outline_rounded,
-                color: AppColors.blue700,
+                color: AppColor.blue.shade700,
                 size: 25.sp,
               ),
           // SizedBox(
@@ -193,7 +205,10 @@ class BookShelfScreen extends GetView<HomeController> {
           // ),
           Text(
             title,
-            style: ThemeText.bodySemibold.s16.blue700,
+            style: AppTheme.textM.copyWith(
+              color: AppColor.blue.shade700,
+              fontSize: 16.sp,
+            ),
           ),
         ],
       ),

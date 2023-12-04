@@ -1,7 +1,10 @@
 import 'dart:developer';
 
+import 'package:analyzer/file_system/file_system.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:library_management_system/domain/models/hive_document.dart';
 import 'package:library_management_system/domain/usecase/add_book_usecase.dart';
 import 'package:library_management_system/presentation/journey/main/main_screen.dart';
@@ -9,7 +12,6 @@ import 'package:library_management_system/presentation/journey/main/main_screen.
 class AddBookController extends GetxController {
   TextEditingController nameBook = TextEditingController();
   TextEditingController authorBook = TextEditingController();
-  TextEditingController idBook = TextEditingController();
   TextEditingController categoryBook = TextEditingController();
   TextEditingController publisherBook = TextEditingController();
   TextEditingController descriptionBook = TextEditingController();
@@ -20,7 +22,10 @@ class AddBookController extends GetxController {
   TextEditingController releaseDateBook = TextEditingController();
   TextEditingController updateDateBook = TextEditingController();
   TextEditingController languageBook = TextEditingController();
-  TextEditingController imageBook = TextEditingController();
+  RxString pdfPicker = ''.obs;
+  RxString namePdf = ''.obs;
+  RxString imageBook = ''.obs;
+  RxString nameImage = ''.obs;
   RxString validateNameBook = ''.obs;
   RxString validateAuthorBook = ''.obs;
   RxString validateIdBook = ''.obs;
@@ -48,7 +53,6 @@ class AddBookController extends GetxController {
   void clearData() {
     nameBook.clear();
     authorBook.clear();
-    idBook.clear();
     categoryBook.clear();
     publisherBook.clear();
     descriptionBook.clear();
@@ -59,7 +63,6 @@ class AddBookController extends GetxController {
     releaseDateBook.clear();
     updateDateBook.clear();
     languageBook.clear();
-    imageBook.clear();
     validateNameBook.value = '';
     validateAuthorBook.value = '';
     validateIdBook.value = '';
@@ -79,90 +82,67 @@ class AddBookController extends GetxController {
   Future<void> addDocument() async {
     bool flag = false;
 
-    if (!checkValidate(
-        textController: nameBook, textValidator: validateNameBook)) {
+    if (!checkValidate(textController: nameBook, textValidator: validateNameBook)) {
       flag = true;
     }
-    if (!checkValidate(
-        textController: authorBook, textValidator: validateAuthorBook)) {
+    if (!checkValidate(textController: authorBook, textValidator: validateAuthorBook)) {
       flag = true;
     }
-    if (!checkValidate(textController: idBook, textValidator: validateIdBook)) {
+    if (!checkValidate(textController: categoryBook, textValidator: validateCategoryBook)) {
       flag = true;
     }
-    if (!checkValidate(
-        textController: categoryBook, textValidator: validateCategoryBook)) {
+    if (!checkValidate(textController: publisherBook, textValidator: validatePublisherBook)) {
       flag = true;
     }
-    if (!checkValidate(
-        textController: publisherBook, textValidator: validatePublisherBook)) {
+    if (!checkValidate(textController: descriptionBook, textValidator: validateDescriptionBook)) {
       flag = true;
     }
-    if (!checkValidate(
-        textController: descriptionBook,
-        textValidator: validateDescriptionBook)) {
+    if (!checkValidate(textController: numberOfBook, textValidator: validateNumberOfBook)) {
       flag = true;
     }
-    if (!checkValidate(
-        textController: numberOfBook, textValidator: validateNumberOfBook)) {
+    if (!checkValidate(textController: paperSizeBook, textValidator: validatePaperSizeBook)) {
       flag = true;
     }
-    if (!checkValidate(
-        textController: paperSizeBook, textValidator: validatePaperSizeBook)) {
+    if (!checkValidate(textController: reprintBook, textValidator: validateReprintBook)) {
       flag = true;
     }
-    if (!checkValidate(
-        textController: reprintBook, textValidator: validateReprintBook)) {
+    if (!checkValidate(textController: numberOfEditionsBook, textValidator: validateNumberOfEditionBook)) {
       flag = true;
     }
-    if (!checkValidate(
-        textController: numberOfEditionsBook,
-        textValidator: validateNumberOfEditionBook)) {
+    if (!checkValidate(textController: releaseDateBook, textValidator: validateReleaseDateBook)) {
       flag = true;
     }
-    if (!checkValidate(
-        textController: releaseDateBook,
-        textValidator: validateReleaseDateBook)) {
+    if (!checkValidate(textController: updateDateBook, textValidator: validateUpdateDateBook)) {
       flag = true;
     }
-    if (!checkValidate(
-        textController: updateDateBook,
-        textValidator: validateUpdateDateBook)) {
+    if (!checkValidate(textController: languageBook, textValidator: validateLanguageBook)) {
       flag = true;
     }
-    if (!checkValidate(
-        textController: languageBook, textValidator: validateLanguageBook)) {
-      flag = true;
-    }
-    if (!checkValidate(
-        textController: imageBook, textValidator: validateImageBook)) {
+    if (!checkValidate(textController: imageBook, textValidator: validateImageBook)) {
       flag = true;
     }
     if (flag) {
       return;
     } else {
-      addBookUsecase.insertDocument(
-        HiveDocument(
-          name: nameBook.text,
-          author: authorBook.text,
-          category: categoryBook.text,
-          code: idBook.text,
-          description: descriptionBook.text,
-          language: languageBook.text,
-          numberOfEditions: int.parse(numberOfEditionsBook.text),
-          numberOfPage: int.parse(numberOfBook.text),
-          paperSize: paperSizeBook.text,
-          publisher: publisherBook.text,
-          reprint: reprintBook.text,
-          releaseDate: releaseDateBook.text,
-          updateDate: updateDateBook.text,
-          image: imageBook.text,
-          isBorrowed: false,
-        ),
-      );
       clearData();
       Get.to(() => const MainScreen());
       Get.snackbar("Thêm sách", "Thêm sách thành công!!");
+    }
+  }
+
+  Future<void> pickImageFromGallery() async {
+    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      imageBook.value = pickedFile.path;
+      nameImage.value = pickedFile.path.split('/').last;
+    }
+  }
+
+  Future<void> pickedFile() async {
+    final pickedFile = await FilePicker.platform.pickFiles();
+    if (pickedFile != null) {
+      pdfPicker.value = pickedFile.files.single.path!;
+      namePdf.value = pickedFile.files.single.name;
     }
   }
 }

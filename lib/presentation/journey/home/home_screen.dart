@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
+import 'package:library_management_system/presentation/journey/home/book_screen.dart';
 import 'package:library_management_system/presentation/journey/home/home_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
@@ -12,53 +15,38 @@ class HomeScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      body: Obx(
-        () => Padding(
-          padding: EdgeInsets.only(
-            left: 16.sp,
-            right: 16.sp,
-            top: Get.mediaQuery.padding.top,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Trang chủ",
-                    style: ThemeText.heading2.blue700,
-                  ),
-                  GestureDetector(
-                    child: Icon(
-                      Icons.refresh_rounded,
-                      color: AppColors.blue700,
-                      size: 30.sp,
-                    ),
-                    onTap: () {
-                      controller.addLocalData();
-                      Get.snackbar("Refresh", "Refresh thành công");
-                    },
-                  ),
-                ],
+      backgroundColor: AppColor.backgroundColor,
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: 16.sp,
+          right: 16.sp,
+          top: Get.mediaQuery.padding.top,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "Trang chủ",
+              style: AppTheme.heading2.copyWith(
+                color: AppColor.blue.shade700,
+                fontSize: 24.sp,
               ),
-              SizedBox(
-                height: 20.h,
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            Expanded(
+              child: CustomScrollView(
+                slivers: [listBuilderTabBarView(controller.listDocument)],
               ),
-              Expanded(
-                child: CustomScrollView(
-                  slivers: [listSliver(controller.listDocument)],
-                ),
-              )
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );
   }
 
-  Widget listSliver(List<Document> document) {
+  Widget listBuilderTabBarView(List<Document> document) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
@@ -67,8 +55,9 @@ class HomeScreen extends GetView<HomeController> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Card(
-              color: AppColors.grey200,
+              color: AppColor.grey.shade200,
               child: SizedBox(
+                height: 150.h,
                 child: Row(
                   children: [
                     Expanded(
@@ -90,64 +79,55 @@ class HomeScreen extends GetView<HomeController> {
                       child: Container(
                         alignment: Alignment.centerLeft,
                         margin: EdgeInsets.only(
+                          top: 15.sp,
                           left: 10.sp,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              alignment: Alignment.centerRight,
-                              height: 20.sp,
-                              child: PopupMenuButton(
-                                icon: Icon(
-                                  Icons.more_vert_rounded,
-                                  color: AppColors.blue700,
-                                  size: 20.sp,
-                                ),
-                                itemBuilder: (context) {
-                                  return [
-                                    _buildAppBarPopUpItem(
-                                        title: "Xem thông tin",
-                                        onTap: controller.onTapDocument(
-                                            index, false)),
-                                    _buildAppBarPopUpItem(
-                                      title: "Sửa tài liệu",
-                                      onTap:
-                                          controller.onTapEditDocument(index),
-                                    ),
-                                    _buildAppBarPopUpItem(
-                                      title: "Xóa tài liệu",
-                                      onTap: () {
-                                        controller.delDocument(index);
-                                      },
-                                    ),
-                                  ];
-                                },
+                            // Container(
+                            //   margin: EdgeInsets.only(left: 200.sp),
+                            //   // child: GestureDetector(
+                            //   //   onTap: () {},
+                            //   //   child: Icon(
+                            //   //     Icons.more_vert,
+                            //   //     size: 20.sp,
+                            //   //     color: AppColor.blue700,
+                            //   //   ),
+                            //   // ),
+                            // ),
+                            Text(
+                              document[index].name ?? "",
+                              style: AppTheme.heading2.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 18.sp,
                               ),
                             ),
                             Text(
-                              document[index].name ?? "",
-                              style: ThemeText.heading1.s18.blue700,
-                            ),
-                            Text(
                               "Tác giả: ${document[index].author ?? ""}",
-                              style: ThemeText.heading4.blue700,
+                              style: AppTheme.heading2.copyWith(color: AppColor.blue.shade700),
                             ),
                             Text(
                               "Thể loại: ${document[index].category ?? ""}",
-                              style: ThemeText.bodyMedium.blue700,
+                              style: AppTheme.textM.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 14.sp,
+                              ),
                             ),
                             Text(
                               "Số trang: ${document[index].numberOfPage.toString()}",
-                              style: ThemeText.bodyMedium.blue700,
+                              style: AppTheme.textM.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 14.sp,
+                              ),
                             ),
                             Text(
-                              "Ngày đăng: ${document[index].releaseDate.toString()}",
-                              style: ThemeText.bodyMedium.blue700,
+                              "Ngày đăng: ${document[index].releaseDate?.toString() ?? DateTime.now()}",
+                              style: AppTheme.textM.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 14.sp,
+                              ),
                             ),
-                            SizedBox(
-                              height: 10.sp,
-                            )
                           ],
                         ),
                       ),
@@ -159,33 +139,6 @@ class HomeScreen extends GetView<HomeController> {
           );
         },
         childCount: document.length,
-      ),
-    );
-  }
-
-  PopupMenuItem _buildAppBarPopUpItem({
-    required String title,
-    Icon? icon,
-    Function()? onTap,
-  }) {
-    return PopupMenuItem(
-      onTap: onTap,
-      child: Row(
-        children: [
-          icon ??
-              Icon(
-                Icons.info_outline_rounded,
-                color: AppColors.blue700,
-                size: 25.sp,
-              ),
-          // SizedBox(
-          //   width: AppDimens.width_8,
-          // ),
-          Text(
-            title,
-            style: ThemeText.bodySemibold.s16.blue700,
-          ),
-        ],
       ),
     );
   }

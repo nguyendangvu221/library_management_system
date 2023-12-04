@@ -29,8 +29,7 @@ class Borrower {
     data['nameUser'] = nameUser;
     data['email'] = email;
     if (borrowedDocument != null) {
-      data['borrowedDocument'] =
-          borrowedDocument?.map((e) => e.toJson()).toList();
+      data['borrowedDocument'] = borrowedDocument?.map((e) => e.toJson()).toList();
     }
     return data;
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:library_management_system/domain/models/borrower_model.dart';
 import 'package:library_management_system/domain/models/hive_borrower.dart';
 import 'package:library_management_system/presentation/journey/borrower/borrower_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
@@ -14,7 +13,7 @@ class BorrowerView extends GetView<BorrowerController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColor.backgroundColor,
       body: Padding(
         padding: EdgeInsets.only(
           left: 16,
@@ -28,7 +27,7 @@ class BorrowerView extends GetView<BorrowerController> {
               onTap: () => Get.back(),
               child: Icon(
                 Icons.arrow_back,
-                color: AppColors.blue700,
+                color: AppColor.blue.shade700,
                 size: 40.sp,
               ),
             ),
@@ -53,7 +52,7 @@ class BorrowerView extends GetView<BorrowerController> {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-            color: AppColors.grey200,
+            color: AppColor.grey.shade200,
           ),
           child: Column(
             children: [
@@ -62,7 +61,7 @@ class BorrowerView extends GetView<BorrowerController> {
               ),
               CircleAvatar(
                 radius: 50.sp,
-                backgroundColor: AppColors.grey200,
+                backgroundColor: AppColor.grey.shade200,
                 backgroundImage: const AssetImage(
                   'assets/images/user.png',
                 ),
@@ -71,7 +70,10 @@ class BorrowerView extends GetView<BorrowerController> {
                 height: 10.sp,
               ),
               Text(borrower.codeUser ?? "",
-                  style: ThemeText.bodySemibold.s20.blue700),
+                  style: AppTheme.textM.copyWith(
+                    color: AppColor.blue.shade700,
+                    fontSize: 20.sp,
+                  )),
             ],
           ),
         ),
@@ -79,7 +81,7 @@ class BorrowerView extends GetView<BorrowerController> {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-            color: AppColors.grey200,
+            color: AppColor.grey.shade200,
           ),
           child: Padding(
             padding: EdgeInsets.all(16.sp),
@@ -89,21 +91,30 @@ class BorrowerView extends GetView<BorrowerController> {
                 children: [
                   Text(
                     "Họ tên: ${borrower.nameUser}",
-                    style: ThemeText.bodySemibold.s15.blue700,
+                    style: AppTheme.textM.copyWith(
+                      color: AppColor.blue.shade700,
+                      fontSize: 15.sp,
+                    ),
                   ),
                   SizedBox(
                     height: 5.sp,
                   ),
                   Text(
                     "Email: ${borrower.email}",
-                    style: ThemeText.bodySemibold.s15.blue700,
+                    style: AppTheme.textM.copyWith(
+                      color: AppColor.blue.shade700,
+                      fontSize: 15.sp,
+                    ),
                   ),
                   SizedBox(
                     height: 5.sp,
                   ),
                   Text(
                     "Danh sách tài liệu: ",
-                    style: ThemeText.bodySemibold.s15.blue700,
+                    style: AppTheme.textM.copyWith(
+                      color: AppColor.blue.shade700,
+                      fontSize: 15.sp,
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 10.sp),
@@ -112,20 +123,26 @@ class BorrowerView extends GetView<BorrowerController> {
                       itemBuilder: (context, index) => Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                              "- ${borrower.borrowedDocument?[index].nameDocument}",
-                              style: ThemeText.bodySemibold.s15.blue700),
+                          Text("- ${borrower.borrowedDocument?[index].nameDocument}",
+                              style: AppTheme.textM.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 15.sp,
+                              )),
                           Container(
                             margin: EdgeInsets.only(left: 10.sp),
-                            child: Text(
-                                "+ ID: ${borrower.borrowedDocument?[index].idDocument}",
-                                style: ThemeText.bodyMedium.s15.blue700),
+                            child: Text("+ ID: ${borrower.borrowedDocument?[index].idDocument}",
+                                style: AppTheme.textM.copyWith(
+                                  color: AppColor.blue.shade700,
+                                  fontSize: 15.sp,
+                                )),
                           ),
                           Container(
                             margin: EdgeInsets.only(left: 10.sp),
-                            child: Text(
-                                "+ Hạn trả: ${borrower.borrowedDocument?[index].loanPeriod}",
-                                style: ThemeText.bodyMedium.s15.blue700),
+                            child: Text("+ Hạn trả: ${borrower.borrowedDocument?[index].loanPeriod}",
+                                style: AppTheme.textM.copyWith(
+                                  color: AppColor.blue.shade700,
+                                  fontSize: 15.sp,
+                                )),
                           ),
                           SizedBox(
                             height: 10.sp,

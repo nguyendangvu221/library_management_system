@@ -16,17 +16,13 @@ class BookScreen extends GetView<HomeController> {
   final bool isBookShelf;
   final Document document;
   final int index;
-  const BookScreen(
-      {required this.document,
-      required this.index,
-      required this.isBookShelf,
-      super.key});
+  const BookScreen({required this.document, required this.index, required this.isBookShelf, super.key});
 
   @override
   Widget build(BuildContext context) {
     logger('Building BookScreen');
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColor.backgroundColor,
       body: Padding(
         padding: EdgeInsets.only(
           left: 16.sp,
@@ -42,7 +38,7 @@ class BookScreen extends GetView<HomeController> {
                 GestureDetector(
                   child: Icon(
                     Icons.arrow_back,
-                    color: AppColors.blue700,
+                    color: AppColor.blue.shade700,
                     size: 40.sp,
                   ),
                   onTap: () => Get.back(),
@@ -58,7 +54,7 @@ class BookScreen extends GetView<HomeController> {
                         height: 304.w,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-                          color: AppColors.grey200,
+                          color: AppColor.grey.shade200,
                         ),
                         child: Column(
                           children: [
@@ -75,7 +71,10 @@ class BookScreen extends GetView<HomeController> {
                             ),
                             Text(
                               document.name ?? "",
-                              style: ThemeText.bodySemibold.s18.blue700,
+                              style: AppTheme.textM.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 18.sp,
+                              ),
                             ),
                           ],
                         )),
@@ -85,7 +84,7 @@ class BookScreen extends GetView<HomeController> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-                        color: AppColors.grey200,
+                        color: AppColor.grey.shade200,
                       ),
                       width: double.infinity,
                       height: 290.h,
@@ -97,11 +96,17 @@ class BookScreen extends GetView<HomeController> {
                               children: [
                                 Text(
                                   'Tác giả: ',
-                                  style: ThemeText.bodyMedium.s16.blue700,
+                                  style: AppTheme.textM.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                                 Text(
                                   document.author ?? "",
-                                  style: ThemeText.bodySemibold.s16.blue700,
+                                  style: AppTheme.textMBold.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -112,11 +117,17 @@ class BookScreen extends GetView<HomeController> {
                               children: [
                                 Text(
                                   'Thể loại:',
-                                  style: ThemeText.bodyMedium.s16.blue700,
+                                  style: AppTheme.textM.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                                 Text(
                                   document.category ?? "",
-                                  style: ThemeText.bodySemibold.s16.blue700,
+                                  style: AppTheme.textMBold.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -127,11 +138,17 @@ class BookScreen extends GetView<HomeController> {
                               children: [
                                 Text(
                                   'Số trang:',
-                                  style: ThemeText.bodyMedium.s16.blue700,
+                                  style: AppTheme.textM.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                                 Text(
                                   document.numberOfPage.toString(),
-                                  style: ThemeText.bodySemibold.s16.blue700,
+                                  style: AppTheme.textMBold.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -142,11 +159,17 @@ class BookScreen extends GetView<HomeController> {
                               children: [
                                 Text(
                                   'Id: ',
-                                  style: ThemeText.bodyMedium.s16.blue700,
+                                  style: AppTheme.textM.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                                 Text(
                                   document.code ?? "",
-                                  style: ThemeText.bodySemibold.s16.blue700,
+                                  style: AppTheme.textMBold.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -157,11 +180,17 @@ class BookScreen extends GetView<HomeController> {
                               children: [
                                 Text(
                                   'Nhà xuất bản: ',
-                                  style: ThemeText.bodyMedium.s16.blue700,
+                                  style: AppTheme.textM.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                                 Text(
                                   document.publisher ?? "",
-                                  style: ThemeText.bodySemibold.s16.blue700,
+                                  style: AppTheme.textMBold.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -172,11 +201,17 @@ class BookScreen extends GetView<HomeController> {
                               children: [
                                 Text(
                                   'Khổ giấy: ',
-                                  style: ThemeText.bodyMedium.s16.blue700,
+                                  style: AppTheme.textM.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                                 Text(
                                   document.paperSize ?? "",
-                                  style: ThemeText.bodySemibold.s16.blue700,
+                                  style: AppTheme.textMBold.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -187,11 +222,17 @@ class BookScreen extends GetView<HomeController> {
                               children: [
                                 Text(
                                   'Ngôn ngữ:',
-                                  style: ThemeText.bodyMedium.s16.blue700,
+                                  style: AppTheme.textM.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                                 Text(
                                   document.language ?? "",
-                                  style: ThemeText.bodySemibold.s16.blue700,
+                                  style: AppTheme.textMBold.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -202,11 +243,17 @@ class BookScreen extends GetView<HomeController> {
                               children: [
                                 Text(
                                   "Số lần: ",
-                                  style: ThemeText.bodyMedium.s16.blue700,
+                                  style: AppTheme.textM.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                                 Text(
                                   document.reprint ?? "",
-                                  style: ThemeText.bodySemibold.s16.blue700,
+                                  style: AppTheme.textMBold.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -217,11 +264,17 @@ class BookScreen extends GetView<HomeController> {
                               children: [
                                 Text(
                                   'Ngày xuất bản:',
-                                  style: ThemeText.bodyMedium.s16.blue700,
+                                  style: AppTheme.textM.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                                 Text(
                                   document.releaseDate ?? "",
-                                  style: ThemeText.bodySemibold.s16.blue700,
+                                  style: AppTheme.textMBold.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -232,11 +285,17 @@ class BookScreen extends GetView<HomeController> {
                               children: [
                                 Text(
                                   'Ngày chỉnh sửa:',
-                                  style: ThemeText.bodyMedium.s16.blue700,
+                                  style: AppTheme.textM.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                                 Text(
                                   document.updateDate ?? "",
-                                  style: ThemeText.bodySemibold.s16.blue700,
+                                  style: AppTheme.textMBold.copyWith(
+                                    color: AppColor.blue.shade700,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                               ],
                             ),
@@ -253,7 +312,7 @@ class BookScreen extends GetView<HomeController> {
                     Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-                        color: AppColors.grey200,
+                        color: AppColor.grey.shade200,
                       ),
                       width: double.infinity,
                       height: 200.w,
@@ -261,7 +320,10 @@ class BookScreen extends GetView<HomeController> {
                         padding: EdgeInsets.all(16.sp),
                         child: Text(
                           document.description ?? "",
-                          style: ThemeText.bodyMedium.s16.blue700,
+                          style: AppTheme.textM.copyWith(
+                            color: AppColor.blue.shade700,
+                            fontSize: 16.sp,
+                          ),
                           textAlign: TextAlign.justify,
                         ),
                       ),
@@ -281,17 +343,15 @@ class BookScreen extends GetView<HomeController> {
           ? AppTouchable(
               onPressed: controller.onTapAddBorrower(index),
               outlinedBorder: RoundedRectangleBorder(
-                  side: BorderSide.none,
-                  borderRadius: BorderRadius.circular(AppDimens.space_20)),
-              backgroundColor: AppColors.blue700,
+                  side: BorderSide.none, borderRadius: BorderRadius.circular(AppDimens.space_20)),
+              backgroundColor: AppColor.blue.shade700,
               width: double.infinity,
               margin: EdgeInsets.symmetric(horizontal: 16.sp),
               padding: EdgeInsets.symmetric(vertical: AppDimens.height_14),
               child: Text(
                 'Thêm Vào Kệ Sách',
-                style: ThemeText.bodySemibold.copyWith(
-                  color: AppColors.bianca,
-                  fontSize: AppDimens.space_18,
+                style: AppTheme.textM.copyWith(
+                  fontSize: 18.sp,
                 ),
               ),
             )

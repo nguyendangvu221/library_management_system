@@ -29,14 +29,8 @@ void configLocator() {
         borrowerUsecase: getIt<BorrowerUsecase>(),
         registerUseCase: getIt<RegisterUseCase>(),
       ));
-  getIt.registerFactory<LoginController>(() => LoginController(
-        registerUseCase: getIt<RegisterUseCase>(),
-        borrowerUsecase: getIt<BorrowerUsecase>(),
-      ));
-  getIt.registerFactory<RegisterController>(() => RegisterController(
-        borrowerUsecase: getIt<BorrowerUsecase>(),
-        registerUseCase: getIt<RegisterUseCase>(),
-      ));
+  getIt.registerFactory<LoginController>(() => LoginController());
+  getIt.registerFactory<RegisterController>(() => RegisterController());
   getIt.registerFactory<SearchsController>(() => SearchsController(
         addBookUsecase: getIt<AddBookUsecase>(),
       ));

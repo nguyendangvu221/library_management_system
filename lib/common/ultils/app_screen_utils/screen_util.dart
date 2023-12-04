@@ -1,95 +1,94 @@
-part of flutter_screenutil;
 
-class ScreenUtil {
-  static const Size defaultSize = Size(360, 690);
-  static late ScreenUtil _instance;
 
-  /// Size of the phone in UI Design , dp
-  late Size uiSize;
+// import 'dart:math';
 
-  late Orientation _orientation;
+// import 'package:flutter/material.dart';
 
-  late double _screenWidth;
-  late double _screenHeight;
-  late bool _minTextAdapt;
-  late BuildContext? context;
+// class ScreenUtil {
+//   static const Size defaultSize = Size(360, 844);
+//   static late ScreenUtil _instance;
 
-  ScreenUtil._();
+//   /// Size of the phone in UI Design , dp
+//   late Size uiSize;
 
-  factory ScreenUtil() {
-    return _instance;
-  }
+//   late Orientation _orientation;
 
-  static void setContext(BuildContext context) {
-    _instance.context = context;
-  }
+//   late double _screenWidth;
+//   late double _screenHeight;
+//   late bool _minTextAdapt;
+//   late BuildContext? context;
 
-  static void init(
-    BoxConstraints constraints, {
-    BuildContext? context,
-    Orientation orientation = Orientation.portrait,
-    Size designSize = defaultSize,
-    bool splitScreenMode = false,
-    bool minTextAdapt = false,
-  }) {
-    _instance = ScreenUtil._()
-      ..uiSize = designSize
-      .._minTextAdapt = minTextAdapt
-      .._orientation = orientation
-      .._screenWidth = constraints.maxWidth
-      .._screenHeight = splitScreenMode
-          ? max(constraints.maxHeight, 700)
-          : constraints.maxHeight;
-    if (context != null) setContext(context);
-  }
+//   ScreenUtil._();
 
-  ///Get screen orientation
-  Orientation get orientation => _orientation;
+//   factory ScreenUtil() {
+//     return _instance;
+//   }
 
-  /// The number of font pixels for each logical pixel.
-  double get textScaleFactor => MediaQuery.of(context!).textScaleFactor;
+//   static void setContext(BuildContext context) {
+//     _instance.context = context;
+//   }
 
-  /// The size of the media in logical pixels (e.g, the size of the screen).
-  double? get pixelRatio => MediaQuery.of(context!).devicePixelRatio;
+//   static void init(
+//     BoxConstraints constraints, {
+//     BuildContext? context,
+//     Orientation orientation = Orientation.portrait,
+//     Size designSize = defaultSize,
+//     bool splitScreenMode = false,
+//     bool minTextAdapt = false,
+//   }) {
+//     _instance = ScreenUtil._()
+//       ..uiSize = designSize
+//       .._minTextAdapt = minTextAdapt
+//       .._orientation = orientation
+//       .._screenWidth = constraints.maxWidth
+//       .._screenHeight = splitScreenMode ? max(constraints.maxHeight, 700) : constraints.maxHeight;
+//     if (context != null) setContext(context);
+//   }
 
-  /// The horizontal extent of this size.
-  double get screenWidth =>
-      context == null ? _screenWidth : MediaQuery.of(context!).size.width;
+//   ///Get screen orientation
+//   Orientation get orientation => _orientation;
 
-  ///The vertical extent of this size. dp
-  double get screenHeight =>
-      context == null ? _screenHeight : MediaQuery.of(context!).size.height;
+//   /// The number of font pixels for each logical pixel.
+//   double get textScaleFactor => MediaQuery.of(context!).textScaleFactor;
 
-  /// The offset from the top, in dp
-  double get statusBarHeight => MediaQuery.of(context!).padding.top;
+//   /// The size of the media in logical pixels (e.g, the size of the screen).
+//   double? get pixelRatio => MediaQuery.of(context!).devicePixelRatio;
 
-  /// The offset from the bottom, in dp
-  double get bottomBarHeight => MediaQuery.of(context!).padding.bottom;
+//   /// The horizontal extent of this size.
+//   double get screenWidth => context == null ? _screenWidth : MediaQuery.of(context!).size.width;
 
-  /// The ratio of actual width to UI design
-  double get scaleWidth => _screenWidth / uiSize.width;
+//   ///The vertical extent of this size. dp
+//   double get screenHeight => context == null ? _screenHeight : MediaQuery.of(context!).size.height;
 
-  ///  /// The ratio of actual height to UI design
-  double get scaleHeight => _screenHeight / uiSize.height;
+//   /// The offset from the top, in dp
+//   double get statusBarHeight => MediaQuery.of(context!).padding.top;
 
-  double get scaleText =>
-      _minTextAdapt ? min(scaleWidth, scaleHeight) : scaleWidth;
+//   /// The offset from the bottom, in dp
+//   double get bottomBarHeight => MediaQuery.of(context!).padding.bottom;
 
-  /// Adapted to the device width of the UI Design.
-  /// Height can also be adapted according to this to ensure no deformation ,
-  /// if you want a square
-  double setWidth(num width) => width * scaleWidth;
+//   /// The ratio of actual width to UI design
+//   double get scaleWidth => _screenWidth / uiSize.width;
 
-  /// Highly adaptable to the device according to UI Design
-  /// It is recommended to use this method to achieve a high degree of adaptation
-  /// when it is found that one screen in the UI design
-  /// does not match the current style effect, or if there is a difference in shape.
-  double setHeight(num height) => height * scaleHeight;
+//   ///  /// The ratio of actual height to UI design
+//   double get scaleHeight => _screenHeight / uiSize.height;
 
-  ///Adapt according to the smaller of width or height
-  double radius(num r) => r * min(scaleWidth, scaleHeight);
+//   double get scaleText => _minTextAdapt ? min(scaleWidth, scaleHeight) : scaleWidth;
 
-  ///Font size adaptation method
-  ///- [fontSize] The size of the font on the UI design, in dp.
-  double setSp(num fontSize) => fontSize * scaleText;
-}
+//   /// Adapted to the device width of the UI Design.
+//   /// Height can also be adapted according to this to ensure no deformation ,
+//   /// if you want a square
+//   double setWidth(num width) => width * scaleWidth;
+
+//   /// Highly adaptable to the device according to UI Design
+//   /// It is recommended to use this method to achieve a high degree of adaptation
+//   /// when it is found that one screen in the UI design
+//   /// does not match the current style effect, or if there is a difference in shape.
+//   double setHeight(num height) => height * scaleHeight;
+
+//   ///Adapt according to the smaller of width or height
+//   double radius(num r) => r * min(scaleWidth, scaleHeight);
+
+//   ///Font size adaptation method
+//   ///- [fontSize] The size of the font on the UI design, in dp.
+//   double setSp(num fontSize) => fontSize * scaleText;
+// }

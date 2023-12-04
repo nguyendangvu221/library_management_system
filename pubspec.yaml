@@ -43,7 +43,7 @@ dependencies:
   flutter_localization: ^0.1.10
   get_it: ^7.6.0
   firebase_auth: ^4.6.1
-  firebase_core: ^2.13.0
+  firebase_core: ^2.24.0
   firebase_database: ^10.2.1
   permission_handler: ^10.2.0
   hive_flutter: ^1.1.0
@@ -59,6 +59,13 @@ dependencies:
   json_serializable: ^6.7.0
   analyzer: ^5.13.0
   flutter_svg: ^2.0.6
+  intl: ^0.18.1
+  cloud_firestore: ^4.13.3
+  uid: ^0.0.2
+  uuid: ^4.2.1
+  image_picker: ^1.0.4
+  path: ^1.8.3
+  file_picker: ^4.1.4
   
 dev_dependencies:
   flutter_test:
@@ -115,5 +122,11 @@ flutter:
           weight: 700
         - asset: assets/fonts/Montserrat-ExtraBold.ttf
           weight: 800
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

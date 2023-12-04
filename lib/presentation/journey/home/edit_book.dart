@@ -14,7 +14,7 @@ class EditBookScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColor.backgroundColor,
       resizeToAvoidBottomInset: true,
       body: Obx(
         () => Padding(
@@ -32,7 +32,7 @@ class EditBookScreen extends GetView<HomeController> {
                   GestureDetector(
                     child: Icon(
                       Icons.arrow_back,
-                      color: AppColors.blue700,
+                      color: AppColor.blue.shade700,
                       size: 40.sp,
                     ),
                     onTap: () => Get.back(),
@@ -42,7 +42,7 @@ class EditBookScreen extends GetView<HomeController> {
                   ),
                   Text(
                     "Sửa tài liệu",
-                    style: ThemeText.heading2.blue700,
+                    style: AppTheme.heading2.copyWith(color: AppColor.blue.shade700),
                   ),
                 ],
               ),
@@ -68,8 +68,7 @@ class EditBookScreen extends GetView<HomeController> {
                               child: textField(
                                   hintText: "Tác giả",
                                   controller: controller.authorBook,
-                                  errorText:
-                                      controller.validateAuthorBook.value,
+                                  errorText: controller.validateAuthorBook.value,
                                   height: 45.sp),
                             ),
                           ),
@@ -95,8 +94,7 @@ class EditBookScreen extends GetView<HomeController> {
                               child: textField(
                                   hintText: "Số tái bản",
                                   controller: controller.reprintBook,
-                                  errorText:
-                                      controller.validateReprintBook.value,
+                                  errorText: controller.validateReprintBook.value,
                                   height: 45.sp),
                             ),
                           ),
@@ -107,8 +105,7 @@ class EditBookScreen extends GetView<HomeController> {
                               child: textField(
                                   hintText: "Thể loại",
                                   controller: controller.categoryBook,
-                                  errorText:
-                                      controller.validateCategoryBook.value,
+                                  errorText: controller.validateCategoryBook.value,
                                   height: 45.sp),
                             ),
                           )
@@ -123,8 +120,7 @@ class EditBookScreen extends GetView<HomeController> {
                               child: textField(
                                   hintText: "Ngày phát hành",
                                   controller: controller.releaseDateBook,
-                                  errorText:
-                                      controller.validateReleaseDateBook.value,
+                                  errorText: controller.validateReleaseDateBook.value,
                                   height: 45.sp),
                             ),
                           ),
@@ -139,8 +135,7 @@ class EditBookScreen extends GetView<HomeController> {
                               child: textField(
                                   hintText: "Số trang",
                                   controller: controller.numberOfBook,
-                                  errorText:
-                                      controller.validatePaperSizeBook.value,
+                                  errorText: controller.validatePaperSizeBook.value,
                                   height: 45.sp),
                             ),
                           ),
@@ -151,8 +146,7 @@ class EditBookScreen extends GetView<HomeController> {
                               child: textField(
                                   hintText: "Khổ giấy",
                                   controller: controller.paperSizeBook,
-                                  errorText:
-                                      controller.validatePaperSizeBook.value,
+                                  errorText: controller.validatePaperSizeBook.value,
                                   height: 45.sp),
                             ),
                           )
@@ -175,8 +169,7 @@ class EditBookScreen extends GetView<HomeController> {
                               child: textField(
                                   hintText: "Số phiên bản",
                                   controller: controller.numberOfEditionsBook,
-                                  errorText: controller
-                                      .validateNumberOfEditionBook.value,
+                                  errorText: controller.validateNumberOfEditionBook.value,
                                   height: 45.sp),
                             ),
                           ),
@@ -187,8 +180,7 @@ class EditBookScreen extends GetView<HomeController> {
                               child: textField(
                                   hintText: "Ngôn ngữ",
                                   controller: controller.languageBook,
-                                  errorText:
-                                      controller.validateLanguageBook.value,
+                                  errorText: controller.validateLanguageBook.value,
                                   height: 45.sp),
                             ),
                           )
@@ -209,8 +201,7 @@ class EditBookScreen extends GetView<HomeController> {
                                   height: 45.sp,
                                   hintText: "Ngày cập nhật",
                                   controller: controller.updateDateBook,
-                                  errorText:
-                                      controller.validateUpdateDateBook.value),
+                                  errorText: controller.validateUpdateDateBook.value),
                             ),
                           ),
                         ],
@@ -234,20 +225,17 @@ class EditBookScreen extends GetView<HomeController> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: AppTouchable(
         onPressed: () => _buttonAddDocument(context, index),
-        outlinedBorder: RoundedRectangleBorder(
-            side: BorderSide.none,
-            borderRadius: BorderRadius.circular(AppDimens.space_20)),
-        backgroundColor: AppColors.blue700,
+        outlinedBorder:
+            RoundedRectangleBorder(side: BorderSide.none, borderRadius: BorderRadius.circular(AppDimens.space_20)),
+        backgroundColor: AppColor.blue.shade700,
         width: double.infinity,
         margin: EdgeInsets.symmetric(horizontal: 16.sp),
         padding: EdgeInsets.symmetric(vertical: AppDimens.height_14),
-        child: Text(
-          'Thêm tài liệu',
-          style: ThemeText.bodySemibold.copyWith(
-            color: AppColors.bianca,
-            fontSize: AppDimens.space_18,
-          ),
-        ),
+        child: Text('Thêm tài liệu',
+            style: AppTheme.textMBold.copyWith(
+              color: AppColor.blue.shade700,
+              fontSize: 14.sp,
+            )),
       ),
     );
   }
@@ -262,7 +250,10 @@ class EditBookScreen extends GetView<HomeController> {
       children: [
         Text(
           hintText,
-          style: ThemeText.bodySemibold.s15.blue700,
+          style: AppTheme.textMBold.copyWith(
+            color: AppColor.blue.shade700,
+            fontSize: 14.sp,
+          ),
         ),
         SizedBox(
           height: 5.sp,
@@ -272,7 +263,7 @@ class EditBookScreen extends GetView<HomeController> {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             border: Border.all(
-              color: AppColors.blue700,
+              color: AppColor.blue.shade700,
               width: 0.5,
             ),
           ),
@@ -284,7 +275,10 @@ class EditBookScreen extends GetView<HomeController> {
               // inputFormatters: <TextInputFormatter>[
               //   FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*'))
               // ],
-              style: ThemeText.bodyMedium.s16,
+              style: AppTheme.textM.copyWith(
+                color: AppColor.blue.shade700,
+                fontSize: 16.sp,
+              ),
               // keyboardType: TextInputType.number,
               controller: controller,
               decoration: const InputDecoration(
@@ -298,7 +292,10 @@ class EditBookScreen extends GetView<HomeController> {
         ),
         Text(
           errorText ?? '',
-          style: ThemeText.errorText.red.s10,
+          style: AppTheme.text.copyWith(
+            color: AppColor.red,
+            fontSize: 10.sp,
+          ),
         ),
       ],
     );

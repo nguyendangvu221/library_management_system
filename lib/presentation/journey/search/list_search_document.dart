@@ -14,7 +14,7 @@ class ListSearchScreen extends GetView<SearchsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColor.backgroundColor,
       body: Obx(
         () => Padding(
           padding: EdgeInsets.only(
@@ -28,7 +28,7 @@ class ListSearchScreen extends GetView<SearchsController> {
               GestureDetector(
                 child: Icon(
                   Icons.arrow_back,
-                  color: AppColors.blue700,
+                  color: AppColor.blue.shade700,
                   size: 40.sp,
                 ),
                 onTap: () {
@@ -68,7 +68,7 @@ class ListSearchScreen extends GetView<SearchsController> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Card(
-                color: AppColors.grey200,
+                color: AppColor.grey.shade200,
                 child: SizedBox(
                   child: Row(
                     children: [
@@ -98,23 +98,34 @@ class ListSearchScreen extends GetView<SearchsController> {
                             children: [
                               Text(
                                 document[index].name ?? "",
-                                style: ThemeText.heading1.s18.blue700,
+                                style: AppTheme.heading2.copyWith(color: AppColor.blue.shade700, fontSize: 18.sp),
                               ),
                               Text(
                                 "Tác giả: ${document[index].author ?? ""}",
-                                style: ThemeText.heading4.blue700,
+                                style: AppTheme.heading4.copyWith(
+                                  color: AppColor.blue.shade700,
+                                ),
                               ),
                               Text(
                                 "Thể loại: ${document[index].category ?? ""}",
-                                style: ThemeText.bodyMedium.blue700,
+                                style: AppTheme.textMBold.copyWith(
+                                  color: AppColor.blue.shade700,
+                                  fontSize: 14.sp,
+                                ),
                               ),
                               Text(
                                 "Số trang: ${document[index].numberOfPage.toString()}",
-                                style: ThemeText.bodyMedium.blue700,
+                                style: AppTheme.textMBold.copyWith(
+                                  color: AppColor.blue.shade700,
+                                  fontSize: 14.sp,
+                                ),
                               ),
                               Text(
                                 "Ngày đăng: ${document[index].releaseDate.toString()}",
-                                style: ThemeText.bodyMedium.blue700,
+                                style: AppTheme.textMBold.copyWith(
+                                  color: AppColor.blue.shade700,
+                                  fontSize: 14.sp,
+                                ),
                               ),
                               SizedBox(
                                 height: 10.sp,
@@ -147,7 +158,7 @@ class ListSearchScreen extends GetView<SearchsController> {
           icon ??
               Icon(
                 Icons.info_outline_rounded,
-                color: AppColors.blue700,
+                color: AppColor.blue.shade700,
                 size: 25.sp,
               ),
           // SizedBox(
@@ -155,7 +166,10 @@ class ListSearchScreen extends GetView<SearchsController> {
           // ),
           Text(
             title,
-            style: ThemeText.bodySemibold.s16.blue700,
+            style: AppTheme.textMBold.copyWith(
+              color: AppColor.blue.shade700,
+              fontSize: 16.sp,
+            ),
           ),
         ],
       ),

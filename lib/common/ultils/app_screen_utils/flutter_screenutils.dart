@@ -1,11 +1,12 @@
-library flutter_screenutil;
+// library flutter_screenutil;
 
-import 'dart:math';
+// import 'dart:math';
 
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+// import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-part 'screen_util.dart';
 
-part 'screenutil_init.dart';
 
-part 'size_extension.dart';
+// part 'screenutil_init.dart';
+
+// part 'size_extension.dart';

@@ -13,7 +13,7 @@ class SearchScreen extends GetView<SearchsController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColor.backgroundColor,
       body: Padding(
         padding: EdgeInsets.only(
           left: 16.sp,
@@ -25,7 +25,10 @@ class SearchScreen extends GetView<SearchsController> {
           children: [
             Text(
               "Tìm kiếm",
-              style: ThemeText.heading2.blue700,
+              style: AppTheme.heading2.copyWith(
+                color: AppColor.blue.shade700,
+                fontSize: 24.sp,
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -33,16 +36,14 @@ class SearchScreen extends GetView<SearchsController> {
                 GestureDetector(
                   child: Icon(
                     Icons.search,
-                    color: AppColors.blue700,
+                    color: AppColor.blue.shade700,
                     size: 30.sp,
                   ),
                   onTap: () {
                     if (controller.searchController.text.isNotEmpty) {
-                      controller
-                          .searchDocument(controller.searchController.text);
+                      controller.searchDocument(controller.searchController.text);
                       if (controller.rxListDocument.isEmpty) {
-                        Get.snackbar(
-                            "Không tìm thấy", "Không tìm thấy tài liệu");
+                        Get.snackbar("Không tìm thấy", "Không tìm thấy tài liệu");
                       } else {
                         Get.to(() => const ListSearchScreen());
                       }
@@ -56,12 +57,11 @@ class SearchScreen extends GetView<SearchsController> {
                     child: TextField(
                       controller: controller.searchController,
                       decoration: InputDecoration(
-                          enabledBorder: const UnderlineInputBorder(
-                            borderSide:
-                                BorderSide(width: 1, color: AppColors.blue700),
-                          ),
-                          hintText: "Nhập tên tài liệu",
-                          hintStyle: ThemeText.bodyMedium.blue700),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(width: 1, color: AppColor.blue.shade700),
+                        ),
+                        hintText: "Nhập tên tài liệu",
+                      ),
                     ),
                   ),
                 ),
@@ -82,7 +82,7 @@ class SearchScreen extends GetView<SearchsController> {
               borderRadius: BorderRadius.circular(10),
             ),
             child: Card(
-              color: AppColors.grey200,
+              color: AppColor.grey.shade200,
               child: SizedBox(
                 child: Row(
                   children: [
@@ -112,23 +112,35 @@ class SearchScreen extends GetView<SearchsController> {
                           children: [
                             Text(
                               document[index].name ?? "",
-                              style: ThemeText.heading1.s18.blue700,
+                              style: AppTheme.heading2.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 18.sp,
+                              ),
                             ),
                             Text(
                               "Tác giả: ${document[index].author ?? ""}",
-                              style: ThemeText.heading4.blue700,
+                              style: AppTheme.heading2.copyWith(color: AppColor.blue.shade700),
                             ),
                             Text(
                               "Thể loại: ${document[index].category ?? ""}",
-                              style: ThemeText.bodyMedium.blue700,
+                              style: AppTheme.textM.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 14.sp,
+                              ),
                             ),
                             Text(
                               "Số trang: ${document[index].numberOfPage.toString()}",
-                              style: ThemeText.bodyMedium.blue700,
+                              style: AppTheme.textM.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 14.sp,
+                              ),
                             ),
                             Text(
-                              "Ngày đăng: ${document[index].releaseDate.toString()}",
-                              style: ThemeText.bodyMedium.blue700,
+                              "Ngày đăng: ${document[index].releaseDate?.toString() ?? DateTime.now()}",
+                              style: AppTheme.textM.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 14.sp,
+                              ),
                             ),
                             SizedBox(
                               height: 10.sp,
