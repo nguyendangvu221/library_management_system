@@ -21,6 +21,7 @@ Document _$DocumentFromJson(Map<String, dynamic> json) => Document(
       releaseDate: json['releaseDate'] as String?,
       updateDate: json['updateDate'] as String?,
       image: json['image'] as String?,
+      pdf: json['pdf'] as String?,
     );
 
 Map<String, dynamic> _$DocumentToJson(Document instance) => <String, dynamic>{
@@ -38,4 +39,5 @@ Map<String, dynamic> _$DocumentToJson(Document instance) => <String, dynamic>{
       'releaseDate': instance.releaseDate,
       'updateDate': instance.updateDate,
       'image': instance.image,
+      'pdf': instance.pdf,
     };

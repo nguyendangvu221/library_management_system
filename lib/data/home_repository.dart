@@ -14,6 +14,7 @@ class HomeRepository {
       for (var element in value.docs) {
         listDocument.add(Document.fromJson({
           'id': element.id,
+          'pdf': element.data()['pdf'],
           ...element.data(),
         }));
       }

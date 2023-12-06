@@ -18,6 +18,8 @@ class Document {
   String? releaseDate;
   String? updateDate;
   String? image;
+  String? pdf;
+  String? postedBy;
   factory Document.fromJson(Map<String, dynamic> json) => _$DocumentFromJson(json);
   Map<String, dynamic> toJson() => _$DocumentToJson(this);
   Document({
@@ -35,5 +37,6 @@ class Document {
     this.releaseDate,
     this.updateDate,
     this.image,
+    this.pdf,
   });
 }

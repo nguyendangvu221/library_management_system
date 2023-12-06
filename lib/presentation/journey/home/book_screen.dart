@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:library_management_system/common/constants/app_dimens.dart';
 import 'package:library_management_system/common/ultils/translations/app_utils.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
+import 'package:library_management_system/presentation/journey/home/pdf_viewer.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 import 'package:library_management_system/presentation/widget/app_touchable.dart';
@@ -342,7 +343,12 @@ class BookScreen extends GetView<HomeController> {
                             _customButton(
                               title: 'Đọc online',
                               onTap: () {
-                                //TODO: read book online
+                                Get.to(
+                                  PdfViewer(
+                                    pdfUrl: document.pdf ?? "",
+                                    namePdf: document.name ?? '',
+                                  ),
+                                );
                               },
                               icon: Icons.menu_book,
                             ),
