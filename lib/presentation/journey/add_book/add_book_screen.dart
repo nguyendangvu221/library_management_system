@@ -2,14 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:library_management_system/common/constants/app_dimens.dart';
 import 'package:library_management_system/common/constants/button.dart';
 import 'package:library_management_system/common/constants/text_input.dart';
 import 'package:library_management_system/common/ultils/translations/app_utils.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
-import 'package:library_management_system/presentation/widget/app_touchable.dart';
 
 class AddBookScreen extends GetView<AddBookController> {
   const AddBookScreen({super.key});

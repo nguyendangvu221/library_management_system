@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/domain/models/user_model.dart';
-import 'package:library_management_system/presentation/journey/borrower/borrower_controller.dart';
+import 'package:library_management_system/presentation/journey/user/user_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
-class BorrowerView extends GetView<BorrowerController> {
+class UserView extends GetView<UserController> {
   final User user;
-  const BorrowerView({required this.user, super.key});
+  const UserView({required this.user, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class BorrowerView extends GetView<BorrowerController> {
             SizedBox(
               height: 20.sp,
             ),
-            displayInfoBorrower(user),
+            displayInfoUser(user),
             SizedBox(
               height: 20.sp,
             ),
@@ -44,7 +44,7 @@ class BorrowerView extends GetView<BorrowerController> {
     );
   }
 
-  Widget displayInfoBorrower(User user) {
+  Widget displayInfoUser(User user) {
     return Column(
       children: [
         Container(

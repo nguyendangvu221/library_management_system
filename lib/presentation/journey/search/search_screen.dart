@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
-import 'package:library_management_system/presentation/journey/search/list_search_document.dart';
 import 'package:library_management_system/presentation/journey/search/search_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
@@ -23,12 +22,30 @@ class SearchScreen extends GetView<SearchsController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              "Tìm kiếm",
-              style: AppTheme.heading2.copyWith(
-                color: AppColor.blue.shade700,
-                fontSize: 24.sp,
-              ),
+            Row(
+              children: [
+                GestureDetector(
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: AppColor.blue.shade700,
+                    size: 25.sp,
+                  ),
+                  onTap: () {
+                    Get.back();
+                    controller.rxListDocument.clear();
+                  },
+                ),
+                SizedBox(
+                  width: 5.sp,
+                ),
+                Text(
+                  "Tìm kiếm",
+                  style: AppTheme.heading2.copyWith(
+                    color: AppColor.blue.shade700,
+                    fontSize: 24.sp,
+                  ),
+                ),
+              ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -40,15 +57,15 @@ class SearchScreen extends GetView<SearchsController> {
                     size: 30.sp,
                   ),
                   onTap: () {
-                    if (controller.searchController.text.isNotEmpty) {
-                      controller.searchDocument(controller.searchController.text);
-                      if (controller.rxListDocument.isEmpty) {
-                        Get.snackbar("Không tìm thấy", "Không tìm thấy tài liệu");
-                      } else {
-                        Get.to(() => const ListSearchScreen());
-                      }
-                    }
-                    controller.searchController.clear();
+                    // if (controller.searchController.text.isNotEmpty) {
+                    //   controller.searchDocument(controller.searchController.text);
+                    //   if (controller.rxListDocument.isEmpty) {
+                    //     Get.snackbar("Không tìm thấy", "Không tìm thấy tài liệu");
+                    //   } else {
+                    //     Get.to(() => const ListSearchScreen());
+                    //   }
+                    // }
+                    // controller.searchController.clear();
                   },
                 ),
                 Expanded(

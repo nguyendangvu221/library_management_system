@@ -25,12 +25,27 @@ class HomeScreen extends GetView<HomeController> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Trang chủ",
-                style: AppTheme.heading2.copyWith(
-                  color: AppColor.blue.shade700,
-                  fontSize: 24.sp,
-                ),
+              Row(
+                children: [
+                  Text(
+                    "Trang chủ",
+                    style: AppTheme.heading2.copyWith(
+                      color: AppColor.blue.shade600,
+                      fontSize: 24.sp,
+                    ),
+                  ),
+                  const Spacer(),
+                  GestureDetector(
+                    child: Icon(
+                      Icons.search,
+                      color: AppColor.blue.shade600,
+                      size: 30.sp,
+                    ),
+                    onTap: () {
+                      Get.toNamed("/search");
+                    },
+                  ),
+                ],
               ),
               SizedBox(
                 height: 20.h,
@@ -111,42 +126,47 @@ class HomeScreen extends GetView<HomeController> {
                               //     child: Icon(
                               //       Icons.more_vert,
                               //       size: 20.sp,
-                              //       color: AppColor.blue.shade700,
+                              //       color: AppColor.blue.shade600,
                               //     ),
                               //   ),
                               // ),
                               Text(
                                 document[index].name ?? "",
+                                overflow: TextOverflow.ellipsis,
                                 style: AppTheme.heading2.copyWith(
-                                  color: AppColor.blue.shade700,
+                                  color: AppColor.blue.shade600,
                                   fontSize: 18.sp,
                                 ),
                               ),
                               Text(
                                 "Tác giả: ${document[index].author ?? ""}",
-                                style: AppTheme.heading4.copyWith(
-                                  color: AppColor.blue.shade700,
+                                overflow: TextOverflow.ellipsis,
+                                style: AppTheme.textMReg.copyWith(
+                                  color: AppColor.blue.shade600,
                                   fontSize: 16.sp,
                                 ),
                               ),
                               Text(
                                 "Thể loại: ${document[index].category ?? ""}",
+                                overflow: TextOverflow.ellipsis,
                                 style: AppTheme.textM.copyWith(
-                                  color: AppColor.blue.shade700,
+                                  color: AppColor.blue.shade600,
                                   fontSize: 14.sp,
                                 ),
                               ),
                               Text(
                                 "Ngôn ngữ: ${document[index].language.toString()}",
+                                overflow: TextOverflow.ellipsis,
                                 style: AppTheme.textM.copyWith(
-                                  color: AppColor.blue.shade700,
+                                  color: AppColor.blue.shade600,
                                   fontSize: 14.sp,
                                 ),
                               ),
                               Text(
                                 "Ngày đăng: ${document[index].releaseDate?.toString() ?? DateTime.now()}",
+                                overflow: TextOverflow.ellipsis,
                                 style: AppTheme.textM.copyWith(
-                                  color: AppColor.blue.shade700,
+                                  color: AppColor.blue.shade600,
                                   fontSize: 14.sp,
                                 ),
                               ),

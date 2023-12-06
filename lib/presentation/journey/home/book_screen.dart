@@ -41,6 +41,16 @@ class BookScreen extends GetView<HomeController> {
                   ),
                   onTap: () => Get.back(),
                 ),
+                GestureDetector(
+                  child: Icon(
+                    Icons.delete,
+                    color: AppColor.blue.shade700,
+                    size: 30.sp,
+                  ),
+                  onTap: () {
+                    //TODO: delete book
+                  },
+                )
               ],
             ),
             SizedBox(
@@ -64,17 +74,20 @@ class BookScreen extends GetView<HomeController> {
                             ),
                             Image(
                               height: 240.h,
+                              width: 150.w,
                               fit: BoxFit.fill,
                               image: NetworkImage(document.image ?? ""),
                             ),
                             const SizedBox(
                               height: 20,
                             ),
-                            Text(
-                              document.name ?? "",
-                              style: AppTheme.textM.copyWith(
-                                color: AppColor.blue.shade700,
-                                fontSize: 18.sp,
+                            Center(
+                              child: Text(
+                                document.name ?? "",
+                                style: AppTheme.textM.copyWith(
+                                  color: AppColor.blue.shade700,
+                                  fontSize: 18.sp,
+                                ),
                               ),
                             ),
                           ],
@@ -133,45 +146,6 @@ class BookScreen extends GetView<HomeController> {
                             ),
                             SizedBox(
                               height: 5.h,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Số trang:',
-                                  style: AppTheme.textM.copyWith(
-                                    color: AppColor.blue.shade700,
-                                    fontSize: 16.sp,
-                                  ),
-                                ),
-                                Text(
-                                  document.numberOfPage.toString(),
-                                  style: AppTheme.textM.copyWith(
-                                    color: AppColor.blue.shade700,
-                                    fontSize: 16.sp,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 5.h,
-                            ),
-                            Row(
-                              children: [
-                                Text(
-                                  'Id: ',
-                                  style: AppTheme.textM.copyWith(
-                                    color: AppColor.blue.shade700,
-                                    fontSize: 16.sp,
-                                  ),
-                                ),
-                                Text(
-                                  document.code ?? "",
-                                  style: AppTheme.textM.copyWith(
-                                    color: AppColor.blue.shade700,
-                                    fontSize: 16.sp,
-                                  ),
-                                ),
-                              ],
                             ),
                             SizedBox(
                               height: 5.h,
@@ -343,6 +317,47 @@ class BookScreen extends GetView<HomeController> {
                       ),
                     ),
                     SizedBox(
+                      height: 20.h,
+                    ),
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(8.sp)),
+                        color: AppColor.grey.shade100,
+                      ),
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: EdgeInsets.all(8.sp),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            _customButton(
+                              title: 'Tải xuống',
+                              onTap: () {
+                                //TODO: download book
+                              },
+                              icon: Icons.download,
+                            ),
+                            _customButton(
+                              title: 'Đọc online',
+                              onTap: () {
+                                //TODO: read book online
+                              },
+                              icon: Icons.menu_book,
+                            ),
+                            _customButton(
+                              title: 'Báo lỗi',
+                              onTap: () {
+                                //TODO: warning book
+                              },
+                              icon: Icons.warning,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
                       height: 50.h,
                     ),
                   ],
@@ -352,24 +367,32 @@ class BookScreen extends GetView<HomeController> {
           ],
         ),
       ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      // floatingActionButton: !isBookShelf
-      //     ? AppTouchable(
-      //         onPressed: controller.onTapAddBorrower(index),
-      //         outlinedBorder: RoundedRectangleBorder(
-      //             side: BorderSide.none, borderRadius: BorderRadius.circular(AppDimens.space_20)),
-      //         backgroundColor: AppColor.blue.shade700,
-      //         width: double.infinity,
-      //         margin: EdgeInsets.symmetric(horizontal: 16.sp),
-      //         padding: EdgeInsets.symmetric(vertical: AppDimens.height_14),
-      //         child: Text(
-      //           'Thêm Vào Kệ Sách',
-      //           style: AppTheme.textM.copyWith(
-      //             fontSize: 18.sp,
-      //           ),
-      //         ),
-      //       )
-      //     : null,
+    );
+  }
+
+  Widget _customButton({
+    required String title,
+    required Function() onTap,
+    required IconData icon,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Icon(
+            icon,
+            color: AppColor.blue.shade700,
+            size: 30.sp,
+          ),
+          Text(
+            title,
+            style: AppTheme.textM.copyWith(
+              color: AppColor.blue.shade700,
+              fontSize: 16.sp,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

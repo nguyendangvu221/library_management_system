@@ -97,6 +97,10 @@ class AppTheme {
     fontWeight: FontWeight.w400,
   );
 
+  static TextStyle textMSemiBold = text.copyWith(
+    fontWeight: FontWeight.w700,
+  );
+
   static TextStyle textMBold = textM.copyWith(
     fontWeight: FontWeight.w700,
   );

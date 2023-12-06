@@ -5,10 +5,10 @@ import 'package:library_management_system/domain/usecase/add_book_usecase.dart';
 import 'package:library_management_system/domain/usecase/register_usecase.dart';
 
 class SearchsController extends GetxController {
-  TextEditingController searchController = TextEditingController();
-  AddBookUsecase addBookUsecase;
-  SearchsController({required this.addBookUsecase});
+  SearchsController();
   RxList<Document> rxListDocument = <Document>[].obs;
+
+  TextEditingController searchController = TextEditingController();
 
   void searchDocument(String name) {
     // rxListDocument.value = addBookUsecase.searchDocument(name);

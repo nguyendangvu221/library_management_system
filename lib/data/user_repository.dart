@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:library_management_system/domain/models/user_model.dart';
 
-class BorrowerRepository {
+class UserRepository {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Future<List<User>> fetchListUser() async {
     List<User> listUser = [];
@@ -30,7 +29,6 @@ class BorrowerRepository {
           .where('name', isGreaterThanOrEqualTo: keyword)
           .where('name', isLessThan: '${keyword}z')
           .get();
-
       // Xử lý kết quả truy vấn
       for (var document in querySnapshot.docs) {
         searchResults.add(User.fromJson({

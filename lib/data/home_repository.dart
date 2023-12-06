@@ -1,13 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:get/get.dart';
+import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:library_management_system/common/config/database/hive_config.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
 import 'package:library_management_system/domain/models/hive_document.dart';
 
-class DocumentRepository {
+class HomeRepository {
   final HiveConfig hiveConfig;
-  DocumentRepository(this.hiveConfig);
-  RxList<Document> listDocument = <Document>[].obs;
+  HomeRepository(this.hiveConfig);
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   Future<List<Document>> fetchListDocument() async {
     List<Document> listDocument = [];
