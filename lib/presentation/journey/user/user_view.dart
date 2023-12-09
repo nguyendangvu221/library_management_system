@@ -23,13 +23,26 @@ class UserView extends GetView<UserController> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            GestureDetector(
-              onTap: () => Get.back(),
-              child: Icon(
-                Icons.arrow_back,
-                color: AppColor.blue.shade700,
-                size: 30.sp,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                GestureDetector(
+                  onTap: () => Get.back(),
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: AppColor.blue.shade700,
+                    size: 30.sp,
+                  ),
+                ),
+                GestureDetector(
+                  onTap: () => controller.deleteUserData(user.id ?? ''),
+                  child: Icon(
+                    Icons.delete,
+                    color: AppColor.blue.shade700,
+                    size: 30.sp,
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 20.sp,
