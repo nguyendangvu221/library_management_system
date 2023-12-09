@@ -10,11 +10,14 @@ class SplashScreen extends GetView<SplashController> {
   @override
   Widget build(BuildContext context) {
     return Material(
-      color: AppColors.background,
+      color: AppColor.backgroundColor,
       child: Center(
         child: Text(
           'Library Management System',
-          style: ThemeText.heading1.blue900.copyWith(color: AppColors.blue700),
+          style: AppTheme.heading1.copyWith(
+            color: AppColor.blue.shade900,
+            fontSize: 30,
+          ),
           textAlign: TextAlign.center,
         ),
       ),

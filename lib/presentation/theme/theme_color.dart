@@ -1,62 +1,95 @@
 import 'package:flutter/material.dart';
 
-class AppColors {
-  static const Color primary = Color(0xFF012A4A);
-  static const Color text = black;
-  static Color? background = grey50;
-  static const backgroundColor = Color(0xffFCFAF3);
-  static const bianca = Color(0xffFCFAF3);
-
-  static const Color charade = Color(0xff012A4A);
-  static const Color white = Colors.white;
-
-  static const Color errorColor = Colors.red;
-  static const Color errorColor2 = Colors.redAccent;
-
+class AppColor {
   //green
-  static Color? green50 = Colors.green[50];
-  static const Color green = Colors.green;
 
   //orange
   static Color? orange50 = Colors.orange[50];
   static const Color orange = Colors.orange;
-
-  //grey
-  static Color? grey50 = Colors.grey[50];
-  static Color? grey100 = Colors.grey[100];
-  static Color? grey200 = Colors.grey[200];
-  static Color? grey300 = Colors.grey[300];
-  static Color? grey400 = Colors.grey[400];
-  static const Color grey = Colors.grey;
-  static Color? grey600 = Colors.grey[600];
-  static Color? grey700 = Colors.grey[700];
-  static Color? grey800 = Colors.grey[800];
-
+  static const Color white = Colors.white;
   static Color transparent = Colors.transparent;
+  static Color backgroundColor = Colors.white;
+  static const red = MaterialColor(0xFF641212, {
+    50: Color(0xFFfdeaea),
+    100: Color(0xFFf9bdbd),
+    200: Color(0xFFf79d9d),
+    300: Color(0xFFf37170),
+    400: Color(0xFFf15555),
+    500: Color(0xFFed2b2a),
+    600: Color(0xFFd82726),
+    700: Color(0xFFa81f1e),
+    800: Color(0xFF821817),
+    900: Color(0xFF641212),
+  });
+  static const purple = MaterialColor(0xFF290064, {
+    50: Color(0xFFefe6fd),
+    100: Color(0xFFceb0fa),
+    200: Color(0xFFb78af7),
+    300: Color(0xFF9654f4),
+    400: Color(0xFF8133f1),
+    500: Color(0xFF6200ee),
+    600: Color(0xFF5900d9),
+    700: Color(0xFF4600a9),
+    800: Color(0xFF360083),
+    900: Color(0xFF290064),
+  });
+  static const black = MaterialColor(0xFF000000, {
+    50: Color(0xFFe6e6e6),
+    100: Color(0xFFb0b0b0),
+    200: Color(0xFF8a8a8a),
+    300: Color(0xFF545454),
+    400: Color(0xFF333333),
+    500: Color(0xFF000000),
+  });
+  static const grey = MaterialColor(0xFF4a4a4a, {
+    50: Color(0xFFf7f7f7),
+    100: Color(0xFFe7e7e7),
+    200: Color(0xFFdbdbdb),
+    300: Color(0xFFcacaca),
+    400: Color(0xFFc0c0c0),
+    500: Color(0xFFb0b0b0),
+    600: Color(0xFFa0a0a0),
+    700: Color(0xFF7d7d7d),
+    800: Color(0xFF616161),
+    900: Color(0xFF4a4a4a),
+  });
 
+  static const yellow = MaterialColor(0xFF655d17, {
+    50: Color(0xFFfefceb),
+    100: Color(0xFFfaf5c1),
+    200: Color(0xFFf8f0a3),
+    300: Color(0xFFf5e978),
+    400: Color(0xFFf3e55e),
+    500: Color(0xFFf0de36),
+    600: Color(0xFFdaca31),
+    700: Color(0xFFaa9e26),
+    800: Color(0xFF847a1e),
+    900: Color(0xFF655d17),
+  });
+  static const green = MaterialColor(0xFF175942, {
+    50: Color(0xFFebfbf5),
+    100: Color(0xFFc1f1e1),
+    200: Color(0xFFa3ebd2),
+    300: Color(0xFF78e2be),
+    400: Color(0xFF5edcb1),
+    500: Color(0xFF36d39e),
+    600: Color(0xFF31c090),
+    700: Color(0xFF269670),
+    800: Color(0xFF1e7457),
+    900: Color(0xFF175942),
+  });
   //blue
 
-  static const Color blue100 = Color(0xFFBBDEFB);
-  static const Color blue200 = Color(0xFF90CAF9);
-  static const Color blue300 = Color(0xFF64B5F6);
-  static const Color blue400 = Color(0xFF42A5F5);
-  static const Color blue500 = Color(0xFF2196F3);
-  static const Color blue600 = Color(0xFF1E88E5);
-  static const Color blue700 = Color(0xFF1976D2);
-  static const Color blue800 = Color(0xFF1565C0);
-  static const Color blue900 = Color(0xFF0D47A1);
-
-  static const Color borderColor = blue400;
-  static const Color red = Colors.red;
-  static const Color redAccent = Colors.redAccent;
-  static const Color red50 = Color(0xffFFEBEE);
-  static const Color red100 = Color(0xffFFCDD2);
-
-  static const Color black = Colors.black;
-  static const Color black45 = Colors.black45;
-  static Color black54 = Colors.black54;
-  static const Color white1 = Color(0xFFFFFFFF);
-  static const Color bluef = Color(0xff0E64D2);
-  static const Color bluel = Color(0xff1877F2);
-  static const Color grey1 = Color(0xFFF7F7F7);
+  static const blue = MaterialColor(0xFF0D47A1, {
+    50: Color(0xFFE3F2FD),
+    100: Color(0xFFBBDEFB),
+    200: Color(0xFF90CAF9),
+    300: Color(0xFF64B5F6),
+    400: Color(0xFF42A5F5),
+    500: Color(0xFF2196F3),
+    600: Color(0xFF1E88E5),
+    700: Color(0xFF1976D2),
+    800: Color(0xFF1565C0),
+    900: Color(0xFF0D47A1),
+  });
 }

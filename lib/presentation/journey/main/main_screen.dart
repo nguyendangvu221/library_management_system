@@ -3,10 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/common/constants/app_dimens.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_screen.dart';
-import 'package:library_management_system/presentation/journey/borrower/Borrower_screen.dart';
+import 'package:library_management_system/presentation/journey/chat/chat_screen.dart';
 import 'package:library_management_system/presentation/journey/home/home_screen.dart';
 import 'package:library_management_system/presentation/journey/main/main_controller.dart';
 import 'package:library_management_system/presentation/journey/search/search_screen.dart';
+import 'package:library_management_system/presentation/journey/setting/setting_screen.dart';
 import 'package:library_management_system/presentation/journey/user/user_screen.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 
@@ -18,11 +19,11 @@ class MainScreen extends GetView<MainController> {
   Widget _buildBottomNavigationBar(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: AppColors.backgroundColor,
+        color: AppColor.backgroundColor,
         boxShadow: [
           BoxShadow(
-            blurRadius: 20,
-            color: AppColors.charade.withOpacity(0.1),
+            blurRadius: 5,
+            color: AppColor.grey.shade500,
           )
         ],
       ),
@@ -64,9 +65,7 @@ class MainScreen extends GetView<MainController> {
       onPressed: () async => await controller.onChangedNav(index),
       icon: Icon(
         mainItem.getIcon(),
-        color: controller.rxCurrentNavIndex.value == index
-            ? AppColors.blue500
-            : AppColors.charade,
+        color: controller.rxCurrentNavIndex.value == index ? AppColor.blue.shade500 : AppColor.grey.shade500,
       ),
     );
   }
@@ -75,13 +74,13 @@ class MainScreen extends GetView<MainController> {
   Widget build(BuildContext context) {
     final List<Widget> listScreenTab = [
       const HomeScreen(),
-      const SearchScreen(),
-      const BorrowerScreen(),
-      const AddBookScreen(),
+      const ChatScreen(),
       const UserScreen(),
+      const AddBookScreen(),
+      const SettingScreen(),
     ];
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: AppColor.backgroundColor,
       body: Obx(() => IndexedStack(
             index: controller.rxCurrentNavIndex.value,
             children: listScreenTab,

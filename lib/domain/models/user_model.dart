@@ -1,24 +1,27 @@
-import 'package:library_management_system/domain/models/account_model.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'user_model.g.dart';
+
+@JsonSerializable()
 class User {
-  Account? account;
-  String? nameDocument;
-  String? loanPeriod;
+  final String? id;
+  final String? name;
+  final String? email;
+  final String? phoneNumber;
+  final DateTime? dateOfBirth;
+  final String? address;
+  final String? gender;
+  final String? urlImage;
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  Map<String, dynamic> toJson() => _$UserToJson(this);
   User({
-    this.account,
-    this.loanPeriod,
-    this.nameDocument,
+    this.id,
+    this.name,
+    this.email,
+    this.phoneNumber,
+    this.dateOfBirth,
+    this.address,
+    this.gender,
+    this.urlImage,
   });
-  User.fromJson(Map<String, dynamic> json) {
-    nameDocument = json['nameDocument'];
-    loanPeriod = json['loanPeriod'];
-    account = json['account'];
-  }
-  Map<String, dynamic> toJson() {
-    Map<String, dynamic> data = <String, dynamic>{};
-    data['nameDocument'] = nameDocument;
-    data['loanPeriod'] = loanPeriod;
-    data['account'] = account;
-    return data;
-  }
 }

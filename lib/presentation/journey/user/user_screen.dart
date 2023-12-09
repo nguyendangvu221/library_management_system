@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:library_management_system/common/constants/button.dart';
+import 'package:library_management_system/common/constants/text_input.dart';
+import 'package:library_management_system/domain/models/user_model.dart';
 import 'package:library_management_system/presentation/journey/user/user_controller.dart';
+import 'package:library_management_system/presentation/journey/user/user_view.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
@@ -11,115 +15,188 @@ class UserScreen extends GetView<UserController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
-      body: Padding(
-        padding: EdgeInsets.only(
-          left: 16.sp,
-          right: 16.sp,
-          
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Cài đặt",
-              style: ThemeText.heading2.blue700,
-            ),
-            Column(
-              children: [
-                SizedBox(
-                  height: 10.sp,
-                ),
-                Container(
-                    height: 140.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-                      color: AppColors.grey1,
+      backgroundColor: AppColor.backgroundColor,
+      body: Obx(
+        () => Padding(
+          padding: EdgeInsets.only(
+            left: 16.sp,
+            right: 16.sp,
+            top: Get.mediaQuery.padding.top,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Người dùng",
+                    style: AppTheme.heading2.copyWith(
+                      color: AppColor.blue.shade700,
+                      fontSize: 24.sp,
                     ),
-                    child: Column(
-                      children: [
-                        const CircleAvatar(
-                          radius: 50,
-                          backgroundImage: NetworkImage(
-                              "https://s3.o7planning.com/images/boy-128.png"),
-                        ),
-                        SizedBox(
-                          height: 10.sp,
-                        ),
-                        Text("Nguyễn Đăng Vũ",
-                            style: ThemeText.bodySemibold.s20.blue700),
-                      ],
-                    )),
-                SizedBox(
-                  height: 20.h,
+                  ),
+                  GestureDetector(
+                    child: Icon(
+                      Icons.refresh_rounded,
+                      color: AppColor.blue.shade700,
+                      size: 30.sp,
+                    ),
+                    onTap: () {
+                      controller.onRefresh();
+                      Get.snackbar("Refresh", "Refresh thành công");
+                    },
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              CustomTextInput(
+                controller: controller.searchController,
+                isDisable: false,
+                hintText: 'Tìm kiếm',
+                hintStyle: AppTheme.textM.copyWith(
+                  color: AppColor.blue.shade700,
+                  fontSize: 14.sp,
                 ),
-                buttonOfSetting(
-                  40.w,
-                  "Hướng dẫn sử dụng",
-                  () => null,
-                  const Icon(Icons.error),
+                seffixIcon: CustomIconButton(
+                  isBorder: false,
+                  onTap: () {
+                    controller.onTapSearch();
+                  },
+                  isDisable: false,
+                  icon: Icons.search,
+                  colorIcon: AppColor.blue.shade700,
+                  size: 20.sp,
                 ),
-                const SizedBox(
-                  height: 20,
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              Expanded(
+                child: CustomScrollView(
+                  slivers: [listBorrower(controller.listUser)],
                 ),
-                buttonOfSetting(
-                  40.w,
-                  "Thông báo",
-                  () => null,
-                  const Icon(Icons.error),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                buttonOfSetting(
-                  40.w,
-                  "Gửi email yêu cầu trợ giúp",
-                  () => null,
-                  const Icon(Icons.email),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                buttonOfSetting(
-                    60.w,
-                    "Điều khoản sử dụng và vấn đề bản quyền",
-                    () => null,
-                    const Icon(Icons.error)),
-                const SizedBox(
-                  height: 20,
-                ),
-                buttonOfSetting(
-                  40.w,
-                  "Đăng xuất",
-                  () => null,
-                  const Icon(Icons.logout),
-                ),
-              ],
-            )
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget buttonOfSetting(
-      double height, String? label, Function()? onPress, Icon icon) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(8.sp)),
-        color: AppColors.grey1,
+  Widget listBorrower(List<User> listBorrower) {
+    return SliverList(
+      delegate: SliverChildBuilderDelegate(
+        (context, index) {
+          return Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+            ),
+            margin: EdgeInsets.only(bottom: 5.sp),
+            child: GestureDetector(
+              onTap: () {
+                Get.to(
+                  UserView(
+                    user: listBorrower[index],
+                  ),
+                );
+              },
+              child: Card(
+                color: AppColor.grey.shade100,
+                child: Padding(
+                  padding: EdgeInsets.only(left: 8.sp, right: 8.sp, top: 5.sp, bottom: 5.sp),
+                  child: Row(
+                    children: [
+                      Flexible(
+                        flex: 2,
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 5.sp),
+                          child: CircleAvatar(
+                            backgroundColor: AppColor.grey.shade100,
+                            backgroundImage: const AssetImage(
+                              'assets/images/user.png',
+                            ),
+                            radius: 30.0.sp,
+                          ),
+                        ),
+                      ),
+                      VerticalDivider(
+                        color: AppColor.blue.shade700,
+                        width: 1,
+                      ),
+                      Flexible(
+                        flex: 5,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 10.sp),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Họ tên: ${listBorrower[index].name}",
+                                style: AppTheme.textMSemiBold.copyWith(
+                                  color: AppColor.blue.shade700,
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                              SizedBox(height: 2.h),
+                              Text(
+                                'Email: ',
+                                style: AppTheme.textM.copyWith(
+                                  color: AppColor.blue.shade700,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                              Text(
+                                listBorrower[index].email ?? "",
+                                style: AppTheme.textM.copyWith(
+                                  color: AppColor.blue.shade700,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+        childCount: listBorrower.length,
       ),
-      width: double.infinity,
-      height: height,
-      child: TextButton.icon(
-        style: const ButtonStyle(alignment: Alignment.bottomLeft),
-        icon: icon,
-        label: Text(
-          label ?? "",
-          style: ThemeText.bodySemibold.s17.blue700,
-          textAlign: TextAlign.left,
-        ),
-        onPressed: onPress,
+    );
+  }
+
+  PopupMenuItem _buildAppBarPopUpItem({
+    required String title,
+    Icon? icon,
+    Function()? onTap,
+  }) {
+    return PopupMenuItem(
+      onTap: onTap,
+      child: Row(
+        children: [
+          icon ??
+              Icon(
+                Icons.info_outline_rounded,
+                color: AppColor.blue.shade700,
+                size: 25.sp,
+              ),
+          // SizedBox(
+          //   width: AppDimens.width_8,
+          // ),
+          Text(
+            title,
+            style: AppTheme.textM.copyWith(
+              color: AppColor.blue.shade700,
+              fontSize: 16.sp,
+            ),
+          ),
+        ],
       ),
     );
   }

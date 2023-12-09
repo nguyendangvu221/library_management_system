@@ -22,22 +22,23 @@ class HiveDocumentAdapter extends TypeAdapter<HiveDocument> {
       category: fields[3] as String?,
       author: fields[2] as String?,
       publisher: fields[4] as String?,
-      yearPublication: fields[5] as String?,
-      description: fields[6] as String?,
-      numberOfPage: fields[7] as int?,
-      paperSize: fields[8] as String?,
-      reprint: fields[9] as String?,
-      numberOfEditions: fields[10] as int?,
-      releaseDate: fields[11] as DateTime?,
-      updateDate: fields[12] as DateTime?,
-      image: fields[13] as String?,
+      description: fields[5] as String?,
+      numberOfPage: fields[6] as int?,
+      paperSize: fields[7] as String?,
+      reprint: fields[8] as String?,
+      numberOfEditions: fields[9] as int?,
+      releaseDate: fields[10] as String?,
+      updateDate: fields[11] as String?,
+      image: fields[12] as String?,
+      language: fields[13] as String?,
+      isBorrowed: fields[14] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, HiveDocument obj) {
     writer
-      ..writeByte(14)
+      ..writeByte(15)
       ..writeByte(0)
       ..write(obj.name)
       ..writeByte(1)
@@ -49,23 +50,25 @@ class HiveDocumentAdapter extends TypeAdapter<HiveDocument> {
       ..writeByte(4)
       ..write(obj.publisher)
       ..writeByte(5)
-      ..write(obj.yearPublication)
-      ..writeByte(6)
       ..write(obj.description)
-      ..writeByte(7)
+      ..writeByte(6)
       ..write(obj.numberOfPage)
-      ..writeByte(8)
+      ..writeByte(7)
       ..write(obj.paperSize)
-      ..writeByte(9)
+      ..writeByte(8)
       ..write(obj.reprint)
-      ..writeByte(10)
+      ..writeByte(9)
       ..write(obj.numberOfEditions)
-      ..writeByte(11)
+      ..writeByte(10)
       ..write(obj.releaseDate)
-      ..writeByte(12)
+      ..writeByte(11)
       ..write(obj.updateDate)
+      ..writeByte(12)
+      ..write(obj.image)
       ..writeByte(13)
-      ..write(obj.image);
+      ..write(obj.language)
+      ..writeByte(14)
+      ..write(obj.isBorrowed);
   }
 
   @override

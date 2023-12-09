@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_screen.dart';
-import 'package:library_management_system/presentation/journey/borrower/Borrower_screen.dart';
+import 'package:library_management_system/presentation/journey/chat/chat_screen.dart';
 import 'package:library_management_system/presentation/journey/home/home_screen.dart';
-import 'package:library_management_system/presentation/journey/search/search_screen.dart';
+import 'package:library_management_system/presentation/journey/setting/setting_screen.dart';
 import 'package:library_management_system/presentation/journey/user/user_screen.dart';
 
 enum MainItem {
   home,
-  search,
-  borrower,
-  addBook,
+  chat,
   user,
+  addBook,
+  setting,
 }
 
 extension MainItemExtension on MainItem {
@@ -18,14 +18,14 @@ extension MainItemExtension on MainItem {
     switch (this) {
       case MainItem.home:
         return const HomeScreen();
-      case MainItem.search:
-        return const SearchScreen();
-      case MainItem.borrower:
-        return const BorrowerScreen();
-      case MainItem.addBook:
-        return const AddBookScreen();
+      case MainItem.chat:
+        return const ChatScreen();
       case MainItem.user:
         return const UserScreen();
+      case MainItem.addBook:
+        return const AddBookScreen();
+      case MainItem.setting:
+        return const SettingScreen();
     }
   }
 
@@ -33,13 +33,13 @@ extension MainItemExtension on MainItem {
     switch (this) {
       case MainItem.home:
         return 0;
-      case MainItem.search:
+      case MainItem.chat:
         return 1;
-      case MainItem.borrower:
+      case MainItem.user:
         return 2;
       case MainItem.addBook:
         return 3;
-      case MainItem.user:
+      case MainItem.setting:
         return 4;
     }
   }
@@ -48,13 +48,13 @@ extension MainItemExtension on MainItem {
     switch (this) {
       case MainItem.home:
         return Icons.home;
-      case MainItem.search:
-        return Icons.search;
-      case MainItem.borrower:
+      case MainItem.chat:
+        return Icons.message_rounded;
+      case MainItem.user:
         return Icons.list;
       case MainItem.addBook:
         return Icons.library_add;
-      case MainItem.user:
+      case MainItem.setting:
         return Icons.person;
     }
   }
