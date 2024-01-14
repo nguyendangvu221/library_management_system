@@ -7,7 +7,7 @@ import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
 class UserView extends GetView<UserController> {
-  final User user;
+  final UserModel user;
   const UserView({required this.user, super.key});
 
   @override
@@ -57,7 +57,7 @@ class UserView extends GetView<UserController> {
     );
   }
 
-  Widget displayInfoUser(User user) {
+  Widget displayInfoUser(UserModel user) {
     return Column(
       children: [
         Container(
@@ -72,11 +72,23 @@ class UserView extends GetView<UserController> {
               SizedBox(
                 height: 10.sp,
               ),
-              CircleAvatar(
-                radius: 50.sp,
-                backgroundColor: AppColor.grey.shade100,
-                backgroundImage: const AssetImage(
-                  'assets/images/user.png',
+              ClipOval(
+                child: CircleAvatar(
+                  radius: 50.sp,
+                  backgroundColor: AppColor.grey.shade100,
+                  child: user.avatar?.trim().isEmpty ?? false
+                      ? Image.asset(
+                          'assets/images/user.png',
+                          fit: BoxFit.cover,
+                          height: 100.sp,
+                          width: 100.sp,
+                        )
+                      : Image.network(
+                          user.avatar ?? '',
+                          fit: BoxFit.cover,
+                          height: 100.sp,
+                          width: 100.sp,
+                        ),
                 ),
               ),
               SizedBox(
@@ -176,7 +188,7 @@ class UserView extends GetView<UserController> {
                     height: 5.sp,
                   ),
                   Text(
-                    "Giới tính: ${user.gender}",
+                    "Giới tính: ${user.gender == 'Male' ? 'Nam' : user.gender == 'Female' ? 'Nữ' : 'Khác'}",
                     style: AppTheme.textM.copyWith(
                       color: AppColor.blue.shade700,
                       fontSize: 15.sp,

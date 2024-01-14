@@ -1,15 +1,11 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:library_management_system/common/constants/app_dimens.dart';
 import 'package:library_management_system/common/ultils/translations/app_utils.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
 import 'package:library_management_system/presentation/journey/home/pdf_viewer.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
-import 'package:library_management_system/presentation/widget/app_touchable.dart';
 
 import 'home_controller.dart';
 
@@ -85,7 +81,7 @@ class BookScreen extends GetView<HomeController> {
                             Center(
                               child: Text(
                                 document.name ?? "",
-                                style: AppTheme.textM.copyWith(
+                                style: AppTheme.textMSemiBold.copyWith(
                                   color: AppColor.blue.shade700,
                                   fontSize: 18.sp,
                                 ),
@@ -175,14 +171,14 @@ class BookScreen extends GetView<HomeController> {
                             Row(
                               children: [
                                 Text(
-                                  'Khổ giấy: ',
+                                  'Số trang: ',
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
                                   ),
                                 ),
                                 Text(
-                                  document.paperSize ?? "",
+                                  document.numberOfPage.toString(),
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
@@ -217,14 +213,14 @@ class BookScreen extends GetView<HomeController> {
                             Row(
                               children: [
                                 Text(
-                                  "Số lần: ",
+                                  "Tái bản lần thứ: ",
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
                                   ),
                                 ),
                                 Text(
-                                  document.reprint ?? "",
+                                  document.reprint.toString(),
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
@@ -245,7 +241,7 @@ class BookScreen extends GetView<HomeController> {
                                   ),
                                 ),
                                 Text(
-                                  document.releaseDate ?? "",
+                                  document.releaseDate.toString().split(' ')[0],
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
@@ -259,14 +255,14 @@ class BookScreen extends GetView<HomeController> {
                             Row(
                               children: [
                                 Text(
-                                  'Ngày chỉnh sửa:',
+                                  'Người đăng:',
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
                                   ),
                                 ),
                                 Text(
-                                  document.updateDate ?? "",
+                                  document.namePoster.toString().split(' ')[0],
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,

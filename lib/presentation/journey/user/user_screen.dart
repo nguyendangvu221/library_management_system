@@ -27,20 +27,33 @@ class UserScreen extends GetView<UserController> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  GestureDetector(
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: AppColor.blue.shade700,
+                      size: 25.sp,
+                    ),
+                    onTap: () {
+                      Get.back();
+                    },
+                  ),
+                  SizedBox(
+                    width: 10.sp,
+                  ),
                   Text(
                     "Người dùng",
-                    style: AppTheme.heading2.copyWith(
+                    style: AppTheme.textMSemiBold.copyWith(
                       color: AppColor.blue.shade700,
-                      fontSize: 24.sp,
+                      fontSize: 25.sp,
                     ),
                   ),
+                  const Spacer(),
                   GestureDetector(
                     child: Icon(
                       Icons.refresh_rounded,
                       color: AppColor.blue.shade700,
-                      size: 30.sp,
+                      size: 25.sp,
                     ),
                     onTap: () {
                       controller.onRefresh();
@@ -60,6 +73,13 @@ class UserScreen extends GetView<UserController> {
                   color: AppColor.blue.shade700,
                   fontSize: 14.sp,
                 ),
+                isDense: true,
+                colorBoder: AppColor.blue.shade600,
+                colorFocusBorder: AppColor.blue.shade600,
+                contentPadding: EdgeInsets.symmetric(
+                  horizontal: 10.sp,
+                  vertical: 10.sp,
+                ),
                 seffixIcon: CustomIconButton(
                   isBorder: false,
                   onTap: () {
@@ -68,7 +88,7 @@ class UserScreen extends GetView<UserController> {
                   isDisable: false,
                   icon: Icons.search,
                   colorIcon: AppColor.blue.shade700,
-                  size: 20.sp,
+                  sizeIcon: 20.sp,
                 ),
               ),
               SizedBox(
@@ -86,7 +106,7 @@ class UserScreen extends GetView<UserController> {
     );
   }
 
-  Widget listBorrower(List<User> listBorrower) {
+  Widget listBorrower(List<UserModel> listBorrower) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
@@ -106,19 +126,32 @@ class UserScreen extends GetView<UserController> {
               child: Card(
                 color: AppColor.grey.shade100,
                 child: Padding(
-                  padding: EdgeInsets.only(left: 8.sp, right: 8.sp, top: 5.sp, bottom: 5.sp),
+                  padding: EdgeInsets.only(
+                    left: 8.sp,
+                    right: 8.sp,
+                    top: 8.sp,
+                    bottom: 8.sp,
+                  ),
                   child: Row(
                     children: [
                       Flexible(
                         flex: 2,
                         child: Padding(
                           padding: EdgeInsets.only(right: 5.sp),
-                          child: CircleAvatar(
-                            backgroundColor: AppColor.grey.shade100,
-                            backgroundImage: const AssetImage(
-                              'assets/images/user.png',
-                            ),
-                            radius: 30.0.sp,
+                          child: ClipOval(
+                            child: listBorrower[index].avatar?.trim().isEmpty ?? false
+                                ? Image.asset(
+                                    'assets/images/user.png',
+                                    fit: BoxFit.cover,
+                                    height: 70.sp,
+                                    width: 70.sp,
+                                  )
+                                : Image.network(
+                                    listBorrower[index].avatar ?? '',
+                                    fit: BoxFit.cover,
+                                    height: 70.sp,
+                                    width: 70.sp,
+                                  ),
                           ),
                         ),
                       ),

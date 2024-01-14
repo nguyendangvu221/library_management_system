@@ -8,8 +8,8 @@ import 'package:library_management_system/common/constants/app_routes.dart';
 class LoginController extends GetxController {
   var isPasswordHidden = true.obs;
   var ischeck = false.obs;
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   final errorEmail = ''.obs;
   final errorPassword = ''.obs;
 
@@ -20,13 +20,6 @@ class LoginController extends GetxController {
     // Simulating obtaining the user name from some local storage
     //emailController.text = ' ';
     super.onInit();
-  }
-
-  @override
-  void onClose() {
-    emailController.dispose();
-    passwordController.dispose();
-    super.onClose();
   }
 
   void login() async {

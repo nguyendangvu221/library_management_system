@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:library_management_system/domain/models/borrower_model.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
 import 'package:library_management_system/presentation/journey/home/book_screen.dart';
 import 'package:library_management_system/presentation/journey/search/search_controller.dart';

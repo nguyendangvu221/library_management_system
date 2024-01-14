@@ -1,9 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'user_model.g.dart';
 
 @JsonSerializable()
-class User {
+class UserModel {
   final String? id;
   final String? name;
   final String? email;
@@ -11,10 +12,10 @@ class User {
   final DateTime? dateOfBirth;
   final String? address;
   final String? gender;
-  final String? urlImage;
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
-  Map<String, dynamic> toJson() => _$UserToJson(this);
-  User({
+  final String? avatar;
+  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+  UserModel({
     this.id,
     this.name,
     this.email,
@@ -22,6 +23,6 @@ class User {
     this.dateOfBirth,
     this.address,
     this.gender,
-    this.urlImage,
+    this.avatar,
   });
 }

@@ -13,65 +13,63 @@ class BookShelfScreen extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.backgroundColor,
-      body: Obx(
-        () => Padding(
-          padding: EdgeInsets.only(
-            left: 16.sp,
-            right: 16.sp,
-            top: Get.mediaQuery.padding.top,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: AppColor.blue.shade700,
-                          size: 25.sp,
-                        ),
-                        onTap: () => Get.back(),
+      body: Padding(
+        padding: EdgeInsets.only(
+          left: 16.sp,
+          right: 16.sp,
+          top: Get.mediaQuery.padding.top,
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    GestureDetector(
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: AppColor.blue.shade700,
+                        size: 25.sp,
                       ),
-                      SizedBox(
-                        width: 5.sp,
-                      ),
-                      Text(
-                        "Kệ sách",
-                        style: AppTheme.heading2.copyWith(
-                          color: AppColor.blue.shade700,
-                          fontSize: 24.sp,
-                        ),
-                      ),
-                    ],
-                  ),
-                  GestureDetector(
-                    child: Icon(
-                      Icons.refresh_rounded,
-                      color: AppColor.blue.shade700,
-                      size: 25.sp,
+                      onTap: () => Get.back(),
                     ),
-                    onTap: () {
-                      Get.snackbar("Refresh", "Refresh thành công");
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Expanded(
-                child: CustomScrollView(
-                  slivers: [
-                    // listSliver(controller.listBorrowed),
+                    SizedBox(
+                      width: 5.sp,
+                    ),
+                    Text(
+                      "Kệ sách",
+                      style: AppTheme.heading2.copyWith(
+                        color: AppColor.blue.shade700,
+                        fontSize: 24.sp,
+                      ),
+                    ),
                   ],
                 ),
-              )
-            ],
-          ),
+                GestureDetector(
+                  child: Icon(
+                    Icons.refresh_rounded,
+                    color: AppColor.blue.shade700,
+                    size: 25.sp,
+                  ),
+                  onTap: () {
+                    Get.snackbar("Refresh", "Refresh thành công");
+                  },
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20.h,
+            ),
+            Expanded(
+              child: CustomScrollView(
+                slivers: [
+                  // listSliver(controller.listBorrowed),
+                ],
+              ),
+            )
+          ],
         ),
       ),
     );

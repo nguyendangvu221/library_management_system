@@ -16,152 +16,154 @@ class RegisterScreen2 extends GetView<RegisterController> {
     return Scaffold(
       backgroundColor: AppColor.white,
       body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.sp),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: 20.h,
-              ),
-              CustomIconButton(
-                isBorder: false,
-                onTap: () {
-                  Get.back();
-                },
-                isDisable: false,
-                icon: Icons.arrow_back,
-                sizeIcon: 30.sp,
-              ),
-              SizedBox(
-                height: 20.sp,
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  'Please complete the final step',
-                  style: AppTheme.heading2.copyWith(color: AppColor.blue.shade700, fontSize: 24.sp),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.sp),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: 20.h,
                 ),
-              ),
-              Container(
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  'To be able to absorb more knowledge',
-                  style: AppTheme.textM.copyWith(
-                    color: AppColor.blue.shade700,
-                    fontSize: 16.sp,
+                CustomIconButton(
+                  isBorder: false,
+                  onTap: () {
+                    Get.back();
+                  },
+                  isDisable: false,
+                  icon: Icons.arrow_back,
+                  sizeIcon: 30.sp,
+                ),
+                SizedBox(
+                  height: 20.sp,
+                ),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    'Please complete the final step',
+                    style: AppTheme.heading2.copyWith(color: AppColor.blue.shade700, fontSize: 24.sp),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 40.h,
-              ),
-              _customTextInput(
-                text: 'Số điện thoại',
-                textInput: Obx(
-                  () => CustomTextInput(
-                    errorText: controller.errorPhoneNumber.value,
-                    isDisable: false,
-                    controller: controller.phoneNumberController,
-                    fillColor: AppColor.white,
-                  ),
-                ),
-              ),
-              _customTextInput(
-                text: 'Địa chỉ',
-                textInput: Obx(
-                  () => CustomTextInput(
-                    errorText: controller.errorAddress.value,
-                    controller: controller.addressController,
-                    isDisable: false,
-                    fillColor: AppColor.white,
-                  ),
-                ),
-              ),
-              _textInputDatePicker(
-                onChanged: (p0) {
-                  controller.dateOfBirth = controller.dateOfBirthController.text as DateTime?;
-                },
-                onTap: () {
-                  controller.selectDatePicker(context);
-                },
-                controller: controller.dateOfBirthController,
-              ),
-              SizedBox(
-                height: 20.sp,
-              ),
-              Obx(
-                () => _customTextField(
-                  text: 'Gender',
-                  textInput: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      _customRadioButton(
-                        text: 'Male',
-                        value: 'Male',
-                        groupValue: controller.gender.value,
-                        onChanged: (p0) {
-                          controller.gender.value = p0 ?? '';
-                        },
-                      ),
-                      _customRadioButton(
-                        text: 'Female',
-                        value: 'Female',
-                        groupValue: controller.gender.value,
-                        onChanged: (p0) {
-                          controller.gender.value = p0 ?? '';
-                        },
-                      ),
-                      _customRadioButton(
-                        text: 'Other',
-                        value: 'Other',
-                        groupValue: controller.gender.value,
-                        onChanged: (p0) {
-                          controller.gender.value = p0 ?? '';
-                        },
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              CustomDefaultButton(
-                isDisable: false,
-                backgroundColor: AppColor.blue,
-                isDisplayIcon: false,
-                textButton: 'Register',
-                onPressed: () {
-                  controller.onRegister2();
-                },
-              ),
-              SizedBox(
-                height: 30.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text("Already have an account?",
-                      textAlign: TextAlign.center,
-                      style: AppTheme.text.copyWith(
-                        color: AppColor.black,
-                        fontSize: 14.sp,
-                      )),
-                  TextButton(
-                    onPressed: () => Get.offAllNamed(AppRoutes.login),
-                    child: Text(
-                      'Login up',
-                      textAlign: TextAlign.center,
-                      style: AppTheme.textMBold.copyWith(
-                        color: AppColor.blue.shade700,
-                        fontSize: 14.sp,
-                      ),
+                Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Text(
+                    'To be able to absorb more knowledge',
+                    style: AppTheme.textM.copyWith(
+                      color: AppColor.blue.shade700,
+                      fontSize: 16.sp,
                     ),
                   ),
-                ],
-              )
-            ],
+                ),
+                SizedBox(
+                  height: 40.h,
+                ),
+                _customTextInput(
+                  text: 'Số điện thoại',
+                  textInput: Obx(
+                    () => CustomTextInput(
+                      errorText: controller.errorPhoneNumber.value,
+                      isDisable: false,
+                      controller: controller.phoneNumberController,
+                      fillColor: AppColor.white,
+                    ),
+                  ),
+                ),
+                _customTextInput(
+                  text: 'Địa chỉ',
+                  textInput: Obx(
+                    () => CustomTextInput(
+                      errorText: controller.errorAddress.value,
+                      controller: controller.addressController,
+                      isDisable: false,
+                      fillColor: AppColor.white,
+                    ),
+                  ),
+                ),
+                _textInputDatePicker(
+                  onChanged: (p0) {
+                    controller.dateOfBirth = controller.dateOfBirthController.text as DateTime?;
+                  },
+                  onTap: () {
+                    controller.selectDatePicker(context);
+                  },
+                  controller: controller.dateOfBirthController,
+                ),
+                SizedBox(
+                  height: 20.sp,
+                ),
+                Obx(
+                  () => _customTextField(
+                    text: 'Gender',
+                    textInput: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        _customRadioButton(
+                          text: 'Male',
+                          value: 'Male',
+                          groupValue: controller.gender.value,
+                          onChanged: (p0) {
+                            controller.gender.value = p0 ?? '';
+                          },
+                        ),
+                        _customRadioButton(
+                          text: 'Female',
+                          value: 'Female',
+                          groupValue: controller.gender.value,
+                          onChanged: (p0) {
+                            controller.gender.value = p0 ?? '';
+                          },
+                        ),
+                        _customRadioButton(
+                          text: 'Other',
+                          value: 'Other',
+                          groupValue: controller.gender.value,
+                          onChanged: (p0) {
+                            controller.gender.value = p0 ?? '';
+                          },
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                CustomDefaultButton(
+                  isDisable: false,
+                  backgroundColor: AppColor.blue,
+                  isDisplayIcon: false,
+                  textButton: 'Register',
+                  onPressed: () {
+                    controller.onRegister2();
+                  },
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Already have an account?",
+                        textAlign: TextAlign.center,
+                        style: AppTheme.text.copyWith(
+                          color: AppColor.black,
+                          fontSize: 14.sp,
+                        )),
+                    TextButton(
+                      onPressed: () => Get.offAllNamed(AppRoutes.login),
+                      child: Text(
+                        'Login up',
+                        textAlign: TextAlign.center,
+                        style: AppTheme.textMBold.copyWith(
+                          color: AppColor.blue.shade700,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),

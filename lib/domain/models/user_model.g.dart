@@ -6,20 +6,22 @@ part of 'user_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) => User(
+UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
       id: json['id'] as String?,
       name: json['name'] as String?,
       email: json['email'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       dateOfBirth: json['dateOfBirth'] == null
           ? null
-          : DateTime.parse(json['dateOfBirth'] as String),
+          : (json['dateOfBirth'] is String
+              ? DateTime.parse(json['dateOfBirth'] as String)
+              : (json['dateOfBirth'] as Timestamp).toDate()),
       address: json['address'] as String?,
       gender: json['gender'] as String?,
-      urlImage: json['urlImage'] as String?,
+      avatar: json['avatar'] as String?,
     );
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+Map<String, dynamic> _$UserModelToJson(UserModel instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'email': instance.email,
@@ -27,5 +29,5 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'dateOfBirth': instance.dateOfBirth?.toIso8601String(),
       'address': instance.address,
       'gender': instance.gender,
-      'urlImage': instance.urlImage,
+      'avatar': instance.avatar,
     };

@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:library_management_system/domain/models/user_model.dart';
 
 class UserRepository {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
-  Future<List<User>> fetchListUser() async {
-    List<User> listUser = [];
+  Future<List<UserModel>> fetchListUser() async {
+    List<UserModel> listUser = [];
     await firestore.collection('users').get().then((value) {
       for (var element in value.docs) {
-        listUser.add(User.fromJson({
+        listUser.add(UserModel.fromJson({
           'id': element.id,
           ...element.data(),
         }));
@@ -20,8 +22,8 @@ class UserRepository {
     await firestore.collection('users').doc(id).delete();
   }
 
-  Future<List<User>> searchUsers(String keyword) async {
-    List<User> searchResults = [];
+  Future<List<UserModel>> searchUsers(String keyword) async {
+    List<UserModel> searchResults = [];
     try {
       // Thực hiện truy vấn tìm kiếm trong Firestore
       QuerySnapshot<Map<String, dynamic>> querySnapshot = await firestore
@@ -31,13 +33,13 @@ class UserRepository {
           .get();
       // Xử lý kết quả truy vấn
       for (var document in querySnapshot.docs) {
-        searchResults.add(User.fromJson({
+        searchResults.add(UserModel.fromJson({
           'id': document.id,
           ...document.data(),
         }));
       }
     } catch (e) {
-      print('Error searching users: $e');
+      log('Error searching users: $e');
     }
 
     return searchResults;

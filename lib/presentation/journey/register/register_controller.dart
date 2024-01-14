@@ -4,10 +4,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:library_management_system/common/constants/app_routes.dart';
 import 'package:library_management_system/presentation/journey/register/register_screen2.dart';
-import 'package:uuid/uuid.dart';
 
 class RegisterController extends GetxController {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -26,12 +24,12 @@ class RegisterController extends GetxController {
     01,
     01,
   );
-  final addressController = TextEditingController();
-  final phoneNumberController = TextEditingController();
-  final nameController = TextEditingController();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   RxBool isPasswordHidden = true.obs;
   RxBool isConfirmPasswordHidden = true.obs;
   RxString gender = 'Male'.obs;
@@ -44,7 +42,16 @@ class RegisterController extends GetxController {
 
   Future<void> register1() async {
     try {
-      await auth.createUserWithEmailAndPassword(email: emailController.text, password: passwordController.text);
+      UserCredential userCredential = await auth.createUserWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      // Lấy UID của người dùng vừa được tạo
+      String uid = userCredential.user?.uid ?? "";
+
+      // Thêm thông tin người dùng vào Firestore với UID
+      await addUserToFirestore(uid);
       Get.snackbar('Success', 'Registered successfully');
       Get.offAllNamed(AppRoutes.login);
     } on FirebaseAuthException catch (e) {
@@ -61,6 +68,23 @@ class RegisterController extends GetxController {
       // Xử lý lỗi chung (nếu cần)
       log(e.toString());
     }
+  }
+
+  Future<void> addUserToFirestore(String uid) {
+    return usersCollection
+        .doc(uid) // Sử dụng UID làm ID của tài liệu trong Firestore
+        .set({
+          'name': nameController.text,
+          'phoneNumber': phoneNumberController.text,
+          'address': addressController.text,
+          'dateOfBirth': dateOfBirthController.text,
+          'email': emailController.text,
+          'gender': gender.value,
+          'role': 1,
+          'imageUrl': 'a',
+        })
+        .then((value) => log("User Added"))
+        .catchError((error) => log("Failed to add user: $error"));
   }
 
   bool validate1() {
@@ -128,53 +152,10 @@ class RegisterController extends GetxController {
     return isValid;
   }
 
-  Future<void> addUser() {
-    return usersCollection
-        .add({
-          'name': nameController.text,
-          'phoneNumber': phoneNumberController.text,
-          'address': addressController.text,
-          'dateOfBirth': dateOfBirthController.text, // Sử dụng text của TextEditingController
-          'email': emailController.text,
-          'gender': gender.value, // Sử dụng value của RxString
-          'role': 1,
-          'imageUrl': 'a',
-        })
-        .then((value) => log("User Added"))
-        .catchError((error) => log("Failed to add user: $error"));
-  }
-  // Future<void> addUser({
-  //   required String name,
-  //   required String email,
-  //   required String phoneNumber,
-  //   required DateTime dateOfBirth,
-  //   required String address,
-  //   required String gender,
-  // }) async {
-  //   try {
-  //     String userId = const Uuid().v1(); // Đặt ID tùy ý của bạn
-  //     await usersCollection.doc(userId).set({
-  //       'name': name,
-  //       'email': email,
-  //       'phoneNumber': phoneNumber,
-  //       'dateOfBirth': dateOfBirth,
-  //       'address': address,
-  //       'gender': gender,
-  //       'role': 1,
-  //       'userId': userId,
-  //       'urlImage':
-  //           'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSr7uUQCPN7lnbXiGu3yjuW82-8lVqCSlsQrg&usqp=CAU',
-  //     });
-  //   } catch (e) {
-  //     print('Error adding user: $e');
-  //   }
-  // }
-
   // Hàm onRegister sử dụng hàm validate để kiểm tra và thực hiện đăng ký
   void onRegister2() async {
     if (validate2()) {
       await register1();
-      await addUser();
     } else {
       return;
     }

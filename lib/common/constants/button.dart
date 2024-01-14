@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:library_management_system/common/ultils/app_screen_utils/flutter_screenutils.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
@@ -49,7 +48,7 @@ class CustomDefaultButton extends StatelessWidget {
             backgroundColor: isDisable ?? false ? AppColor.grey.shade300 : backgroundColor ?? Colors.transparent,
             foregroundColor: foregroundColor ?? Colors.white,
             side: isBorder ?? false
-                ? BorderSide(width: 1.0, color: borderColor ?? AppColor.blue.shade600)
+                ? BorderSide(width: 1.0, color: borderColor ?? AppColor.green.shade300)
                 : BorderSide.none,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(radius ?? 20.sp),
@@ -75,7 +74,6 @@ class CustomIconButton extends StatelessWidget {
     this.splashRadius,
     this.colorBorder,
     this.colorFill,
-    this.size,
     this.colorIcon,
     this.sizeIcon,
     this.iconSVG,
@@ -84,11 +82,12 @@ class CustomIconButton extends StatelessWidget {
     required this.isDisable,
     this.icon,
     super.key,
+    this.shape,
+    this.borderRadius,
   });
   final double? splashRadius;
   final bool isBorder;
   final Color? colorIcon;
-  final double? size;
   final bool isDisable;
   final Color? colorBorder;
   final Color? colorFill;
@@ -96,38 +95,39 @@ class CustomIconButton extends StatelessWidget {
   final IconData? icon;
   final void Function()? onTap;
   final double? sizeIcon;
+  final BoxShape? shape;
+  final BorderRadiusGeometry? borderRadius;
   @override
-  Widget build(BuildContext context) => ClipRect(
-        child: isBorder
-            ? DecoratedBox(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: isDisable ? Colors.transparent : colorFill ?? Colors.transparent,
-                  border: Border.all(
-                    color: isDisable ? AppColor.grey.shade400 : colorBorder ?? Colors.transparent,
-                    width: 2.sp,
-                  ),
+  Widget build(BuildContext context) => isBorder
+      ? DecoratedBox(
+          decoration: BoxDecoration(
+            borderRadius: borderRadius ?? BorderRadius.circular(8.sp),
+            shape: shape ?? BoxShape.circle,
+            color: isDisable ? Colors.transparent : colorFill ?? Colors.transparent,
+            border: Border.all(
+              color: isDisable ? AppColor.grey.shade400 : colorBorder ?? Colors.transparent,
+              width: 2.sp,
+            ),
+          ),
+          child: GestureDetector(
+            onTap: isDisable ? null : onTap,
+            child: iconSVG ??
+                Icon(
+                  size: sizeIcon,
+                  icon,
+                  color: isDisable ? AppColor.grey.shade400 : colorIcon ?? AppColor.green.shade300,
                 ),
-                child: GestureDetector(
-                  onTap: isDisable ? null : onTap,
-                  child: iconSVG ??
-                      Icon(
-                        size: sizeIcon,
-                        icon,
-                        color: isDisable ? AppColor.grey.shade400 : colorIcon ?? AppColor.blue.shade600,
-                      ),
-                ),
-              )
-            : GestureDetector(
-                onTap: isDisable ? null : onTap,
-                child: iconSVG ??
-                    Icon(
-                      size: sizeIcon,
-                      icon,
-                      color: isDisable ? AppColor.grey.shade400 : colorIcon ?? AppColor.blue.shade600,
-                    ),
+          ),
+        )
+      : GestureDetector(
+          onTap: isDisable ? null : onTap,
+          child: iconSVG ??
+              Icon(
+                size: sizeIcon,
+                icon,
+                color: isDisable ? AppColor.grey.shade400 : colorIcon ?? AppColor.green.shade300,
               ),
-      );
+        );
 }
 
 class CustomTextButton extends StatelessWidget {
@@ -136,6 +136,7 @@ class CustomTextButton extends StatelessWidget {
     required this.onTap,
     required this.isDisable,
     this.textColor,
+    this.textStyle,
     this.fontSize,
     super.key,
   });
@@ -143,17 +144,19 @@ class CustomTextButton extends StatelessWidget {
   final bool isDisable;
   final String textButton;
   final double? fontSize;
+  final TextStyle? textStyle;
   final void Function()? onTap;
   @override
   Widget build(BuildContext context) => GestureDetector(
         onTap: isDisable ? null : onTap,
         child: Text(
           textButton,
-          style: AppTheme.text.copyWith(
-            color: textColor ?? AppColor.black,
-            fontWeight: FontWeight.w400,
-            fontSize: fontSize ?? 16.sp,
-          ),
+          style: textStyle ??
+              AppTheme.text.copyWith(
+                color: textColor ?? AppColor.black,
+                fontWeight: FontWeight.w400,
+                fontSize: fontSize ?? 16.sp,
+              ),
         ),
       );
 }
@@ -179,10 +182,13 @@ Widget customIntoButton(
                       width: AppTheme.smallSpacing,
                     )
                   : Container(),
-              Text(
-                textButton,
-                style: AppTheme.text.copyWith(
-                  color: colorData,
+              Flexible(
+                child: Text(
+                  textButton,
+                  overflow: TextOverflow.ellipsis,
+                  style: AppTheme.text.copyWith(
+                    color: colorData,
+                  ),
                 ),
               ),
             ],
@@ -190,12 +196,15 @@ Widget customIntoButton(
         : Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                textButton,
-                style: textStyle ??
-                    AppTheme.text.copyWith(
-                      color: colorData,
-                    ),
+              Flexible(
+                child: Text(
+                  textButton,
+                  overflow: TextOverflow.ellipsis,
+                  style: textStyle ??
+                      AppTheme.text.copyWith(
+                        color: colorData,
+                      ),
+                ),
               ),
               // ignore: prefer_if_elements_to_conditional_expressions
               isDisplayIcon

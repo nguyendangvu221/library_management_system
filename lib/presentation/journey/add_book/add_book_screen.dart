@@ -27,19 +27,7 @@ class AddBookScreen extends GetView<AddBookController> {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.sp),
-        child: CustomDefaultButton(
-          textButton: 'Thêm tài liệu',
-          backgroundColor: AppColor.blue.shade700,
-          onPressed: () {
-            _buttonAddDocument(context);
-          },
-        ),
-      ),
       backgroundColor: AppColor.backgroundColor,
-      resizeToAvoidBottomInset: false,
       body: Obx(
         () => SafeArea(
           child: Padding(
@@ -62,6 +50,13 @@ class AddBookScreen extends GetView<AddBookController> {
                   _customTextInput(
                     text: 'Tên tài liệu',
                     textInput: CustomTextInput(
+                      isDense: true,
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 10.sp,
+                        horizontal: 10.sp,
+                      ),
+                      colorBoder: AppColor.blue.shade600,
+                      colorFocusBorder: AppColor.blue.shade600,
                       textInputAction: TextInputAction.next,
                       isDisable: false,
                       controller: controller.nameBook,
@@ -72,6 +67,13 @@ class AddBookScreen extends GetView<AddBookController> {
                   _customTextInput(
                     text: 'Tác giả',
                     textInput: CustomTextInput(
+                      isDense: true,
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 10.sp,
+                        horizontal: 10.sp,
+                      ),
+                      colorBoder: AppColor.blue.shade600,
+                      colorFocusBorder: AppColor.blue.shade600,
                       textInputAction: TextInputAction.next,
                       isDisable: false,
                       controller: controller.authorBook,
@@ -87,6 +89,13 @@ class AddBookScreen extends GetView<AddBookController> {
                           child: _customTextInput(
                             text: 'Số lần tái bản',
                             textInput: CustomTextInput(
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.sp,
+                                horizontal: 10.sp,
+                              ),
+                              colorBoder: AppColor.blue.shade600,
+                              colorFocusBorder: AppColor.blue.shade600,
                               textInputAction: TextInputAction.next,
                               isDisable: false,
                               controller: controller.reprintBook,
@@ -100,6 +109,13 @@ class AddBookScreen extends GetView<AddBookController> {
                           child: _customTextInput(
                             text: 'Thể loại',
                             textInput: CustomTextInput(
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.sp,
+                                horizontal: 10.sp,
+                              ),
+                              colorBoder: AppColor.blue.shade600,
+                              colorFocusBorder: AppColor.blue.shade600,
                               textInputAction: TextInputAction.next,
                               isDisable: false,
                               controller: controller.categoryBook,
@@ -120,6 +136,13 @@ class AddBookScreen extends GetView<AddBookController> {
                           child: _customTextInput(
                             text: 'Ngày phát hành',
                             textInput: CustomTextInput(
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.sp,
+                                horizontal: 10.sp,
+                              ),
+                              colorBoder: AppColor.blue.shade600,
+                              colorFocusBorder: AppColor.blue.shade600,
                               textInputAction: TextInputAction.next,
                               isDisable: false,
                               controller: controller.releaseDateBook,
@@ -128,6 +151,16 @@ class AddBookScreen extends GetView<AddBookController> {
                           ),
                         ),
                       ),
+                      SizedBox(width: 5.sp),
+                      CustomIconButton(
+                        colorIcon: AppColor.blue.shade600,
+                        isBorder: false,
+                        onTap: () {
+                          controller.selectDatePicker(context);
+                        },
+                        isDisable: false,
+                        icon: Icons.calendar_today_outlined,
+                      )
                     ],
                   ),
                   SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
@@ -139,6 +172,13 @@ class AddBookScreen extends GetView<AddBookController> {
                           child: _customTextInput(
                             text: 'Số trang',
                             textInput: CustomTextInput(
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.sp,
+                                horizontal: 10.sp,
+                              ),
+                              colorBoder: AppColor.blue.shade600,
+                              colorFocusBorder: AppColor.blue.shade600,
                               isDisable: false,
                               textInputAction: TextInputAction.next,
                               controller: controller.numberOfBook,
@@ -147,20 +187,6 @@ class AddBookScreen extends GetView<AddBookController> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Container(
-                          margin: EdgeInsets.only(top: 15.sp),
-                          child: _customTextInput(
-                            text: 'Khổ giấy',
-                            textInput: CustomTextInput(
-                              textInputAction: TextInputAction.next,
-                              isDisable: false,
-                              controller: controller.paperSizeBook,
-                              errorText: controller.validatePaperSizeBook.value,
-                            ),
-                          ),
-                        ),
-                      )
                     ],
                   ),
                   SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
@@ -169,10 +195,17 @@ class AddBookScreen extends GetView<AddBookController> {
                     child: _customTextInput(
                       text: 'Nhà xuất bản',
                       textInput: CustomTextInput(
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 10.sp,
+                          horizontal: 10.sp,
+                        ),
+                        colorBoder: AppColor.blue.shade600,
+                        colorFocusBorder: AppColor.blue.shade600,
                         textInputAction: TextInputAction.next,
                         isDisable: false,
                         controller: controller.publisherBook,
-                        errorText: controller.validatePaperSizeBook.value,
+                        errorText: controller.validatePublisherBook.value,
                       ),
                     ),
                   ),
@@ -185,6 +218,13 @@ class AddBookScreen extends GetView<AddBookController> {
                           child: _customTextInput(
                             text: 'Số phiên bản',
                             textInput: CustomTextInput(
+                              isDense: true,
+                              contentPadding: EdgeInsets.symmetric(
+                                vertical: 10.sp,
+                                horizontal: 10.sp,
+                              ),
+                              colorBoder: AppColor.blue.shade600,
+                              colorFocusBorder: AppColor.blue.shade600,
                               textInputAction: TextInputAction.next,
                               isDisable: false,
                               controller: controller.numberOfEditionsBook,
@@ -193,20 +233,26 @@ class AddBookScreen extends GetView<AddBookController> {
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: Container(
-                          child: _customTextInput(
-                            text: 'Ngôn ngữ',
-                            textInput: CustomTextInput(
-                              textInputAction: TextInputAction.next,
-                              isDisable: false,
-                              controller: controller.languageBook,
-                              errorText: controller.validateLanguageBook.value,
-                            ),
-                          ),
-                        ),
-                      )
                     ],
+                  ),
+                  SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
+                  Container(
+                    child: _customTextInput(
+                      text: 'Ngôn ngữ',
+                      textInput: CustomTextInput(
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 10.sp,
+                          horizontal: 10.sp,
+                        ),
+                        colorBoder: AppColor.blue.shade600,
+                        colorFocusBorder: AppColor.blue.shade600,
+                        textInputAction: TextInputAction.next,
+                        isDisable: false,
+                        controller: controller.languageBook,
+                        errorText: controller.validateLanguageBook.value,
+                      ),
+                    ),
                   ),
                   SizedBox(height: MediaQuery.of(context).viewInsets.bottom),
                   Container(
@@ -214,6 +260,13 @@ class AddBookScreen extends GetView<AddBookController> {
                     child: _customTextInput(
                       text: 'Mô tả',
                       textInput: CustomTextInput(
+                        isDense: true,
+                        contentPadding: EdgeInsets.symmetric(
+                          vertical: 10.sp,
+                          horizontal: 10.sp,
+                        ),
+                        colorBoder: AppColor.blue.shade600,
+                        colorFocusBorder: AppColor.blue.shade600,
                         textInputAction: TextInputAction.done,
                         isDisable: false,
                         controller: controller.descriptionBook,
@@ -371,10 +424,20 @@ class AddBookScreen extends GetView<AddBookController> {
                           ],
                         ),
                   SizedBox(
-                    height: 30.sp,
+                    height: 70.sp,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.sp),
+                    child: CustomDefaultButton(
+                      textButton: 'Thêm tài liệu',
+                      backgroundColor: AppColor.blue.shade700,
+                      onPressed: () {
+                        _buttonAddDocument(context);
+                      },
+                    ),
                   ),
                   SizedBox(
-                    height: 70.sp,
+                    height: 30.sp,
                   ),
                 ],
               ),

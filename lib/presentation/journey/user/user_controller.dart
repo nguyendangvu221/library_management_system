@@ -7,7 +7,7 @@ import 'package:library_management_system/presentation/journey/user/user_view.da
 class UserController extends GetxController {
   UserUsecase userUsecase;
   UserController({required this.userUsecase});
-  RxList<User> listUser = <User>[].obs;
+  RxList<UserModel> listUser = <UserModel>[].obs;
   TextEditingController searchController = TextEditingController();
 
   @override
@@ -20,7 +20,7 @@ class UserController extends GetxController {
     listUser.value = await userUsecase.fetchListUser();
   }
 
-  Future<List<User>> fetchListUser() {
+  Future<List<UserModel>> fetchListUser() {
     return userUsecase.fetchListUser();
   }
 
@@ -29,7 +29,7 @@ class UserController extends GetxController {
     onRefresh();
   }
 
-  Future<List<User>> searchUsers(String keyword) async {
+  Future<List<UserModel>> searchUsers(String keyword) async {
     return userUsecase.searchUsers(keyword);
   }
 

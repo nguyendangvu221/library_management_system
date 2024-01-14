@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
-import 'package:library_management_system/domain/usecase/register_usecase.dart';
+import 'package:library_management_system/common/constants/app_routes.dart';
 import 'package:library_management_system/domain/usecase/setting_usecase.dart';
 
 class SettingController extends GetxController {
@@ -43,7 +43,7 @@ class SettingController extends GetxController {
 
   Function()? onPressedOfLogout() {
     return () {
-      Get.offNamed('/login');
+      Get.offAllNamed(AppRoutes.login);
       signOut();
     };
   }

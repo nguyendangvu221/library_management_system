@@ -53,7 +53,7 @@ class HomeScreen extends GetView<HomeController> {
               Expanded(
                 child: RefreshIndicator(
                   onRefresh: () async {
-                    controller.fetchData();
+                    await controller.fetchData();
                   },
                   child: CustomScrollView(
                     slivers: [
@@ -163,7 +163,7 @@ class HomeScreen extends GetView<HomeController> {
                                 ),
                               ),
                               Text(
-                                "Ngày đăng: ${document[index].releaseDate?.toString() ?? DateTime.now()}",
+                                "Ngày đăng: ${document[index].releaseDate?.toString().split(' ')[0] ?? DateTime.now()}",
                                 overflow: TextOverflow.ellipsis,
                                 style: AppTheme.textM.copyWith(
                                   color: AppColor.blue.shade600,

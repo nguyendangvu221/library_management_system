@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:library_management_system/common/constants/app_routes.dart';
 import 'package:library_management_system/presentation/journey/home/book_shelf.dart';
 import 'package:library_management_system/presentation/journey/setting/setting_controller.dart';
+import 'package:library_management_system/presentation/journey/setting_account/setting_account_screen.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
@@ -62,23 +64,35 @@ class SettingScreen extends GetView<SettingController> {
                         ],
                       ),
                     ),
+
                     SizedBox(
                       height: 20.h,
                     ),
                     buttonOfSetting(
                       40.w,
-                      "Hướng dẫn sử dụng",
-                      () => null,
-                      const Icon(Icons.error),
+                      "Cài đặt tài khoản",
+                      () {
+                        Get.toNamed(AppRoutes.settingAccount);
+                      },
+                      const Icon(Icons.settings),
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     buttonOfSetting(
                       40.w,
-                      "Thông báo",
+                      "Quản lý tài liệu",
                       () => null,
-                      const Icon(Icons.error),
+                      const Icon(Icons.menu_book),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    buttonOfSetting(
+                      40.w,
+                      "Tài liệu đã đăng",
+                      () => null,
+                      const Icon(Icons.menu_book),
                     ),
                     const SizedBox(
                       height: 20,
@@ -109,11 +123,19 @@ class SettingScreen extends GetView<SettingController> {
                       () => null,
                       const Icon(Icons.email),
                     ),
+
                     const SizedBox(
                       height: 20,
                     ),
+
                     buttonOfSetting(
-                        60.w, "Điều khoản sử dụng và vấn đề bản quyền", () => null, const Icon(Icons.error)),
+                      40.w,
+                      "Quản lý người dùng",
+                      () {
+                        Get.toNamed(AppRoutes.user);
+                      },
+                      const Icon(Icons.person),
+                    ),
                     const SizedBox(
                       height: 20,
                     ),

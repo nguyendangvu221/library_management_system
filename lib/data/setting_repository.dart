@@ -19,7 +19,7 @@ class SettingRepository {
         fullName = querySnapshot.docs.first['name'];
       }
     } catch (e) {
-      print('Lỗi khi lấy thông tin từ Firestore: $e');
+      log('Lỗi khi lấy thông tin từ Firestore: $e');
     }
     log(fullName ?? '');
     return fullName;
