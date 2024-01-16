@@ -10,4 +10,6 @@ class AppRoutes {
   static const String setting = '/setting';
   static const String chat = '/chat';
   static const String settingAccount = '/settingAccount';
+  static const String managerDocumentPosted = '/managerDocumentPosted';
+  static const String manageDocument = '/manageDocument';
 }

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:library_management_system/common/constants/button.dart';
 import 'package:library_management_system/common/constants/text_input.dart';
 import 'package:library_management_system/domain/models/user_model.dart';
+import 'package:library_management_system/presentation/journey/user/create_user.dart';
 import 'package:library_management_system/presentation/journey/user/user_controller.dart';
 import 'package:library_management_system/presentation/journey/user/user_view.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
@@ -17,89 +18,95 @@ class UserScreen extends GetView<UserController> {
     return Scaffold(
       backgroundColor: AppColor.backgroundColor,
       body: Obx(
-        () => Padding(
-          padding: EdgeInsets.only(
-            left: 16.sp,
-            right: 16.sp,
-            top: Get.mediaQuery.padding.top,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  GestureDetector(
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: AppColor.blue.shade700,
-                      size: 25.sp,
+        () => RefreshIndicator(
+          onRefresh: () async {
+            controller.onRefresh();
+          },
+          child: Padding(
+            padding: EdgeInsets.only(
+              left: 16.sp,
+              right: 16.sp,
+              top: Get.mediaQuery.padding.top,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    GestureDetector(
+                      child: Icon(
+                        Icons.arrow_back,
+                        color: AppColor.blue.shade700,
+                        size: 25.sp,
+                      ),
+                      onTap: () {
+                        Get.back();
+                      },
                     ),
-                    onTap: () {
-                      Get.back();
-                    },
-                  ),
-                  SizedBox(
-                    width: 10.sp,
-                  ),
-                  Text(
-                    "Người dùng",
-                    style: AppTheme.textMSemiBold.copyWith(
-                      color: AppColor.blue.shade700,
-                      fontSize: 25.sp,
+                    SizedBox(
+                      width: 10.sp,
                     ),
-                  ),
-                  const Spacer(),
-                  GestureDetector(
-                    child: Icon(
-                      Icons.refresh_rounded,
-                      color: AppColor.blue.shade700,
-                      size: 25.sp,
+                    Text(
+                      "Người dùng",
+                      style: AppTheme.textMSemiBold.copyWith(
+                        color: AppColor.blue.shade700,
+                        fontSize: 25.sp,
+                      ),
                     ),
-                    onTap: () {
-                      controller.onRefresh();
-                      Get.snackbar("Refresh", "Refresh thành công");
-                    },
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              CustomTextInput(
-                controller: controller.searchController,
-                isDisable: false,
-                hintText: 'Tìm kiếm',
-                hintStyle: AppTheme.textM.copyWith(
-                  color: AppColor.blue.shade700,
-                  fontSize: 14.sp,
+                    const Spacer(),
+                    GestureDetector(
+                      child: Icon(
+                        Icons.add,
+                        color: AppColor.blue.shade700,
+                        size: 25.sp,
+                      ),
+                      onTap: () {
+                        Get.to(const CreateOrEditUserScreen(
+                          isUpdate: false,
+                        ));
+                      },
+                    ),
+                  ],
                 ),
-                isDense: true,
-                colorBoder: AppColor.blue.shade600,
-                colorFocusBorder: AppColor.blue.shade600,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10.sp,
-                  vertical: 10.sp,
+                SizedBox(
+                  height: 20.h,
                 ),
-                seffixIcon: CustomIconButton(
-                  isBorder: false,
-                  onTap: () {
-                    controller.onTapSearch();
-                  },
+                CustomTextInput(
+                  controller: controller.searchController,
                   isDisable: false,
-                  icon: Icons.search,
-                  colorIcon: AppColor.blue.shade700,
-                  sizeIcon: 20.sp,
+                  hintText: 'Tìm kiếm',
+                  hintStyle: AppTheme.textM.copyWith(
+                    color: AppColor.blue.shade700,
+                    fontSize: 14.sp,
+                  ),
+                  isDense: true,
+                  colorBoder: AppColor.blue.shade600,
+                  colorFocusBorder: AppColor.blue.shade600,
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 10.sp,
+                    vertical: 10.sp,
+                  ),
+                  seffixIcon: CustomIconButton(
+                    isBorder: false,
+                    onTap: () {
+                      controller.onTapSearch();
+                    },
+                    isDisable: false,
+                    icon: Icons.search,
+                    colorIcon: AppColor.blue.shade700,
+                    sizeIcon: 20.sp,
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 20.h,
-              ),
-              Expanded(
-                child: CustomScrollView(
-                  slivers: [listBorrower(controller.listUser)],
+                SizedBox(
+                  height: 20.h,
                 ),
-              ),
-            ],
+                Expanded(
+                  child: CustomScrollView(
+                    slivers: [listBorrower(controller.listUser)],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

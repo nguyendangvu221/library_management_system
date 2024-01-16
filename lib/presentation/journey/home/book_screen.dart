@@ -11,7 +11,16 @@ import 'home_controller.dart';
 
 class BookScreen extends GetView<HomeController> {
   final Document document;
-  const BookScreen({required this.document, super.key});
+  final bool? isDelete;
+  final void Function()? onTapDelete;
+  final void Function() onTapSave;
+  const BookScreen({
+    required this.document,
+    this.isDelete,
+    this.onTapDelete,
+    required this.onTapSave,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +47,46 @@ class BookScreen extends GetView<HomeController> {
                   ),
                   onTap: () => Get.back(),
                 ),
-                GestureDetector(
-                  child: Icon(
-                    Icons.delete,
-                    color: AppColor.blue.shade700,
-                    size: 30.sp,
-                  ),
-                  onTap: () {
-                    //TODO: delete book
-                  },
-                )
+                isDelete ?? false
+                    ? PopupMenuButton(
+                        icon: Icon(
+                          Icons.more_vert,
+                          color: AppColor.blue.shade700,
+                          size: 30.sp,
+                        ),
+                        shape: ShapeBorder.lerp(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.sp),
+                          ),
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.sp),
+                          ),
+                          1,
+                        ),
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            onTap: () async {},
+                            child: Text(
+                              'Sửa',
+                              style: AppTheme.textM.copyWith(
+                                fontSize: 16.sp,
+                                color: AppColor.black,
+                              ),
+                            ),
+                          ),
+                          PopupMenuItem(
+                            onTap: onTapDelete ?? () {},
+                            child: Text(
+                              'Xóa',
+                              style: AppTheme.textM.copyWith(
+                                fontSize: 16.sp,
+                                color: AppColor.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
               ],
             ),
             SizedBox(
@@ -331,9 +370,7 @@ class BookScreen extends GetView<HomeController> {
                           children: [
                             _customButton(
                               title: 'Tải xuống',
-                              onTap: () {
-                                //TODO: download book
-                              },
+                              onTap: onTapSave,
                               icon: Icons.download,
                             ),
                             _customButton(

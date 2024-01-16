@@ -5,12 +5,12 @@ import 'package:library_management_system/common/constants/text_input.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
 import 'package:library_management_system/domain/models/hive_document.dart';
 import 'package:library_management_system/presentation/journey/home/book_screen.dart';
-import 'package:library_management_system/presentation/journey/search/search_controller.dart';
+import 'package:library_management_system/presentation/journey/manage_document/manage_document_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
-class SearchScreen extends GetView<SearchsController> {
-  const SearchScreen({super.key});
+class ManageDocumentScreen extends GetView<ManageDocumentController> {
+  const ManageDocumentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class SearchScreen extends GetView<SearchsController> {
           },
         ),
         title: Text(
-          "Tìm kiếm",
+          "Quản lý tài liệu",
           style: AppTheme.heading2.copyWith(
             color: AppColor.blue.shade700,
             fontSize: 24.sp,
@@ -56,6 +56,7 @@ class SearchScreen extends GetView<SearchsController> {
                 controller.searchDocumentByName(
                   p0,
                 );
+                controller.searchController.clear();
               },
               controller: controller.searchController,
               hintText: "Nhập tên tài liệu",
@@ -103,7 +104,26 @@ class SearchScreen extends GetView<SearchsController> {
                                 context,
                               );
                             },
+                            onTapDelete: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    "Xóa tài liệu thành công",
+                                    style: AppTheme.textM.copyWith(
+                                      color: AppColor.white,
+                                      fontSize: 16.sp,
+                                    ),
+                                  ),
+                                  backgroundColor: AppColor.blue.shade700,
+                                  duration: const Duration(seconds: 2),
+                                ),
+                              );
+                              controller.deleteDocument(controller.rxListDocument[index].id ?? '');
+                              controller.rxListDocument.removeAt(index);
+                              Get.back();
+                            },
                             document: controller.rxListDocument[index],
+                            isDelete: true,
                           ),
                         );
                       },

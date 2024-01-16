@@ -57,6 +57,7 @@ class ChatPage extends GetView<ChatController> {
                             var currentId = controller.getCurrentUser()?.uid;
                             var messageSenderId = messages?[index]['userId'] ?? '';
                             var name = messages?[index]['user'];
+                            var avatar = messages?[index]['avatar'];
                             if (controller.isScrolledToBottom.value &&
                                 controller.scrollController.value.position.hasViewportDimension) {
                               controller.scrollController.value.animateTo(
@@ -69,7 +70,7 @@ class ChatPage extends GetView<ChatController> {
                               name: name,
                               message: messageContent,
                               isMe: currentId == messageSenderId ? true : false,
-                              avatarUrl: 'https://cdn.diemnhangroup.com/seoulcenter/2022/11/gai-xinh-1.jpg',
+                              avatarUrl: avatar,
                               timestamp: timestamp ?? DateTime.now(),
                             );
                           },

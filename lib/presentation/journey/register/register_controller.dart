@@ -81,7 +81,7 @@ class RegisterController extends GetxController {
           'email': emailController.text,
           'gender': gender.value,
           'role': 1,
-          'imageUrl': 'a',
+          'avatar': '',
         })
         .then((value) => log("User Added"))
         .catchError((error) => log("Failed to add user: $error"));

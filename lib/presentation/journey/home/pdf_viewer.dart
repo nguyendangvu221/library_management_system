@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -10,35 +12,42 @@ class PdfViewer extends StatelessWidget {
     super.key,
     required this.pdfUrl,
     required this.namePdf,
+    this.isOnline,
   });
+  final bool? isOnline;
   final String pdfUrl;
   final String namePdf;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Colors.white,
-          title: Text(
-            namePdf,
-            style: AppTheme.textM.copyWith(
-              color: AppColor.blue.shade700,
-              fontSize: 20.sp,
-            ),
-          ),
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: AppColor.blue.shade700,
-              size: 30,
-            ),
-            onPressed: () => Get.back(),
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        title: Text(
+          namePdf,
+          style: AppTheme.textM.copyWith(
+            color: AppColor.blue.shade700,
+            fontSize: 20.sp,
           ),
         ),
-        body: SafeArea(
-          child: SfPdfViewer.network(
-            pdfUrl,
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: AppColor.blue.shade700,
+            size: 30,
           ),
-        ));
+          onPressed: () => Get.back(),
+        ),
+      ),
+      body: SafeArea(
+        child: isOnline ?? false
+            ? SfPdfViewer.network(
+                pdfUrl,
+              )
+            : SfPdfViewer.file(
+                File(pdfUrl),
+              ),
+      ),
+    );
   }
 }

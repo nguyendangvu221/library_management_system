@@ -6,7 +6,7 @@ import 'package:library_management_system/presentation/theme/theme_text.dart';
 class ChatBubble extends StatelessWidget {
   final String message;
   final bool isMe;
-  final String avatarUrl;
+  final String? avatarUrl;
   final DateTime timestamp;
   final String? name;
   const ChatBubble({
@@ -27,10 +27,15 @@ class ChatBubble extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           if (!isMe)
-            CircleAvatar(
-              backgroundImage: NetworkImage(avatarUrl),
-              radius: 16.0,
-            ),
+            avatarUrl?.trim != null
+                ? CircleAvatar(
+                    backgroundImage: NetworkImage(avatarUrl ?? ''),
+                    radius: 16.0,
+                  )
+                : const CircleAvatar(
+                    backgroundImage: AssetImage('assets/svg/user.svg'),
+                    radius: 16.0,
+                  ),
           SizedBox(width: 8.0.sp),
           Column(
             crossAxisAlignment: isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
@@ -72,10 +77,15 @@ class ChatBubble extends StatelessWidget {
           ),
           SizedBox(width: 8.0.sp),
           if (isMe)
-            CircleAvatar(
-              backgroundImage: NetworkImage(avatarUrl),
-              radius: 16.0,
-            ),
+            avatarUrl?.trim != null
+                ? CircleAvatar(
+                    backgroundImage: NetworkImage(avatarUrl ?? ''),
+                    radius: 16.0,
+                  )
+                : const CircleAvatar(
+                    backgroundImage: AssetImage('assets/svg/user.svg'),
+                    radius: 16.0,
+                  ),
         ],
       ),
     );

@@ -10,11 +10,13 @@ class DioClient {
       responseType: ResponseType.json,
     ),
   );
-  Future<Response> get({required String endpoint}) async {
+  Future<Response> get({required String endpoint, Map<String, dynamic>? queryParameters}) async {
     final String url = '${_dio.options.baseUrl}$endpoint';
+
     try {
       final response = await _dio.get(
         url,
+        queryParameters: queryParameters,
         options: Options(),
       );
       return response;

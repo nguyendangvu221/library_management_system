@@ -1,4 +1,11 @@
+import 'dart:developer';
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:path/path.dart' as path;
+import 'package:path_provider/path_provider.dart';
+import 'package:dio/dio.dart';
 import 'package:library_management_system/common/config/database/hive_config.dart';
 import 'package:library_management_system/common/config/network/dio_client.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
@@ -11,7 +18,9 @@ class HomeRepository {
     required this.hiveConfig,
     required this.dioClient,
   });
+
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+
   Future<List<Document>> fetchListDocument() async {
     try {
       final response = await dioClient.get(endpoint: '/documents');
@@ -23,95 +32,85 @@ class HomeRepository {
     }
   }
 
-  // ignore: non_constant_identifier_names
-  Future<void> insertDocument(HiveDocument HiveDocument) async {
-    await hiveConfig.documentBox.add(HiveDocument);
+  Future<Box<HiveDocument>> getDataHive() async {
+    return hiveConfig.documentBox;
   }
 
-  // ignore: non_constant_identifier_names
-  Future<void> updateDocument(HiveDocument HiveDocument, int index) async {
-    await hiveConfig.documentBox.putAt(index, HiveDocument);
+  Future<void> insertDocument(HiveDocument hiveDocument, BuildContext context) async {
+    String localPdfPath = await getApplicationDocumentsDirectoryPath(hiveDocument.id ?? '', 'pdf');
+    String localImagePath = await getApplicationDocumentsDirectoryPath(hiveDocument.id ?? '', 'image');
+
+    await downloadAndSaveFile(hiveDocument.pdf ?? '', localPdfPath);
+    await downloadAndSaveFile(hiveDocument.image ?? '', localImagePath);
+
+    hiveDocument.pdf = localPdfPath;
+    hiveDocument.image = localImagePath;
+    bool isExist = false;
+    for (int i = 0; i < hiveConfig.documentBox.length; i++) {
+      HiveDocument hiveDocumentBox = hiveConfig.documentBox.getAt(i) as HiveDocument;
+      if (hiveDocumentBox.id == hiveDocument.id) {
+        isExist = true;
+      }
+    }
+
+    if (!isExist) {
+      await hiveConfig.documentBox.add(hiveDocument);
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Thêm tài liệu thành công'),
+          ),
+        );
+      }
+    } else {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Thêm tài liệu thất bại'),
+          ),
+        );
+      }
+    }
+  }
+
+  void clearHive() {
+    hiveConfig.documentBox.clear();
+  }
+
+  Future<String> getApplicationDocumentsDirectoryPath(String documentId, String fileType) async {
+    var appDocDir = await getApplicationDocumentsDirectory();
+    return path.join(appDocDir.path, '${documentId}_$fileType');
+  }
+
+  Future<void> updateDocument(HiveDocument hiveDocument, int index) async {
+    String localPdfPath = await getApplicationDocumentsDirectoryPath(hiveDocument.id ?? '', 'pdf');
+    String localImagePath = await getApplicationDocumentsDirectoryPath(hiveDocument.id ?? '', 'image');
+
+    await downloadAndSaveFile(hiveDocument.pdf ?? '', localPdfPath);
+    await downloadAndSaveFile(hiveDocument.image ?? '', localImagePath);
+
+    hiveDocument.pdf = localPdfPath;
+    hiveDocument.image = localImagePath;
+
+    await hiveConfig.documentBox.putAt(index, hiveDocument);
   }
 
   Future<void> deleteDocument(int index) async {
+    HiveDocument hiveDocument = hiveConfig.documentBox.getAt(index) as HiveDocument;
+
+    File localPdfFile = File(hiveDocument.pdf ?? '');
+    File localImageFile = File(hiveDocument.image ?? '');
+
+    await localPdfFile.delete();
+    await localImageFile.delete();
+
     await hiveConfig.documentBox.deleteAt(index);
   }
 
-  int? getIndex(String code) {
-    for (int i = 0; i < hiveConfig.documentBox.length; i++) {
-      if (hiveConfig.documentBox.values.elementAt(i).code == code) {
-        return i;
-      }
-    }
-    return null;
-  }
-
-  String? getCode(int index) {
-    return hiveConfig.documentBox.getAt(index)?.code;
-  }
-
-  String? getName(int index) {
-    return hiveConfig.documentBox.getAt(index)?.name;
-  }
-
-  String? getAuthor(int index) {
-    return hiveConfig.documentBox.getAt(index)?.author;
-  }
-
-  String? getPublisher(int index) {
-    return hiveConfig.documentBox.getAt(index)?.publisher;
-  }
-
-  String? getCategory(int index) {
-    return hiveConfig.documentBox.getAt(index)?.category;
-  }
-
-  // String? getYearPublication(int index) {
-  //   return hiveConfig.documentBox.getAt(index)?.yearPublication;
-  // }
-
-  String? getDescription(int index) {
-    return hiveConfig.documentBox.getAt(index)?.description;
-  }
-
-  int? getNumberOfPage(int index) {
-    return hiveConfig.documentBox.getAt(index)?.numberOfPage;
-  }
-
-  String? getPaperSize(int index) {
-    return hiveConfig.documentBox.getAt(index)?.paperSize;
-  }
-
-  String? getReprint(int index) {
-    return hiveConfig.documentBox.getAt(index)?.reprint;
-  }
-
-  int? getNumberOfEditions(int index) {
-    return hiveConfig.documentBox.getAt(index)?.numberOfEditions;
-  }
-
-  String? getReleaseDate(int index) {
-    return hiveConfig.documentBox.getAt(index)?.releaseDate;
-  }
-
-  String? getUpdateDate(int index) {
-    return hiveConfig.documentBox.getAt(index)?.updateDate;
-  }
-
-  String? getImage(int index) {
-    return hiveConfig.documentBox.getAt(index)?.image;
-  }
-
-  String? getLanguage(int index) {
-    return hiveConfig.documentBox.getAt(index)?.language;
-  }
-
-  int getLength() {
-    return hiveConfig.documentBox.length;
-  }
-
-  bool compareToId(int i, String code) {
-    if (hiveConfig.documentBox.values.elementAt(i).code == code) return true;
-    return false;
+  Future<void> downloadAndSaveFile(String url, String localPath) async {
+    Dio dio = Dio();
+    final response = await dio.get(url, options: Options(responseType: ResponseType.bytes));
+    File file = File(localPath);
+    await file.writeAsBytes(response.data);
   }
 }

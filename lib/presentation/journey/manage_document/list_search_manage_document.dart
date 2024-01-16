@@ -3,12 +3,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
 import 'package:library_management_system/presentation/journey/home/book_screen.dart';
-import 'package:library_management_system/presentation/journey/search/search_controller.dart';
+import 'package:library_management_system/presentation/journey/manage_document/manage_document_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
-class ListSearchScreen extends GetView<SearchsController> {
-  const ListSearchScreen({super.key});
+class ListSearchManageDocumentScreen extends GetView<ManageDocumentController> {
+  const ListSearchManageDocumentScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

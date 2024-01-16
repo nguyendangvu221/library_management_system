@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/domain/models/user_model.dart';
+import 'package:library_management_system/presentation/journey/user/create_user.dart';
 import 'package:library_management_system/presentation/journey/user/user_controller.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
@@ -27,20 +28,66 @@ class UserView extends GetView<UserController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () => Get.back(),
+                  onTap: () {
+                    Get.back();
+                  },
                   child: Icon(
                     Icons.arrow_back,
                     color: AppColor.blue.shade700,
                     size: 30.sp,
                   ),
                 ),
-                GestureDetector(
-                  onTap: () => controller.deleteUserData(user.id ?? ''),
-                  child: Icon(
-                    Icons.delete,
+                PopupMenuButton(
+                  icon: Icon(
+                    Icons.more_vert,
                     color: AppColor.blue.shade700,
                     size: 30.sp,
                   ),
+                  shape: ShapeBorder.lerp(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.sp),
+                    ),
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.sp),
+                    ),
+                    1,
+                  ),
+                  itemBuilder: (context) => [
+                    PopupMenuItem(
+                      onTap: () async {
+                        controller.getData(user.id ?? '');
+                        Get.to(
+                          () => const CreateOrEditUserScreen(
+                            isUpdate: true,
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Sửa',
+                        style: AppTheme.textM.copyWith(
+                          fontSize: 16.sp,
+                          color: AppColor.black,
+                        ),
+                      ),
+                    ),
+                    PopupMenuItem(
+                      onTap: () async {
+                        controller.deleteUserData(user.id ?? '');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Xóa thành công'),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Xóa',
+                        style: AppTheme.textM.copyWith(
+                          fontSize: 16.sp,
+                          color: AppColor.black,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),

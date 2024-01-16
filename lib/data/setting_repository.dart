@@ -1,6 +1,8 @@
 import 'dart:developer';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:library_management_system/domain/models/user_model.dart';
 
 class SettingRepository {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
@@ -23,5 +25,22 @@ class SettingRepository {
     }
     log(fullName ?? '');
     return fullName;
+  }
+
+  String? getId() {
+    String id = FirebaseAuth.instance.currentUser?.uid ?? '';
+    return id;
+  }
+
+  Future<UserModel> getUserById() {
+    final id = getId();
+    return firestore.collection("users").doc(id).get().then(
+          (value) => UserModel.fromJson(
+            {
+              "id": value.id,
+              ...value.data() ?? {},
+            },
+          ),
+        );
   }
 }

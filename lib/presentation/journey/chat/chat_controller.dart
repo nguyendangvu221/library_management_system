@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:library_management_system/domain/models/user_model.dart';
 import 'package:library_management_system/domain/usecase/chat_usecase.dart';
 
 class ChatController extends GetxController {
@@ -23,6 +24,10 @@ class ChatController extends GetxController {
       );
     }
     return chatUsecase.getMessages();
+  }
+
+  Future<UserModel> getUserById(String id) async {
+    return chatUsecase.getUserById(id);
   }
 
   User? getCurrentUser() {

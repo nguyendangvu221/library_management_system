@@ -5,6 +5,8 @@ import 'package:library_management_system/data/add_book_repository.dart';
 import 'package:library_management_system/data/chat_repository.dart';
 import 'package:library_management_system/data/home_repository.dart';
 import 'package:library_management_system/data/login_repository.dart';
+import 'package:library_management_system/data/manage_document_posted_repository.dart';
+import 'package:library_management_system/data/manage_document_repository.dart';
 import 'package:library_management_system/data/register_repository.dart';
 import 'package:library_management_system/data/search_repository.dart';
 import 'package:library_management_system/data/setting_account_repository.dart';
@@ -14,6 +16,8 @@ import 'package:library_management_system/domain/usecase/add_book_usecase.dart';
 import 'package:library_management_system/domain/usecase/chat_usecase.dart';
 import 'package:library_management_system/domain/usecase/home_usecase.dart';
 import 'package:library_management_system/domain/usecase/login_usecase.dart';
+import 'package:library_management_system/domain/usecase/manage_document_posted_usecase.dart';
+import 'package:library_management_system/domain/usecase/manage_document_usecase.dart';
 import 'package:library_management_system/domain/usecase/register_usecase.dart';
 import 'package:library_management_system/domain/usecase/search_usecase.dart';
 import 'package:library_management_system/domain/usecase/setting_account_usecase.dart';
@@ -25,6 +29,8 @@ import 'package:library_management_system/presentation/journey/chat/chat_control
 import 'package:library_management_system/presentation/journey/home/home_controller.dart';
 import 'package:library_management_system/presentation/journey/login/login_controller.dart';
 import 'package:library_management_system/presentation/journey/main/main_controller.dart';
+import 'package:library_management_system/presentation/journey/manage_document/manage_document_controller.dart';
+import 'package:library_management_system/presentation/journey/manage_document_posted/manager_document_posted_controller.dart';
 import 'package:library_management_system/presentation/journey/register/register_controller.dart';
 import 'package:library_management_system/presentation/journey/search/search_controller.dart';
 import 'package:library_management_system/presentation/journey/setting_account/setting_account_controller.dart';
@@ -85,6 +91,16 @@ void configLocator() {
       settingAccountUseCase: getIt<SettingAccountUseCase>(),
     ),
   );
+  getIt.registerFactory<ManageDocumentPostedController>(
+    () => ManageDocumentPostedController(
+      manageDocumentPostedUsecase: getIt<ManageDocumentPostedUsecase>(),
+    ),
+  );
+  getIt.registerFactory<ManageDocumentController>(
+    () => ManageDocumentController(
+      manageDocumentUsecase: getIt<ManageDocumentUsecase>(),
+    ),
+  );
 
   //usecase
   getIt.registerFactory<HomeUsecase>(
@@ -132,6 +148,16 @@ void configLocator() {
       getIt<SettingAccountRepository>(),
     ),
   );
+  getIt.registerFactory<ManageDocumentPostedUsecase>(
+    () => ManageDocumentPostedUsecase(
+      manageDocumentPostedRepository: getIt<ManageDocumentPostedRepository>(),
+    ),
+  );
+  getIt.registerFactory<ManageDocumentUsecase>(
+    () => ManageDocumentUsecase(
+      manageDocumentRepository: getIt<ManageDocumentRepository>(),
+    ),
+  );
 
   //repository
   getIt.registerFactory<HomeRepository>(
@@ -141,6 +167,7 @@ void configLocator() {
     ),
   );
   getIt.registerFactory<SearchRepository>(() => SearchRepository(
+        hiveConfig: getIt<HiveConfig>(),
         dioClient: getIt<DioClient>(),
       ));
   getIt.registerFactory<UserRepository>(
@@ -160,6 +187,18 @@ void configLocator() {
       ));
   getIt.registerFactory<SettingAccountRepository>(
     () => SettingAccountRepository(),
+  );
+  getIt.registerFactory<ManageDocumentPostedRepository>(
+    () => ManageDocumentPostedRepository(
+      hiveConfig: getIt<HiveConfig>(),
+      dioClient: getIt<DioClient>(),
+    ),
+  );
+  getIt.registerFactory<ManageDocumentRepository>(
+    () => ManageDocumentRepository(
+      hiveConfig: getIt<HiveConfig>(),
+      dioClient: getIt<DioClient>(),
+    ),
   );
 
   getIt.registerLazySingleton<HiveConfig>(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
+import 'package:library_management_system/domain/models/hive_document.dart';
 import 'package:library_management_system/presentation/journey/home/book_screen.dart';
 
 import 'package:library_management_system/presentation/journey/home/home_controller.dart';
@@ -71,7 +72,9 @@ class HomeScreen extends GetView<HomeController> {
     );
   }
 
-  Widget listBuilderTabBarView({required List<Document> document}) {
+  Widget listBuilderTabBarView({
+    required List<Document> document,
+  }) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
@@ -84,6 +87,28 @@ class HomeScreen extends GetView<HomeController> {
                 Get.to(
                   () => BookScreen(
                     document: document[index],
+                    onTapSave: () async {
+                      await controller.insertDocument(
+                        HiveDocument(
+                          author: document[index].author ?? "",
+                          category: document[index].category ?? "",
+                          id: document[index].id ?? "",
+                          image: document[index].image ?? "",
+                          language: document[index].language ?? "",
+                          name: document[index].name ?? "",
+                          releaseDate: document[index].releaseDate ?? DateTime.now(),
+                          description: document[index].description ?? "",
+                          idPoster: document[index].idPoster ?? "",
+                          namePoster: document[index].namePoster ?? "",
+                          numberOfEditions: document[index].numberOfEditions ?? 0,
+                          numberOfPage: document[index].numberOfPage ?? 0,
+                          publisher: document[index].publisher ?? "",
+                          pdf: document[index].pdf ?? "",
+                          reprint: document[index].reprint ?? 0,
+                        ),
+                        context,
+                      );
+                    },
                   ),
                 );
               },
@@ -96,6 +121,7 @@ class HomeScreen extends GetView<HomeController> {
                       Expanded(
                         flex: 2,
                         child: Container(
+                          height: 100.sp,
                           margin: EdgeInsets.all(5.sp),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.sp),

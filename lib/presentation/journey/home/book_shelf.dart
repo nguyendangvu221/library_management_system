@@ -1,8 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
+import 'package:library_management_system/domain/models/hive_document.dart';
 import 'package:library_management_system/presentation/journey/home/home_controller.dart';
+import 'package:library_management_system/presentation/journey/home/pdf_viewer.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
@@ -19,63 +23,66 @@ class BookShelfScreen extends GetView<HomeController> {
           right: 16.sp,
           top: Get.mediaQuery.padding.top,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    GestureDetector(
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: AppColor.blue.shade700,
-                        size: 25.sp,
+        child: Obx(
+          () => Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      GestureDetector(
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: AppColor.blue.shade700,
+                          size: 25.sp,
+                        ),
+                        onTap: () => Get.back(),
                       ),
-                      onTap: () => Get.back(),
-                    ),
-                    SizedBox(
-                      width: 5.sp,
-                    ),
-                    Text(
-                      "Kệ sách",
-                      style: AppTheme.heading2.copyWith(
-                        color: AppColor.blue.shade700,
-                        fontSize: 24.sp,
+                      SizedBox(
+                        width: 5.sp,
                       ),
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                  child: Icon(
-                    Icons.refresh_rounded,
-                    color: AppColor.blue.shade700,
-                    size: 25.sp,
+                      Text(
+                        "Kệ sách",
+                        style: AppTheme.heading2.copyWith(
+                          color: AppColor.blue.shade700,
+                          fontSize: 24.sp,
+                        ),
+                      ),
+                    ],
                   ),
-                  onTap: () {
-                    Get.snackbar("Refresh", "Refresh thành công");
-                  },
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 20.h,
-            ),
-            Expanded(
-              child: CustomScrollView(
-                slivers: [
-                  // listSliver(controller.listBorrowed),
+                  GestureDetector(
+                    child: Icon(
+                      Icons.refresh_rounded,
+                      color: AppColor.blue.shade700,
+                      size: 25.sp,
+                    ),
+                    onTap: () async {
+                      await controller.fetDataHiveBox();
+                      Get.snackbar("Refresh", "Refresh thành công");
+                    },
+                  ),
                 ],
               ),
-            )
-          ],
+              SizedBox(
+                height: 20.h,
+              ),
+              Expanded(
+                child: CustomScrollView(
+                  slivers: [
+                    listSliver(controller.listHiveDocument),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
 
-  Widget listSliver(List<Document> document) {
+  Widget listSliver(List<HiveDocument> document) {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (context, index) {
@@ -91,14 +98,15 @@ class BookShelfScreen extends GetView<HomeController> {
                     Expanded(
                       flex: 2,
                       child: Container(
+                          height: 100.sp,
                           margin: EdgeInsets.all(5.sp),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20.sp),
                           ),
                           child: Image(
                             fit: BoxFit.fill,
-                            image: NetworkImage(
-                              document[index].image ?? "",
+                            image: FileImage(
+                              File(document[index].image ?? ""),
                             ),
                           )),
                     ),
@@ -123,28 +131,48 @@ class BookShelfScreen extends GetView<HomeController> {
                                 ),
                                 itemBuilder: (context) {
                                   return [
-                                    // _buildAppBarPopUpItem(
-                                    //     title: "Xem thông tin", onTap: controller.onTapDocument(index, true)),
-                                    // _buildAppBarPopUpItem(
-                                    //   title: "Xóa tài liệu",
-                                    //   onTap: () {
-                                    //     // controller.delBorrowedDocument(index);
-                                    //   },
-                                    // ),
+                                    _buildAppBarPopUpItem(
+                                      title: "Xem thông tin",
+                                      onTap: () {
+                                        Get.to(
+                                          PdfViewer(
+                                            isOnline: false,
+                                            pdfUrl: document[index].pdf ?? "",
+                                            namePdf: document[index].name ?? '',
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    _buildAppBarPopUpItem(
+                                      title: "Xóa tài liệu",
+                                      onTap: () async {
+                                        // controller.clearHiveDocument();
+                                        await controller.deleteDocument(index);
+                                        await controller.fetDataHiveBox();
+
+                                        if (context.mounted) {
+                                          ScaffoldMessenger.of(context).showSnackBar(
+                                            const SnackBar(
+                                              content: Text("Xóa tài liệu thành công"),
+                                            ),
+                                          );
+                                        }
+                                      },
+                                    ),
                                   ];
                                 },
                               ),
                             ),
                             Text(
                               document[index].name ?? "",
-                              style: AppTheme.heading2.copyWith(
+                              style: AppTheme.textMSemiBold.copyWith(
                                 color: AppColor.blue.shade700,
                                 fontSize: 18.sp,
                               ),
                             ),
                             Text(
                               "Tác giả: ${document[index].author ?? ""}",
-                              style: AppTheme.heading2.copyWith(
+                              style: AppTheme.text.copyWith(
                                 color: AppColor.blue.shade700,
                               ),
                             ),
@@ -163,7 +191,7 @@ class BookShelfScreen extends GetView<HomeController> {
                               ),
                             ),
                             Text(
-                              "Ngày đăng: ${document[index].releaseDate.toString()}",
+                              "Ngày đăng: ${document[index].releaseDate?.toString().split(' ')[0] ?? DateTime.now()}",
                               style: AppTheme.textM.copyWith(
                                 color: AppColor.blue.shade700,
                                 fontSize: 14.sp,

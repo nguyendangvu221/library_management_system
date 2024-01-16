@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:path/path.dart' as path;
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:library_management_system/domain/models/user_model.dart';
 
 class SettingAccountRepository {
@@ -27,14 +25,6 @@ class SettingAccountRepository {
             },
           ),
         );
-  }
-
-  Future<void> pickImageFromGallery({required String imageBook, required String nameImage}) async {
-    final pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      imageBook = pickedFile.path;
-      nameImage = pickedFile.path.split('/').last;
-    }
   }
 
   Future<String> uploadFileToFirebaseStorage(String filePath, String storagePath) async {
