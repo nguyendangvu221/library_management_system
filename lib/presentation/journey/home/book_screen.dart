@@ -1,21 +1,26 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:library_management_system/common/constants/app_dimens.dart';
 import 'package:library_management_system/common/ultils/translations/app_utils.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
 import 'package:library_management_system/presentation/journey/home/pdf_viewer.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
-import 'package:library_management_system/presentation/widget/app_touchable.dart';
 
 import 'home_controller.dart';
 
 class BookScreen extends GetView<HomeController> {
   final Document document;
-  const BookScreen({required this.document, super.key});
+  final bool? isDelete;
+  final void Function()? onTapDelete;
+  final void Function() onTapSave;
+  const BookScreen({
+    required this.document,
+    this.isDelete,
+    this.onTapDelete,
+    required this.onTapSave,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -42,16 +47,46 @@ class BookScreen extends GetView<HomeController> {
                   ),
                   onTap: () => Get.back(),
                 ),
-                GestureDetector(
-                  child: Icon(
-                    Icons.delete,
-                    color: AppColor.blue.shade700,
-                    size: 30.sp,
-                  ),
-                  onTap: () {
-                    //TODO: delete book
-                  },
-                )
+                isDelete ?? false
+                    ? PopupMenuButton(
+                        icon: Icon(
+                          Icons.more_vert,
+                          color: AppColor.blue.shade700,
+                          size: 30.sp,
+                        ),
+                        shape: ShapeBorder.lerp(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.sp),
+                          ),
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.sp),
+                          ),
+                          1,
+                        ),
+                        itemBuilder: (context) => [
+                          PopupMenuItem(
+                            onTap: () async {},
+                            child: Text(
+                              'Sửa',
+                              style: AppTheme.textM.copyWith(
+                                fontSize: 16.sp,
+                                color: AppColor.black,
+                              ),
+                            ),
+                          ),
+                          PopupMenuItem(
+                            onTap: onTapDelete ?? () {},
+                            child: Text(
+                              'Xóa',
+                              style: AppTheme.textM.copyWith(
+                                fontSize: 16.sp,
+                                color: AppColor.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
               ],
             ),
             SizedBox(
@@ -85,7 +120,7 @@ class BookScreen extends GetView<HomeController> {
                             Center(
                               child: Text(
                                 document.name ?? "",
-                                style: AppTheme.textM.copyWith(
+                                style: AppTheme.textMSemiBold.copyWith(
                                   color: AppColor.blue.shade700,
                                   fontSize: 18.sp,
                                 ),
@@ -175,14 +210,14 @@ class BookScreen extends GetView<HomeController> {
                             Row(
                               children: [
                                 Text(
-                                  'Khổ giấy: ',
+                                  'Số trang: ',
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
                                   ),
                                 ),
                                 Text(
-                                  document.paperSize ?? "",
+                                  document.numberOfPage.toString(),
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
@@ -217,14 +252,14 @@ class BookScreen extends GetView<HomeController> {
                             Row(
                               children: [
                                 Text(
-                                  "Số lần: ",
+                                  "Tái bản lần thứ: ",
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
                                   ),
                                 ),
                                 Text(
-                                  document.reprint ?? "",
+                                  document.reprint.toString(),
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
@@ -245,7 +280,7 @@ class BookScreen extends GetView<HomeController> {
                                   ),
                                 ),
                                 Text(
-                                  document.releaseDate ?? "",
+                                  document.releaseDate.toString().split(' ')[0],
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
@@ -259,14 +294,14 @@ class BookScreen extends GetView<HomeController> {
                             Row(
                               children: [
                                 Text(
-                                  'Ngày chỉnh sửa:',
+                                  'Người đăng:',
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
                                   ),
                                 ),
                                 Text(
-                                  document.updateDate ?? "",
+                                  document.namePoster.toString().split(' ')[0],
                                   style: AppTheme.textM.copyWith(
                                     color: AppColor.blue.shade700,
                                     fontSize: 16.sp,
@@ -335,9 +370,7 @@ class BookScreen extends GetView<HomeController> {
                           children: [
                             _customButton(
                               title: 'Tải xuống',
-                              onTap: () {
-                                //TODO: download book
-                              },
+                              onTap: onTapSave,
                               icon: Icons.download,
                             ),
                             _customButton(

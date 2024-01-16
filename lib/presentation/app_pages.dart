@@ -1,6 +1,10 @@
 import 'package:get/get.dart';
 import 'package:library_management_system/common/constants/app_routes.dart';
 import 'package:library_management_system/common/injector/bindings/add_book_binding.dart';
+import 'package:library_management_system/common/injector/bindings/chat_binding.dart';
+import 'package:library_management_system/common/injector/bindings/manage_document.dart';
+import 'package:library_management_system/common/injector/bindings/manage_document_posted_binding.dart';
+import 'package:library_management_system/common/injector/bindings/setting_account_binding.dart';
 import 'package:library_management_system/common/injector/bindings/user_binding.dart';
 import 'package:library_management_system/common/injector/bindings/home_binding.dart';
 import 'package:library_management_system/common/injector/bindings/login_binding.dart';
@@ -10,9 +14,13 @@ import 'package:library_management_system/common/injector/bindings/search_bindin
 import 'package:library_management_system/common/injector/bindings/splash_binding.dart';
 import 'package:library_management_system/common/injector/bindings/setting_binding.dart';
 import 'package:library_management_system/presentation/journey/add_book/add_book_screen.dart';
+import 'package:library_management_system/presentation/journey/chat/chat_screen.dart';
 import 'package:library_management_system/presentation/journey/home/home_screen.dart';
 import 'package:library_management_system/presentation/journey/main/main_screen.dart';
+import 'package:library_management_system/presentation/journey/manage_document/manage_document.dart';
+import 'package:library_management_system/presentation/journey/manage_document_posted/manage_document_poster_screen.dart';
 import 'package:library_management_system/presentation/journey/register/register_screen.dart';
+import 'package:library_management_system/presentation/journey/setting_account/setting_account_screen.dart';
 import 'package:library_management_system/presentation/journey/splash/splash_page.dart';
 import 'package:library_management_system/presentation/journey/setting/setting_screen.dart';
 import 'package:library_management_system/presentation/journey/user/user_screen.dart';
@@ -32,17 +40,20 @@ List<GetPage> myPages = [
     bindings: [
       MainBinding(),
       HomeBinding(),
-      SearchsBinding(),
-      SettingBinding(),
       AddBookBinding(),
-      UserBinding(),
       SettingBinding(),
+      ChatBinding(),
     ],
   ),
   GetPage(
     name: AppRoutes.login,
     page: () => const LoginScreen(),
     binding: LoginBinding(),
+  ),
+  GetPage(
+    name: AppRoutes.chat,
+    page: () => const ChatPage(),
+    binding: ChatBinding(),
   ),
   GetPage(
     name: AppRoutes.register,
@@ -73,5 +84,20 @@ List<GetPage> myPages = [
     name: AppRoutes.setting,
     page: () => const SettingScreen(),
     binding: SettingBinding(),
+  ),
+  GetPage(
+    name: AppRoutes.settingAccount,
+    page: () => const SettingAccountScreen(),
+    binding: SettingAccountBinding(),
+  ),
+  GetPage(
+    name: AppRoutes.managerDocumentPosted,
+    page: () => const ManageDocumentPostedScreen(),
+    binding: ManageDocumentPostedBinding(),
+  ),
+  GetPage(
+    name: AppRoutes.manageDocument,
+    page: () => const ManageDocumentScreen(),
+    binding: ManageDocumentBinding(),
   ),
 ];

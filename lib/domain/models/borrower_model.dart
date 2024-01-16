@@ -1,5 +1,3 @@
-import 'package:library_management_system/domain/models/user_model.dart';
-
 class Borrower {
   String? codeUser;
   String? email;

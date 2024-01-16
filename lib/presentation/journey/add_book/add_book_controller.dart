@@ -1,9 +1,9 @@
 import 'package:file_picker/file_picker.dart';
-import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:library_management_system/common/constants/app_routes.dart';
+import 'package:library_management_system/domain/models/user_model.dart';
 import 'package:library_management_system/domain/usecase/add_book_usecase.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +18,6 @@ class AddBookController extends GetxController {
   TextEditingController reprintBook = TextEditingController();
   TextEditingController numberOfEditionsBook = TextEditingController();
   TextEditingController releaseDateBook = TextEditingController();
-  TextEditingController updateDateBook = TextEditingController();
   TextEditingController languageBook = TextEditingController();
   RxString pdfPicker = ''.obs;
   RxString namePdf = ''.obs;
@@ -26,31 +25,50 @@ class AddBookController extends GetxController {
   RxString nameImage = ''.obs;
   RxString validateNameBook = ''.obs;
   RxString validateAuthorBook = ''.obs;
-  RxString validateIdBook = ''.obs;
   RxString validateCategoryBook = ''.obs;
   RxString validatePublisherBook = ''.obs;
   RxString validateDescriptionBook = ''.obs;
   RxString validateNumberOfBook = ''.obs;
-  RxString validatePaperSizeBook = ''.obs;
   RxString validateReprintBook = ''.obs;
   RxString validateNumberOfEditionBook = ''.obs;
   RxString validateReleaseDateBook = ''.obs;
-  RxString validateUpdateDateBook = ''.obs;
   RxString validateLanguageBook = ''.obs;
   RxString validateImageBook = ''.obs;
   final AddBookUsecase addBookUsecase;
   AddBookController({required this.addBookUsecase});
-  FirebaseStorage storage = FirebaseStorage.instance;
-  FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Future<void> addDocument() async {
-    if (validate1()) {
+    if (!validate1()) {
       return;
     } else {
       Get.snackbar("Thêm sách", "Thêm sách thành công!!");
       Get.offAllNamed(AppRoutes.main);
-      await uploadDataAndFilesToFirebase();
+      await upDocumentToDB();
       clearData();
+    }
+  }
+
+  User? getCurrentUser() {
+    return addBookUsecase.getCurrentUser();
+  }
+
+  Future<UserModel> getUserById(String id) async {
+    return await addBookUsecase.getUserById(id);
+  }
+
+  Future<void> selectDatePicker(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null) {
+      releaseDateBook.text = DateTime(
+        picked.year,
+        picked.month,
+        picked.day,
+      ).toString().split(' ')[0];
     }
   }
 
@@ -65,7 +83,6 @@ class AddBookController extends GetxController {
     reprintBook.clear();
     numberOfEditionsBook.clear();
     releaseDateBook.clear();
-    updateDateBook.clear();
     languageBook.clear();
     pdfPicker.value = '';
     namePdf.value = '';
@@ -93,6 +110,29 @@ class AddBookController extends GetxController {
     return await addBookUsecase.uploadFileToFirebaseStorage(filePath, storagePath);
   }
 
+  Future<void> upDocumentToDB() async {
+    String idPoster = getCurrentUser()?.uid ?? '';
+    UserModel userModel = await getUserById(idPoster);
+    String namePoster = userModel.name ?? '';
+    await addBookUsecase.upDocumentToDB(
+      nameBook: nameBook.text,
+      authorBook: authorBook.text,
+      categoryBook: categoryBook.text,
+      publisherBook: publisherBook.text,
+      descriptionBook: descriptionBook.text,
+      numberOfBook: numberOfBook.text,
+      paperSizeBook: paperSizeBook.text,
+      reprintBook: reprintBook.text,
+      numberOfEditionsBook: numberOfEditionsBook.text,
+      releaseDateBook: DateTime.parse(releaseDateBook.text),
+      languageBook: languageBook.text,
+      imageBook: imageBook.value,
+      pdfPicker: pdfPicker.value,
+      idPoster: idPoster,
+      namePoster: namePoster,
+    );
+  }
+
   Future<void> uploadDataAndFilesToFirebase() async {
     await addBookUsecase.uploadDataAndFilesToFirebase(
       nameBook: nameBook.text,
@@ -105,7 +145,6 @@ class AddBookController extends GetxController {
       reprintBook: reprintBook.text,
       numberOfEditionsBook: numberOfEditionsBook.text,
       releaseDateBook: releaseDateBook.text,
-      updateDateBook: updateDateBook.text,
       languageBook: languageBook.text,
       imageBook: imageBook.value,
       pdfPicker: pdfPicker.value,
@@ -151,12 +190,7 @@ class AddBookController extends GetxController {
     } else {
       validateNumberOfBook.value = '';
     }
-    if (paperSizeBook.text.isEmpty) {
-      validatePaperSizeBook.value = 'Kích thước không được để trống';
-      isValid = false;
-    } else {
-      validatePaperSizeBook.value = '';
-    }
+
     if (reprintBook.text.isEmpty) {
       validateReprintBook.value = 'Lần tái bản không được để trống';
       isValid = false;
@@ -175,12 +209,7 @@ class AddBookController extends GetxController {
     } else {
       validateReleaseDateBook.value = '';
     }
-    if (updateDateBook.text.isEmpty) {
-      validateUpdateDateBook.value = 'Ngày cập nhật không được để trống';
-      isValid = false;
-    } else {
-      validateUpdateDateBook.value = '';
-    }
+
     if (languageBook.text.isEmpty) {
       validateLanguageBook.value = 'Ngôn ngữ không được để trống';
       isValid = false;

@@ -4,39 +4,38 @@ part 'document_model.g.dart';
 
 @JsonSerializable()
 class Document {
-  String? code;
-  String? name;
-  String? author;
-  String? category;
-  String? publisher;
-  String? description;
-  int? numberOfPage;
-  String? paperSize;
-  String? reprint;
-  int? numberOfEditions;
-  String? language;
-  String? releaseDate;
-  String? updateDate;
-  String? image;
-  String? pdf;
-  String? postedBy;
+  String? id;
+  final String? name;
+  final String? author;
+  final String? idPoster;
+  final String? category;
+  final String? publisher;
+  final String? description;
+  final int? numberOfPage;
+  final int? reprint;
+  final int? numberOfEditions;
+  final String? language;
+  final DateTime? releaseDate;
+  final String? image;
+  final String? pdf;
+  final String? namePoster;
   factory Document.fromJson(Map<String, dynamic> json) => _$DocumentFromJson(json);
   Map<String, dynamic> toJson() => _$DocumentToJson(this);
   Document({
-    this.code,
+    this.id,
     this.name,
     this.author,
+    this.idPoster,
     this.category,
     this.publisher,
     this.description,
     this.numberOfPage,
-    this.paperSize,
     this.reprint,
-    this.language,
     this.numberOfEditions,
+    this.language,
     this.releaseDate,
-    this.updateDate,
     this.image,
     this.pdf,
+    this.namePoster,
   });
 }

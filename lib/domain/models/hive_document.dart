@@ -5,50 +5,50 @@ part 'hive_document.g.dart';
 @HiveType(typeId: HiveTypeConstants.document)
 class HiveDocument {
   @HiveField(0)
-  String? name;
+  String? id;
   @HiveField(1)
-  String? code;
+  String? name;
   @HiveField(2)
   String? author;
   @HiveField(3)
-  String? category;
+  String? idPoster;
   @HiveField(4)
-  String? publisher;
+  String? category;
   @HiveField(5)
-  String? description;
+  String? publisher;
   @HiveField(6)
-  int? numberOfPage;
+  String? description;
   @HiveField(7)
-  String? paperSize;
+  int? numberOfPage;
   @HiveField(8)
-  String? reprint;
+  int? reprint;
   @HiveField(9)
   int? numberOfEditions;
   @HiveField(10)
-  String? releaseDate;
+  String? language;
   @HiveField(11)
-  String? updateDate;
+  DateTime? releaseDate;
   @HiveField(12)
   String? image;
   @HiveField(13)
-  String? language;
+  String? pdf;
   @HiveField(14)
-  bool? isBorrowed;
+  String? namePoster;
   HiveDocument({
+    this.id,
     this.name,
-    this.code,
     this.category,
     this.author,
     this.publisher,
     this.description,
     this.numberOfPage,
-    this.paperSize,
     this.reprint,
     this.numberOfEditions,
     this.releaseDate,
-    this.updateDate,
     this.image,
     this.language,
-    this.isBorrowed,
+    this.pdf,
+    this.idPoster,
+    this.namePoster,
   });
 }

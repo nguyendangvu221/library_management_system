@@ -1,4 +1,4 @@
-import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:library_management_system/common/config/database/hive_type_constants.dart';
 part 'hive_account.g.dart';
 

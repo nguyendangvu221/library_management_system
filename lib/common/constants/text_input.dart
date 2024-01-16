@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:library_management_system/common/constants/button.dart';
 import 'package:library_management_system/presentation/theme/theme_color.dart';
 import 'package:library_management_system/presentation/theme/theme_text.dart';
 
-// ignore: must_be_immutable
 class CustomTextInput extends StatelessWidget {
-  CustomTextInput({
+  const CustomTextInput({
     required this.isDisable,
-    this.minLines,
     this.textInputAction,
-    this.readOnly,
     this.controller,
+    this.onTapForgotPassword,
     this.cursorColor,
     this.focusNode,
     this.colorBoder,
@@ -32,6 +31,7 @@ class CustomTextInput extends StatelessWidget {
     this.textStyle,
     this.inputAction,
     this.inputType,
+    this.isForgetPassword,
     this.formatter,
     this.validate,
     this.onChanged,
@@ -42,20 +42,32 @@ class CustomTextInput extends StatelessWidget {
     this.errorText,
     this.hintStyle,
     this.labelStyle,
+    this.readOnly,
+    this.filled,
+    this.isDense,
+    this.onTap,
+    this.minHeight,
+    this.minWidth,
+    this.minLines,
+    this.customHintext,
+    this.radius,
     super.key,
   });
-  TextEditingController? controller;
+  final TextEditingController? controller;
   final FocusNode? focusNode;
   final Color? colorBoder;
+  final double? radius;
   final Color? fillColor;
   final Color? colorFocusBorder;
   final Color? errorBorder;
   final String? initValue;
   final String? labelText;
   final String? hintText;
+  final bool? isForgetPassword;
   final int? maxLength;
   final int? maxLines;
-  final double? contentPadding;
+  final int? minLines;
+  final EdgeInsetsGeometry? contentPadding;
   final bool? obscureText;
   final bool? autofocus;
   final bool? autoValidate;
@@ -76,30 +88,44 @@ class CustomTextInput extends StatelessWidget {
   final Widget? prefixIcon;
   final String? errorText;
   final Color? cursorColor;
-  final bool? readOnly;
-  final int? minLines;
   final TextInputAction? textInputAction;
+  final bool? readOnly;
+  final bool? filled;
+  final bool? customHintext;
+  final double? minHeight;
+  final double? minWidth;
+  final bool? isDense;
+  final void Function()? onTap;
+  final void Function()? onTapForgotPassword;
   @override
   Widget build(BuildContext context) => Column(
         children: [
           TextFormField(
-            scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+            onFieldSubmitted: onSubmitted,
+            initialValue: initValue,
+            onTap: onTap,
+            readOnly: readOnly ?? false,
             textInputAction: textInputAction,
             cursorColor: cursorColor ?? AppColor.grey.shade300,
             controller: controller,
             style: textStyle,
-            initialValue: initValue,
-            validator: validate,
             textAlign: align ?? TextAlign.start,
             onChanged: isDisable ? null : onChanged,
+            keyboardType: inputType ?? TextInputType.text,
             onEditingComplete: onEditingComplete,
-            onFieldSubmitted: onSubmitted,
             obscureText: obscureText ?? false,
-            readOnly: readOnly ?? false,
+            maxLines: maxLines ?? 1,
+            minLines: minLines ?? 1,
             inputFormatters: formatter,
             decoration: InputDecoration(
+              suffixIconConstraints: BoxConstraints(
+                minHeight: minHeight ?? 30.sp,
+                minWidth: minWidth ?? 40.sp,
+              ),
+              isDense: isDense,
+              filled: filled,
               fillColor: fillColor ?? Colors.transparent,
-              contentPadding: EdgeInsets.all(contentPadding ?? 8.sp),
+              contentPadding: contentPadding,
               labelText: labelText,
               hintText: hintText,
               labelStyle: labelStyle,
@@ -107,46 +133,77 @@ class CustomTextInput extends StatelessWidget {
               suffixIcon: seffixIcon,
               prefixIcon: prefixIcon,
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: colorBoder ?? AppColor.blue.shade600, width: 1),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(5),
+                borderSide: BorderSide(color: colorBoder ?? AppColor.grey.shade500, width: 1),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(radius ?? 5),
                 ),
               ),
               focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: colorFocusBorder ?? AppColor.blue.shade600, width: 1),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(5),
+                borderSide: BorderSide(color: colorFocusBorder ?? AppColor.grey.shade500, width: 1),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(radius ?? 5),
                 ),
               ),
               errorBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: AppColor.red.shade400, width: 1),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(5),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(radius ?? 5),
                 ),
               ),
               focusedErrorBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: AppColor.blue.shade600, width: 1),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(5),
+                borderSide: BorderSide(color: AppColor.grey.shade500, width: 1),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(radius ?? 5),
                 ),
               ),
             ),
           ),
           // ignore: prefer_if_elements_to_conditional_expressions
           errorText == null
-              ? const SizedBox.shrink()
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const SizedBox.shrink(),
+                    isForgetPassword ?? false
+                        ? CustomTextButton(
+                            textColor: AppColor.blue.shade700,
+                            textButton: 'Quên mật khẩu',
+                            onTap: onTapForgotPassword,
+                            textStyle: AppTheme.textMSemiBold.copyWith(
+                              color: AppColor.blue.shade700,
+                              fontSize: 14.sp,
+                            ),
+                            isDisable: false,
+                          )
+                        : Container(),
+                  ],
+                )
               : Container(
                   height: 25.sp,
-                  // padding: EdgeInsets.symmetric(
-                  //   horizontal: 16.sp,
-                  // ),
                   alignment: Alignment.centerLeft,
-                  child: Text(
-                    errorText ?? '',
-                    style: AppTheme.text.copyWith(
-                      color: AppColor.red.shade400,
-                      fontSize: 12.sp,
-                    ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        errorText ?? '',
+                        style: AppTheme.text.copyWith(
+                          color: AppColor.red.shade400,
+                          fontSize: 12.sp,
+                        ),
+                      ),
+                      isForgetPassword ?? false
+                          ? CustomTextButton(
+                              textColor: AppColor.blue.shade700,
+                              textButton: 'Quên mật khẩu',
+                              onTap: onTapForgotPassword,
+                              isDisable: false,
+                              textStyle: AppTheme.textMSemiBold.copyWith(
+                                color: AppColor.blue.shade700,
+                                fontSize: 14.sp,
+                              ),
+                            )
+                          : Container(),
+                    ],
                   ),
                 ),
         ],

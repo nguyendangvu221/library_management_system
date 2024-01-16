@@ -17,21 +17,21 @@ class HiveDocumentAdapter extends TypeAdapter<HiveDocument> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return HiveDocument(
-      name: fields[0] as String?,
-      code: fields[1] as String?,
-      category: fields[3] as String?,
+      id: fields[0] as String?,
+      name: fields[1] as String?,
+      category: fields[4] as String?,
       author: fields[2] as String?,
-      publisher: fields[4] as String?,
-      description: fields[5] as String?,
-      numberOfPage: fields[6] as int?,
-      paperSize: fields[7] as String?,
-      reprint: fields[8] as String?,
+      publisher: fields[5] as String?,
+      description: fields[6] as String?,
+      numberOfPage: fields[7] as int?,
+      reprint: fields[8] as int?,
       numberOfEditions: fields[9] as int?,
-      releaseDate: fields[10] as String?,
-      updateDate: fields[11] as String?,
+      releaseDate: fields[11] as DateTime?,
       image: fields[12] as String?,
-      language: fields[13] as String?,
-      isBorrowed: fields[14] as bool?,
+      language: fields[10] as String?,
+      pdf: fields[13] as String?,
+      idPoster: fields[3] as String?,
+      namePoster: fields[14] as String?,
     );
   }
 
@@ -40,35 +40,35 @@ class HiveDocumentAdapter extends TypeAdapter<HiveDocument> {
     writer
       ..writeByte(15)
       ..writeByte(0)
-      ..write(obj.name)
+      ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.code)
+      ..write(obj.name)
       ..writeByte(2)
       ..write(obj.author)
       ..writeByte(3)
-      ..write(obj.category)
+      ..write(obj.idPoster)
       ..writeByte(4)
-      ..write(obj.publisher)
+      ..write(obj.category)
       ..writeByte(5)
-      ..write(obj.description)
+      ..write(obj.publisher)
       ..writeByte(6)
-      ..write(obj.numberOfPage)
+      ..write(obj.description)
       ..writeByte(7)
-      ..write(obj.paperSize)
+      ..write(obj.numberOfPage)
       ..writeByte(8)
       ..write(obj.reprint)
       ..writeByte(9)
       ..write(obj.numberOfEditions)
       ..writeByte(10)
-      ..write(obj.releaseDate)
+      ..write(obj.language)
       ..writeByte(11)
-      ..write(obj.updateDate)
+      ..write(obj.releaseDate)
       ..writeByte(12)
       ..write(obj.image)
       ..writeByte(13)
-      ..write(obj.language)
+      ..write(obj.pdf)
       ..writeByte(14)
-      ..write(obj.isBorrowed);
+      ..write(obj.namePoster);
   }
 
   @override

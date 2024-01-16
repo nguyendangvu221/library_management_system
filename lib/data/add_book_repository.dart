@@ -1,6 +1,9 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:library_management_system/common/config/network/dio_client.dart';
+import 'package:library_management_system/domain/models/user_model.dart';
 import 'package:path/path.dart' as path;
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -9,6 +12,64 @@ import 'package:image_picker/image_picker.dart';
 class AddBookRepository {
   FirebaseStorage storage = FirebaseStorage.instance;
   FirebaseFirestore firestore = FirebaseFirestore.instance;
+  DioClient dioClient;
+  AddBookRepository({required this.dioClient});
+
+  User? getCurrentUser() {
+    return FirebaseAuth.instance.currentUser;
+  }
+
+  Future<UserModel> getUserById(String id) async {
+    DocumentSnapshot<Map<String, dynamic>> documentSnapshot = await firestore.collection("users").doc(id).get();
+    return UserModel.fromJson({
+      "id": documentSnapshot.id,
+      ...documentSnapshot.data() ?? {},
+    });
+  }
+
+  Future<void> upDocumentToDB({
+    required String nameBook,
+    required String authorBook,
+    required String categoryBook,
+    required String publisherBook,
+    required String descriptionBook,
+    required String numberOfBook,
+    required String paperSizeBook,
+    required String reprintBook,
+    required String numberOfEditionsBook,
+    required DateTime releaseDateBook,
+    required String languageBook,
+    required String imageBook,
+    required String pdfPicker,
+    required String idPoster,
+    required String namePoster,
+  }) async {
+    try {
+      String imageUrl = await uploadFileToFirebaseStorage(imageBook, 'images');
+
+      // Upload file PDF lên Firebase Storage và lấy URL
+      String pdfUrl = await uploadFileToFirebaseStorage(pdfPicker, 'pdfs');
+
+      final response = await dioClient.post(endpoint: '/documents', data: {
+        "name": nameBook,
+        "author": authorBook,
+        "idPoster": idPoster,
+        "category": categoryBook,
+        "publisher": publisherBook,
+        "description": descriptionBook,
+        "numberOfPage": numberOfBook,
+        "reprint": reprintBook,
+        "numberOfEditions": numberOfEditionsBook,
+        "language": languageBook,
+        "releaseDate": releaseDateBook.toIso8601String(),
+        "image": imageUrl,
+        "pdf": pdfUrl,
+        "namePoster": namePoster,
+      });
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 
   Future<String?> getFullNameByEmail(String email) async {
     String? fullName;
@@ -20,7 +81,7 @@ class AddBookRepository {
         fullName = querySnapshot.docs.first['name'];
       }
     } catch (e) {
-      print('Lỗi khi lấy thông tin từ Firestore: $e');
+      log('Lỗi khi lấy thông tin từ Firestore: $e');
     }
     return fullName;
   }
@@ -71,7 +132,6 @@ class AddBookRepository {
     required String reprintBook,
     required String numberOfEditionsBook,
     required String releaseDateBook,
-    required String updateDateBook,
     required String languageBook,
     required String imageBook,
     required String pdfPicker,
@@ -96,15 +156,14 @@ class AddBookRepository {
         'reprint': reprintBook,
         'numberOfEditions': int.parse(numberOfEditionsBook),
         'releaseDate': releaseDateBook,
-        'updateDate': updateDateBook,
         'language': languageBook,
         'image': imageUrl,
         'pdf': pdfUrl,
       });
 
-      print('Data and files uploaded successfully');
+      log('Data and files uploaded successfully');
     } catch (error) {
-      print('Failed to upload data and files: $error');
+      log('Failed to upload data and files: $error');
     }
   }
 }
