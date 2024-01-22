@@ -377,7 +377,8 @@ class BookScreen extends GetView<HomeController> {
                               title: 'Đọc online',
                               onTap: () {
                                 Get.to(
-                                  PdfViewer(
+                                  () => PdfViewer(
+                                    isOnline: true,
                                     pdfUrl: document.pdf ?? "",
                                     namePdf: document.name ?? '',
                                   ),

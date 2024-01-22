@@ -87,7 +87,7 @@ class SettingAccountController extends GetxController {
       confirmText: 'Lưu',
       cancelText: 'Hủy',
       initialDate: DateTime.parse(
-        dateOfBirthController.value ?? DateTime.now().toString().split(' ')[0],
+        dateOfBirthController.value,
       ),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),

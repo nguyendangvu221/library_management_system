@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:library_management_system/data/manage_document_posted_repository.dart';
-import 'package:library_management_system/data/search_repository.dart';
 import 'package:library_management_system/domain/models/document_model.dart';
 import 'package:library_management_system/domain/models/hive_document.dart';
 
